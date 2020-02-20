@@ -1,0 +1,30 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Sip\\Psinder\\E2E\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../PhpSharedKernel",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "require": {
+        "php-di/php-di": "^6.0",
+        "guzzlehttp/guzzle": "^6.3",
+        "beberlei/assert": "^3.1",
+        "ramsey/uuid": "^3.8",
+        "lstrojny/functional-php": "^1.8",
+        "fig/http-message-util": "^1.1",
+        "nyholm/psr7": "^1.1",
+        "sip/psinder-php-sharedkernel": "dev-master",
+        "monolog/monolog": "^1.24"
+    },
+    "require-dev": {
+        "behat/behat": "^3.5"
+    }
+}

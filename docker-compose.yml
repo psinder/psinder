@@ -1,0 +1,126 @@
+version: '3.2'
+services:
+  kong:
+    image: kong
+    environment:
+      KONG_LOG_LEVEL: debug
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: /usr/local/kong.yml
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
+    ports:
+      - ${KONG_HOST_PORT:-9500}:8000
+      - ${KONG_MANAGEMENT_HOST_PORT:-9501}:8001
+    volumes:
+      - ./docker/kong/kong.yml:/usr/local/kong.yml
+    networks:
+      - proxy
+  adoption-web:
+    image: sip/psinder-nginx
+    build:
+      context: docker/nginx-php
+    depends_on:
+      - adoption-php
+    volumes:
+      - ./Adoption/public:/var/www/app/Adoption/public
+    environment:
+      FPM_HOST: adoption-php
+      ROOT_DIR: /var/www/app/Adoption/public
+    networks:
+      - internal
+      - proxy
+  adoption-php:
+    image: sip/psinder-adoption-php
+    build:
+      context: ./Adoption/docker/php-fpm
+      args:
+        HOST_UID: ${HOST_UID:-1000}
+    secrets:
+      - ssh_private_key
+      - ssh_public_key
+    volumes:
+      - ./:/var/www/app
+      - /tmp/composer-cache:/.composer/cache
+    working_dir: /var/www/app/Adoption
+    networks:
+      - internal
+    env_file:
+      - Adoption/.env
+  security-php:
+    image: sip/psinder-php
+    build:
+      context: ./Security/docker/php-fpm
+      args:
+        HOST_UID: ${HOST_UID:-1000}
+    secrets:
+      - ssh_private_key
+      - ssh_public_key
+    volumes:
+      - ./:/var/www/app
+      - /tmp/composer-cache:/.composer/cache
+    working_dir: /var/www/app/Security
+    networks:
+      - internal
+    env_file:
+      - Security/.env
+  security-web:
+    image: sip/psinder-nginx
+    build:
+      context: docker/nginx-php
+    depends_on:
+      - security-php
+    volumes:
+      - ./Security/public:/var/www/app/Security/public
+    environment:
+      FPM_HOST: security-php
+      ROOT_DIR: /var/www/app/Security/public
+    networks:
+      - internal
+      - proxy
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+    env_file:
+      - .env
+    ports:
+      - ${RABBITMQ_MANAGEMENT_HOST_PORT}:15672
+    networks:
+      - internal
+      - proxy
+  db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_PASSWORD: ${DB_SUPERUSER_PASS}
+    networks:
+      - internal
+    env_file:
+      - ./Adoption/.env
+      - ./Security/.env
+    volumes:
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+    ports:
+      - ${DB_HOST_PORT:-9520}:5432
+  e2e:
+    image: sip/psinder-e2e
+    build:
+      context: ./e2e-tests/docker/php
+    depends_on:
+      - adoption-web
+      - security-web
+    networks:
+      - internal
+      - proxy
+    env_file:
+      - ./e2e-tests/.env
+    volumes:
+      - ./:/var/www/app
+      - /tmp/composer-cache:/.composer/cache
+    working_dir: /var/www/app/e2e-tests
+    entrypoint: "php -S 0.0.0.0:8080"
+networks:
+  proxy:
+    external: false
+  internal:
+    external: false

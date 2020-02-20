@@ -1,0 +1,14 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Sip\Psinder\Adoption\Domain\Pet\Pet" table="pet">
+        <id name="id" type="PetId">
+            <generator strategy="NONE" />
+        </id>
+        <field name="name" type="PetName" />
+        <field name="birthdate" type="Birthdate" />
+        <field name="sex" type="PetSex" />
+        <embedded name="breed" class="Sip\Psinder\Adoption\Domain\Pet\PetBreed" />
+    </entity>
+</doctrine-mapping>

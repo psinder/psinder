@@ -1,0 +1,3 @@
+.env
+docker-compose.override.yml
+.phpunit.result.cache

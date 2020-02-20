@@ -1,0 +1,18 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Sip\Psinder\Adoption\Domain\Offer\Offer" table="offer">
+        <id name="id" type="OfferId">
+            <generator strategy="NONE" />
+        </id>
+        <field name="shelterId" type="ShelterId" />
+        <one-to-one field="pet" target-entity="Sip\Psinder\Adoption\Domain\Pet\Pet">
+            <cascade><cascade-all/></cascade>
+            <join-column name="pet_id" nullable="false" />
+        </one-to-one>
+        <field name="applications" type="OfferApplications"/>
+        <field name="isOpen" type="boolean" />
+        <field name="selectedAdopter" type="AdopterId" nullable="true" />
+    </entity>
+</doctrine-mapping>

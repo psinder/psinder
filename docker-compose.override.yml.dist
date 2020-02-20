@@ -1,0 +1,7 @@
+version: '3.2'
+
+secrets:
+  ssh_private_key:
+     file: ~/.ssh/id_rsa
+  ssh_public_key:
+     file: ~/.ssh/id_rsa.pub

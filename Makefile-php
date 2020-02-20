@@ -1,0 +1,27 @@
+PHP_RUN ?= $(COMPOSE_EXEC) $(PHP_SERVICE)
+
+.PHONY: test
+
+composer-install:
+	$(PHP_RUN) composer install $(arg)
+
+composer-update:
+	$(PHP_RUN) composer update $(arg)
+
+composer:
+	$(PHP_RUN) composer $(arg)
+
+qa:
+	$(PHP_RUN) composer run qa
+
+phpstan:
+	$(PHP_RUN) composer run phpstan
+
+cs-check:
+	$(PHP_RUN) composer run cs-check
+
+cs-fix:
+	$(PHP_RUN) composer run cs-fix
+
+test:
+	$(PHP_RUN) composer run test-coverage

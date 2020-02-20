@@ -1,0 +1,6 @@
+.idea
+phpunit.xml
+vendor/
+reports/
+.env
+var/logs

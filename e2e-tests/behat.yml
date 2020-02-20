@@ -1,0 +1,14 @@
+default:
+  autoload: '%paths.base%/vendor/autoload.php'
+  suites:
+    default:
+      path: '%paths.base%/features'
+      contexts:
+         - Sip\Psinder\E2E\Context\OfferContext:
+             - '@Sip\Psinder\E2E\Collection\Offers'
+         - Sip\Psinder\E2E\Context\ShelterContext:
+             - '@Sip\Psinder\E2E\Collection\Shelters'
+api:
+  suites:
+    default:
+      services: Sip\Psinder\E2E\Container\Api\ApiContainerFactory::create
