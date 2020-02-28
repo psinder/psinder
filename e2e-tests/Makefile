@@ -9,9 +9,8 @@ PHP_SERVICE=e2e
 
 include ../Makefile-php
 
-e2e: composer-install e2e-run
-
 e2e-run:
+	cd .. && $(MAKE) reload-db && cd e2e-tests
 	service=${PHP_SERVICE} cmd="php vendor/bin/behat --profile=api" $(MAKE) docker-compose-exec
 
 behat:
@@ -20,3 +19,4 @@ behat:
 shell:
 	service=${PHP_SERVICE} cmd="/bin/sh" $(MAKE) docker-compose-exec
 
+setup: composer-install

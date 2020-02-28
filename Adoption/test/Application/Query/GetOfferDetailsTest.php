@@ -11,6 +11,7 @@ use Sip\Psinder\Adoption\Domain\Offer\Offers;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferBuilder;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferMother;
 use Sip\Psinder\Adoption\Test\Domain\Pet\PetMother;
+use Sip\Psinder\Adoption\Test\Domain\Shelter\ShelterMother;
 use Sip\Psinder\Adoption\Test\TransactionalTestCase;
 use Sip\Psinder\SharedKernel\Application\Query\QueryBus;
 
@@ -41,20 +42,21 @@ class GetOfferDetailsTest extends TransactionalTestCase
     {
         $pet   = PetMother::example();
         $id    = OfferMother::randomId();
+        $shelterId = ShelterMother::randomId();
         $offer = (new OfferBuilder())
             ->id($id)
+            ->shelter($shelterId)
             ->pet($pet)
             ->get();
         $this->offers->create($offer);
 
         $result = $this->bus->execute(new GetOfferDetails($id->toScalar()));
 
-        $event = $this->eventPublisher()->events()[0];
         self::assertEquals(
             [
                 'id' => $id->toScalar(),
-                'shelterId' => $event->shelterId(),
-                'pet' => $event->pet(),
+                'shelterId' => $shelterId->toScalar(),
+                'pet' => $pet->toPayload(),
             ],
             $result->toArray()
         );

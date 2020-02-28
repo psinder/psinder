@@ -38,7 +38,7 @@ final class SelectApplicationHandlerTest extends TestCase
         $offer       = OfferMother::example();
         $application = ApplicationMother::withAdopter($adopterId);
 
-        $offer->sendApplication($application);
+        $offer->apply($application);
 
         $this->offers->create($offer);
 

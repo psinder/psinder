@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Security\Domain\User;
 
+use Sip\Psinder\SharedKernel\Domain\Email;
+
 interface Users
 {
     public function add(User $account) : void;
@@ -16,5 +18,5 @@ interface Users
     /**
      * @throws UserNotFound
      */
-    public function forCredentials(Credentials $credentials) : User;
+    public function forEmail(Email $email) : User;
 }

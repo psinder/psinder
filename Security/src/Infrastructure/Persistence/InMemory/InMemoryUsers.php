@@ -9,6 +9,7 @@ use Sip\Psinder\Security\Domain\User\User;
 use Sip\Psinder\Security\Domain\User\UserId;
 use Sip\Psinder\Security\Domain\User\UserNotFound;
 use Sip\Psinder\Security\Domain\User\Users;
+use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use function Functional\first;
 
@@ -47,15 +48,15 @@ final class InMemoryUsers implements Users
         return $account;
     }
 
-    public function forCredentials(Credentials $credentials) : User
+    public function forEmail(Email $email) : User
     {
         /** @var User|null $user */
-        $user = first($this->users, static function (User $user) use ($credentials) : bool {
-            return $user->matchesCredentials($credentials);
+        $user = first($this->users, static function (User $user) use ($email) : bool {
+            return $user->email()->equals($email);
         });
 
         if ($user === null) {
-            throw UserNotFound::forCredentials($credentials);
+            throw UserNotFound::forEmail($email);
         }
 
         return $user;

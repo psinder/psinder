@@ -73,7 +73,7 @@ final class OfferBuilder
         );
 
         if ($this->selectedAdopterId !== null) {
-            $offer->sendApplication(ApplicationMother::withAdopter($this->selectedAdopterId));
+            $offer->apply(ApplicationMother::withAdopter($this->selectedAdopterId));
             $offer->selectApplication($this->selectedAdopterId);
         }
 

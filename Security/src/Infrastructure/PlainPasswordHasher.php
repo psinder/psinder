@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Security\Infrastructure;
 
-use Sip\Psinder\Security\Application\PasswordEncoder;
+use Sip\Psinder\Security\Application\PasswordHasher;
 use Sip\Psinder\Security\Domain\User\EncodedPassword;
 
-final class PlainPasswordEncoder implements PasswordEncoder
+final class PlainPasswordHasher implements PasswordHasher
 {
-    public function encode(string $plainPassword) : EncodedPassword
+    public function encode(string $plainPassword, string $salt) : EncodedPassword
     {
         return new EncodedPassword($plainPassword);
     }

@@ -46,7 +46,11 @@ final class MigrationsConfigurationFactory extends AbstractFactory
         return $configuration;
     }
 
-    protected function getDefaultConfig($configKey)
+    /**
+     * @phpstan-return array<string, mixed>
+     * @return mixed[]
+     */
+    protected function getDefaultConfig(string $configKey): array
     {
         return [
             'directory' => 'data/migrations',

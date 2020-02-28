@@ -8,6 +8,7 @@ default:
              - '@Sip\Psinder\E2E\Collection\Offers'
          - Sip\Psinder\E2E\Context\ShelterContext:
              - '@Sip\Psinder\E2E\Collection\Shelters'
+             - '@Sip\Psinder\E2E\Collection\Tokens'
 api:
   suites:
     default:

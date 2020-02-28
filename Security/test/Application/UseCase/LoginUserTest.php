@@ -6,7 +6,7 @@ namespace Sip\Psinder\Security\Test\Application\UseCase;
 
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
-use Sip\Psinder\Security\Application\PasswordEncoder;
+use Sip\Psinder\Security\Application\PasswordHasher;
 use Sip\Psinder\Security\Application\UseCase\LoginUser;
 use Sip\Psinder\Security\Application\UseCase\LoginUserDTO;
 use Sip\Psinder\Security\Domain\User\Credentials;
@@ -16,7 +16,7 @@ use Sip\Psinder\Security\Domain\User\User;
 use Sip\Psinder\Security\Domain\User\UserId;
 use Sip\Psinder\Security\Domain\User\UserNotFound;
 use Sip\Psinder\Security\Infrastructure\Persistence\InMemory\InMemoryUsers;
-use Sip\Psinder\Security\Infrastructure\PlainPasswordEncoder;
+use Sip\Psinder\Security\Infrastructure\PlainPasswordHasher;
 use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Infrastructure\InterceptingEventPublisher;
 
@@ -31,14 +31,14 @@ final class LoginUserTest extends TestCase
     /** @var LoginUser */
     private $useCase;
 
-    /** @var PasswordEncoder */
+    /** @var PasswordHasher */
     private $passwordEncoder;
 
     public function setUp() : void
     {
         $this->eventPublisher  = new InterceptingEventPublisher();
         $this->users           = new InMemoryUsers($this->eventPublisher);
-        $this->passwordEncoder = new PlainPasswordEncoder();
+        $this->passwordEncoder = new PlainPasswordHasher();
         $this->useCase         = new LoginUser($this->users, $this->passwordEncoder);
     }
 
@@ -53,7 +53,7 @@ final class LoginUserTest extends TestCase
             new Roles([Role::fromString('shelter')]),
             Credentials::fromEmailAndPassword(
                 Email::fromString($email),
-                $this->passwordEncoder->encode($password)
+                $this->passwordEncoder->encode($password, $id)
             ),
             []
         );

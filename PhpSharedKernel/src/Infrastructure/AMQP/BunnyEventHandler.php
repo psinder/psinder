@@ -49,7 +49,8 @@ final class BunnyEventHandler
 
         $eventName = (new \ReflectionObject($event))->getShortName();
 
-        $this->client->channel()->publish(
+        $channel = $this->client->channel();
+        $channel->publish(
             $this->serializer->serialize($event),
             [],
             $this->exchangeName,

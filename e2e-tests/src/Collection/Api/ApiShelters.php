@@ -4,15 +4,8 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\E2E\Collection\Api;
 
-use function DI\value;
-use Fig\Http\Message\RequestMethodInterface;
-use Fig\Http\Message\StatusCodeInterface;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Psr7\Request;
-use Psr\Http\Message\RequestFactoryInterface;
-use Sip\Psinder\E2E\Collection\Offers;
 use Sip\Psinder\E2E\Collection\Shelters;
-use Sip\Psinder\SharedKernel\UI\Http\RequestBuilder;
 use Sip\Psinder\SharedKernel\UI\Http\RequestBuilderFactory;
 
 final class ApiShelters implements Shelters
@@ -35,14 +28,22 @@ final class ApiShelters implements Shelters
             ->post()
             ->url('/register')
             ->jsonBodyArray(
-                array_merge(
-                    [
-                        'type' => 'shelter'
-                    ],
-                    $shelter
-                )
+                [
+                    'type' => 'shelter',
+                    'email' => $shelter['email'],
+                    'password' => $shelter['password'],
+                    'context' => [
+                        'name' => $shelter['name'],
+                        'address_street' => $shelter['address_street'],
+                        'address_number' => $shelter['address_number'],
+                        'address_postal' => $shelter['address_postal'],
+                        'address_city' => $shelter['address_city'],
+                    ]
+                ]
             )
             ->create();
+
+//        | name | email | password | address_street | address_number | address_postal | address_city |
 
         $response = $this->client->send($request);
 

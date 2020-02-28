@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sip\Psinder\Security\Domain\User;
 
 use Sip\Psinder\SharedKernel\Domain\AggregateRoot;
+use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Domain\EventsPublishingAggregateRoot;
 use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
 
@@ -51,6 +52,11 @@ final class User implements AggregateRoot
     public function roles() : Roles
     {
         return $this->roles;
+    }
+
+    public function email() : Email
+    {
+        return $this->credentials->email();
     }
 
     public function matchesCredentials(Credentials $credentials) : bool

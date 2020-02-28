@@ -33,7 +33,7 @@ final class PostLoginRequestHandler implements RequestHandlerInterface
         assert($requestData instanceof PostLoginRequest);
 
         $user = $this->loginUser->handle(new LoginUserDTO(
-            $requestData->username,
+            $requestData->email,
             $requestData->password
         ));
 

@@ -1,4 +1,5 @@
-DOCKER_RUN = docker run --init -it --env-file=.env --rm -v `pwd`/..:/app -v /tmp/composer-cache:/.composer/cache -w /app/$(APP_DIR) -u 1000 $(IMAGE_NAME)
+DOCKER_ENV_FILES ?= --env-file=.env
+DOCKER_RUN = docker run --init -it $(DOCKER_ENV_FILES) --rm -v `pwd`/..:/app -v /tmp/composer-cache:/.composer/cache -w /app/$(APP_DIR) -u 1000 $(IMAGE_NAME)
 PROJECT_DIR ?= ./
 DOCKER_COMPOSE = docker-compose --project-directory=$(PROJECT_DIR)
 COMPOSE_EXEC = $(DOCKER_COMPOSE) exec
@@ -31,3 +32,18 @@ docker-compose-logs:
 
 docker-build:
 	docker build -t $(IMAGE_NAME) .
+
+reload-db:
+	cd Adoption && $(MAKE) db-fixtures-load && cd ..
+	cd Security && $(MAKE) db-reset && cd ..
+
+.env:
+	cp .env.dist .env
+
+initial-setup:
+	$(MAKE) docker-compose-down
+	cd PhpSharedKernel && $(MAKE) setup && cd ..
+	$(MAKE) docker-compose-up
+	cd Adoption && $(MAKE) setup && cd ..
+	cd Security && $(MAKE) setup && cd ..
+	cd e2e-tests && $(MAKE) setup && cd ..

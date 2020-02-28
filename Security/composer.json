@@ -32,7 +32,7 @@
         "sip/psinder-php-sharedkernel": "dev-master",
         "symfony/property-access": "^4.2",
         "symfony/serializer": "^4.2",
-        "xtreamwayz/expressive-messenger": "^0.4.1",
+        "xtreamwayz/expressive-messenger": "^1.0",
         "laminas/laminas-config-aggregator": "^1.1",
         "laminas/laminas-di": "^3.1",
         "laminas/laminas-diactoros": "^2.1",

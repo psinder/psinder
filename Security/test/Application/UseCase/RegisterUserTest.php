@@ -13,7 +13,7 @@ use Sip\Psinder\Security\Domain\User\Roles;
 use Sip\Psinder\Security\Domain\User\UserId;
 use Sip\Psinder\Security\Domain\User\UserRegistered;
 use Sip\Psinder\Security\Infrastructure\Persistence\InMemory\InMemoryUsers;
-use Sip\Psinder\Security\Infrastructure\PlainPasswordEncoder;
+use Sip\Psinder\Security\Infrastructure\PlainPasswordHasher;
 use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
 
@@ -30,7 +30,7 @@ final class RegisterUserTest extends TestCase
     public function setUp() : void
     {
         $this->users   = new InMemoryUsers($this->eventPublisher());
-        $this->useCase = new RegisterUser($this->users, new PlainPasswordEncoder());
+        $this->useCase = new RegisterUser($this->users, new PlainPasswordHasher());
     }
 
     public function testRegistersShelterUser() : void

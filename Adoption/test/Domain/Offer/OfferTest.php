@@ -23,7 +23,7 @@ final class OfferTest extends TestCase
         $offer       = OfferMother::example();
         $application = ApplicationMother::example();
 
-        $offer->sendApplication($application);
+        $offer->apply($application);
 
         $offer->publishEvents($this->eventPublisher());
 
@@ -38,13 +38,15 @@ final class OfferTest extends TestCase
     public function testSendsTwoApplicationsForDifferentAdopters() : void
     {
         $offer            = OfferMother::example();
+
         $adopterId        = AdopterMother::randomId();
         $application      = ApplicationMother::withAdopter($adopterId);
+
         $otherAdopterId   = AdopterMother::randomId();
         $otherApplication = ApplicationMother::withAdopter($otherAdopterId);
 
-        $offer->sendApplication($application);
-        $offer->sendApplication($otherApplication);
+        $offer->apply($application);
+        $offer->apply($otherApplication);
 
         $offer->publishEvents($this->eventPublisher());
 
@@ -59,11 +61,11 @@ final class OfferTest extends TestCase
         $application      = ApplicationMother::withAdopter($adopterId);
         $otherApplication = ApplicationMother::withAdopter($adopterId);
 
-        $offer->sendApplication($application);
+        $offer->apply($application);
 
         $this->expectException(AlreadyApplied::class);
 
-        $offer->sendApplication($otherApplication);
+        $offer->apply($otherApplication);
     }
 
     public function testSendsApplicationAfterApplicationWasSelectedAndThrows() : void
@@ -78,7 +80,7 @@ final class OfferTest extends TestCase
 
         $this->expectException(OfferNotOpen::class);
 
-        $offer->sendApplication($otherApplication);
+        $offer->apply($otherApplication);
     }
 
     public function testSchedulesTransfer() : void

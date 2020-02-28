@@ -8,12 +8,11 @@ use DI;
 use Psr\Container\ContainerInterface;
 use Sip\Psinder\E2E\Collection\Api\ApiOffers;
 use Sip\Psinder\E2E\Collection\Offers;
-use Sip\Psinder\E2E\Container\ContainerFactory;
 use Sip\Psinder\E2E\Container\DefinitionsProvider;
 
 final class ApiOfferContainerFactory extends DefinitionsProvider
 {
-    public  static function definitions() : array
+    public static function definitions() : array
     {
         return [
             Offers::class => DI\get(ApiOffers::class),

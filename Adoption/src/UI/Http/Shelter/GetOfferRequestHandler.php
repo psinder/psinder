@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\UI\Http\Shelter;
 
+use Fig\Http\Message\StatusCodeInterface;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\JsonResponse;
 use Mezzio\Router\RouteResult;
@@ -37,10 +38,8 @@ final class GetOfferRequestHandler implements RequestHandlerInterface
         $result = $this->queryBus->execute(new GetOfferDetails($id));
 
         if ($result === null) {
-            return new EmptyResponse();
+            return new EmptyResponse(StatusCodeInterface::STATUS_NOT_FOUND);
         }
-
-        assert($result instanceof OfferDetails);
 
         return new JsonResponse($result->toArray());
     }

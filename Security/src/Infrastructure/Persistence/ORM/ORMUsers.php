@@ -10,6 +10,7 @@ use Sip\Psinder\Security\Domain\User\User;
 use Sip\Psinder\Security\Domain\User\UserId;
 use Sip\Psinder\Security\Domain\User\UserNotFound;
 use Sip\Psinder\Security\Domain\User\Users;
+use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\ORM\ORMCollection;
 use function assert;
@@ -49,21 +50,19 @@ final class ORMUsers implements Users
     /**
      * @throws UserNotFound
      */
-    public function forCredentials(Credentials $credentials) : User
+    public function forEmail(Email $email) : User
     {
         $qb = $this->collection->entityManager()->createQueryBuilder();
 
         $qb->select('u')
             ->from(User::class, 'u')
-            ->where($qb->expr()->eq('u.email', ':email'))
-            ->andWhere($qb->expr()->eq('u.password', ':password'))
-            ->setParameter('email', $credentials->email())
-            ->setParameter('password', $credentials->password());
+            ->where($qb->expr()->eq('u.credentials.email', ':email'))
+            ->setParameter('email', $email->toString());
 
         $result = $qb->getQuery()->getOneOrNullResult();
 
         if ($result === null) {
-            throw UserNotFound::forCredentials($credentials);
+            throw UserNotFound::forEmail($email);
         }
 
         return $result;

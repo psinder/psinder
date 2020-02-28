@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Security\Application\UseCase;
 
-use Sip\Psinder\Security\Application\PasswordEncoder;
+use Sip\Psinder\Security\Application\PasswordHasher;
 use Sip\Psinder\Security\Domain\User\Credentials;
 use Sip\Psinder\Security\Domain\User\Role;
 use Sip\Psinder\Security\Domain\User\Roles;
@@ -18,10 +18,10 @@ final class RegisterUser
     /** @var Users */
     private $users;
 
-    /** @var PasswordEncoder */
+    /** @var PasswordHasher */
     private $encoder;
 
-    public function __construct(Users $accounts, PasswordEncoder $encoder)
+    public function __construct(Users $accounts, PasswordHasher $encoder)
     {
         $this->users   = $accounts;
         $this->encoder = $encoder;
@@ -34,7 +34,7 @@ final class RegisterUser
             Roles::fromArray([Role::fromString($dto->type())]),
             Credentials::fromEmailAndPassword(
                 Email::fromString($dto->email()),
-                $this->encoder->encode($dto->password())
+                $this->encoder->encode($dto->password(), $dto->id())
             ),
             $dto->context()
         );

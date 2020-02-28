@@ -79,7 +79,7 @@ final class Offer implements AggregateRoot
         return $this->shelterId;
     }
 
-    public function sendApplication(Application $application) : void
+    public function apply(Application $application) : void
     {
         if (! $this->isOpen) {
             throw OfferNotOpen::forId($this->id);

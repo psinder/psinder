@@ -12,7 +12,7 @@ abstract class AggregateRootNotFound extends \Exception
     {
         return new static(sprintf(
             '%s with id %s not found',
-            self::name(),
+            static::name(),
             $id->toScalar()
         ));
     }

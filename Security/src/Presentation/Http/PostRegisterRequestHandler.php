@@ -37,7 +37,7 @@ final class PostRegisterRequestHandler implements RequestHandlerInterface
             $requestData->type,
             $requestData->email,
             $requestData->password,
-            $requestData->context ?? []
+            $requestData->context
         ));
 
         return new JsonResponse(

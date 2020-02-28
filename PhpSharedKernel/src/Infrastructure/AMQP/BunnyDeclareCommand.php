@@ -75,5 +75,7 @@ final class BunnyDeclareCommand extends Command
         }
 
         $this->client->disconnect();
+
+        return 0;
     }
 }

@@ -31,7 +31,10 @@ services:
         strip_path: false
         paths:
           - /register
-
+      - name: login
+        strip_path: false
+        paths:
+          - /login
 # routes:
 # - name: another-route
 #   # Relationships can also be specified between top-level entities,

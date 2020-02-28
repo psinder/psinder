@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
+use Lcobucci\JWT\Builder;
 use Psr\Container\ContainerInterface;
 use Sip\Psinder\Adoption\UI\Http\Handler\Shelter\PostOfferRequestHandler;
+use Sip\Psinder\Security\Presentation\Http\UserTokenFactory;
 use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
 use Sip\Psinder\SharedKernel\Infrastructure\Serializer\Serializer;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\JsonDeserializeMiddleware;
@@ -26,6 +28,12 @@ return [
             },
             RouteResultRequestPayloadTargetDTOResolver::class => static function () {
                 return new RouteResultRequestPayloadTargetDTOResolver();
+            },
+            UserTokenFactory::class => static function () {
+                return new UserTokenFactory(
+                    new Builder(),
+                    'psinder'
+                );
             },
         ],
     ],

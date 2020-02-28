@@ -44,7 +44,7 @@ trait OffersTest
 
         $this->eventPublisher()->clear();
 
-        $offer->sendApplication($application);
+        $offer->apply($application);
 
         $this->offers()->update($offer);
 

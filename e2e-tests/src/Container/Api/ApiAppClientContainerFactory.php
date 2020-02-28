@@ -7,9 +7,6 @@ namespace Sip\Psinder\E2E\Container\Api;
 use DI;
 use GuzzleHttp\Client;
 use Psr\Container\ContainerInterface;
-use Sip\Psinder\E2E\Collection\Api\ApiOffers;
-use Sip\Psinder\E2E\Collection\Offers;
-use Sip\Psinder\E2E\Container\ContainerFactory;
 use Sip\Psinder\E2E\Container\DefinitionsProvider;
 
 final class ApiAppClientContainerFactory extends DefinitionsProvider

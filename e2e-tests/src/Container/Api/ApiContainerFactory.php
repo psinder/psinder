@@ -13,14 +13,12 @@ use Monolog\Logger;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
-use Sip\Psinder\E2E\Collection\Api\ApiOffers;
-use Sip\Psinder\E2E\Collection\Offers;
 use Sip\Psinder\E2E\Container\ContainerFactory;
 use Sip\Psinder\SharedKernel\UI\Http\RequestBuilderFactory;
 
 final class ApiContainerFactory extends ContainerFactory
 {
-    protected static function definitions() : array
+    public static function definitions() : array
     {
         return array_merge(
             [
@@ -44,7 +42,8 @@ final class ApiContainerFactory extends ContainerFactory
             ],
             ApiAppClientContainerFactory::definitions(),
             ApiOfferContainerFactory::definitions(),
-            ApShelterContainerFactory::definitions(),
+            ApiShelterContainerFactory::definitions(),
+            ApiTokensContainerFactory::definitions(),
             [
                 RequestBuilderFactory::class => DI\factory(function (ContainerInterface $container) {
                     return new RequestBuilderFactory(

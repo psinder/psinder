@@ -21,3 +21,6 @@ db-migrations-migrate:
 
 console:
 	service=${PHP_SERVICE} cmd="php bin/console $(arg)" $(MAKE) docker-compose-exec
+
+setup: .env composer-install db-prepare
+	$(MAKE) console arg="amqp:declare"

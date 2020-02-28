@@ -64,7 +64,7 @@ return [
                 );
             },
             SymfonyMessengerEventPublisher::class => static function (ContainerInterface $c) {
-                return new SymfonyMessengerEventPublisher($c->get('messenger.bus.event'));
+                return new SymfonyMessengerEventPublisher($c->get('messenger.event.bus'));
             },
             'doctrine.entity_manager.orm_default' => EntityManagerFactory::class,
             'doctrine.connection.default' => ConnectionFactory::class,

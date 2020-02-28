@@ -28,28 +28,28 @@ final class RegisterConsumer
         switch ($role) {
             case 'shelter':
                 $this->bus->dispatch(new RegisterShelter(
-                    Uuid::uuid4()->toString(),
+                    $data->id,
                     $data->context['name'],
                     new Address(
-                        $data->context['street'],
-                        $data->context['street_number'],
-                        $data->context['postal_code'],
-                        $data->context['city']
+                        $data->context['address_street'],
+                        $data->context['address_number'],
+                        $data->context['address_postal'],
+                        $data->context['address_city']
                     ),
                     $data->email
                 ));
                 break;
-
-            case 'adopter':
-                $this->bus->dispatch(new RegisterAdopter(
-                    Uuid::uuid4()->toString(),
-                    $data->context['firstName'],
-                    $data->context['lastName'],
-                    $data->email,
-                    $data->context['birthdate'],
-                    $data->context['gender']
-                ));
-                break;
+//
+//            case 'adopter':
+//                $this->bus->dispatch(new RegisterAdopter(
+//                    Uuid::uuid4()->toString(),
+//                    $data->context['firstName'],
+//                    $data->context['lastName'],
+//                    $data->email,
+//                    $data->context['birthdate'],
+//                    $data->context['gender']
+//                ));
+//                break;
         }
     }
 }

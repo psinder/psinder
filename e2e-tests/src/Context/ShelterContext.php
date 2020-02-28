@@ -5,8 +5,8 @@ namespace Sip\Psinder\E2E\Context;
 use Assert\Assertion;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use Sip\Psinder\E2E\Collection\Offers;
 use Sip\Psinder\E2E\Collection\Shelters;
+use Sip\Psinder\E2E\Collection\Tokens;
 
 class ShelterContext implements Context
 {
@@ -16,10 +16,14 @@ class ShelterContext implements Context
     /** @var mixed[] */
     private $shelter;
 
-    public function __construct(Shelters $shelters)
+    /** @var Tokens */
+    private $tokens;
+
+    public function __construct(Shelters $shelters, Tokens $tokens)
     {
         $this->shelters = $shelters;
         $this->shelter = [];
+        $this->tokens = $tokens;
     }
 
     /**
@@ -43,7 +47,13 @@ class ShelterContext implements Context
     /**
      * @Then /^I should be able to log in$/
      */
-    public function thenOfferVisibleOnList()
+    public function thenCanLogIn()
     {
+        $token = $this->tokens->retrieve(
+            $this->shelter['email'],
+            $this->shelter['password']
+        );
+
+        Assertion::notNull($token);
     }
 }

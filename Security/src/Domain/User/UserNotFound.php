@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sip\Psinder\Security\Domain\User;
 
 use Exception;
+use Sip\Psinder\SharedKernel\Domain\Email;
 use function sprintf;
 
 final class UserNotFound extends Exception
@@ -17,11 +18,11 @@ final class UserNotFound extends Exception
         ));
     }
 
-    public static function forCredentials(Credentials $credentials) : self
+    public static function forEmail(Email $email) : self
     {
         return new self(sprintf(
             'Account with email %s does not exist',
-            $credentials->email()->toString()
+            $email->toString()
         ));
     }
 }

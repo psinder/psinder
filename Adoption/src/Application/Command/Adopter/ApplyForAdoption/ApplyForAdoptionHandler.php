@@ -38,10 +38,9 @@ final class ApplyForAdoptionHandler implements CommandHandler
         $this->adopters->get($adopterId);
 
         $offer = $this->offers->get($offerId);
-
         $application = Application::prepare($adopterId);
 
-        $offer->sendApplication($application);
+        $offer->apply($application);
 
         $this->offers->update($offer);
     }

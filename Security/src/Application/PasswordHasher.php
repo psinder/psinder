@@ -6,7 +6,7 @@ namespace Sip\Psinder\Security\Application;
 
 use Sip\Psinder\Security\Domain\User\EncodedPassword;
 
-interface PasswordEncoder
+interface PasswordHasher
 {
-    public function encode(string $plainPassword) : EncodedPassword;
+    public function encode(string $plainPassword, string $salt) : EncodedPassword;
 }
