@@ -48,6 +48,7 @@ final class MigrationsConfigurationFactory extends AbstractFactory
         $configuration->setName($config['name']);
         $configuration->setMigrationsDirectory($config['directory']);
         $configuration->setMigrationsTableName($config['table']);
+        $configuration->setMigrationsColumnLength(64);
 
         return $configuration;
     }
