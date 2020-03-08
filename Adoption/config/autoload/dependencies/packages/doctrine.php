@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Doctrine\DBAL\Driver\PDOPgSql\Driver;
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Adopter\AdopterIdType;
+use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Adopter\AdopterNameType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\ContactFormsType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Offer\OfferApplicationsType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Offer\OfferIdType;
@@ -15,6 +16,7 @@ use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Pet\PetTypeType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Shelter\ShelterIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Shelter\ShelterNameType;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\DBAL\Types\BirthdateType;
+use Sip\Psinder\SharedKernel\Infrastructure\Persistence\DBAL\Types\GenderType;
 
 return [
     'doctrine' => [
@@ -56,6 +58,8 @@ return [
             OfferIdType::name() => OfferIdType::class,
             OfferApplicationsType::name() => OfferApplicationsType::class,
             AdopterIdType::name() => AdopterIdType::class,
+            AdopterNameType::name() => AdopterNameType::class,
+            GenderType::name() => GenderType::class
         ],
         'migrations' => [
             'orm_default' => [

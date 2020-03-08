@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\Domain\Adopter;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sip\Psinder\Adoption\Domain\Contact\ContactEmail;
 use Sip\Psinder\Adoption\Domain\Contact\ContactForms;
 use Sip\Psinder\Adoption\Domain\Pet\Pet;
@@ -18,13 +20,13 @@ final class Adopter implements AggregateRoot
 {
     use EventsPublishingAggregateRoot;
 
+    private AdopterId $id;
     private AdopterName $name;
     private Birthdate $birthdate;
     private Gender $gender;
-    /** @var Pet[] */
-    private array $pets;
+    /** @var Collection|Pet[] */
+    private Collection $pets;
     private ContactForms $contactForms;
-    private AdopterId $id;
 
     /**
      * @param Pet[]   $pets
@@ -43,7 +45,7 @@ final class Adopter implements AggregateRoot
         $this->name         = $name;
         $this->birthdate    = $birthdate;
         $this->gender       = $gender;
-        $this->pets         = $pets;
+        $this->pets         = new ArrayCollection($pets);
         $this->contactForms = $contactForms;
         $this->events       = $events;
     }
@@ -91,7 +93,7 @@ final class Adopter implements AggregateRoot
      */
     public function pets() : array
     {
-        return $this->pets;
+        return $this->pets->toArray();
     }
 
     public function contactForms() : ContactForms
@@ -101,7 +103,7 @@ final class Adopter implements AggregateRoot
 
     public function receivePet(Pet $pet) : void
     {
-        $this->pets[]   = $pet;
+        $this->pets->add($pet);
         $this->events[] = ReceivedPet::occur($this->id, $pet);
     }
 }

@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
+use Sip\Psinder\Adoption\Domain\Adopter\Adopters;
 use Sip\Psinder\Adoption\Domain\Offer\Offers;
 use Sip\Psinder\Adoption\Domain\Shelter\Shelters;
+use Sip\Psinder\Adoption\Infrastructure\Persistence\ORM\ORMAdopters;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\ORM\ORMOffers;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\ORM\ORMShelters;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
@@ -14,6 +16,7 @@ return [
         'aliases' => [
             Shelters::class => ORMShelters::class,
             Offers::class => ORMOffers::class,
+            Adopters::class => ORMAdopters::class,
             EventPublisher::class => SymfonyMessengerEventPublisher::class,
         ],
     ],

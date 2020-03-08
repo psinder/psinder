@@ -1,0 +1,25 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Sip\Psinder\Adoption\Domain\Adopter\Adopter" table="adopter">
+        <id name="id" type="AdopterId">
+            <generator strategy="NONE" />
+        </id>
+
+        <many-to-many field="pets" target-entity="Sip\Psinder\Adoption\Domain\Pet\Pet">
+            <join-table name="adopters_pets">
+                <join-columns>
+                    <join-column name="adopter_id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="pet_id" unique="true" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+        <field name="name" type="AdopterName" />
+        <field name="contactForms" type="ContactForms" />
+        <field name="birthdate" type="Birthdate" />
+        <field name="gender" type="Gender" />
+    </entity>
+</doctrine-mapping>

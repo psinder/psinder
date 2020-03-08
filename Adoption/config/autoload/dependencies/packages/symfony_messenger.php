@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
+use Sip\Psinder\Adoption\Application\Command\Adopter\ApplyForAdoption\ApplyForAdoption;
+use Sip\Psinder\Adoption\Application\Command\Adopter\ApplyForAdoption\ApplyForAdoptionHandler;
 use Sip\Psinder\Adoption\Application\Command\Adopter\RegisterAdopter\RegisterAdopter;
 use Sip\Psinder\Adoption\Application\Command\Adopter\RegisterAdopter\RegisterAdopterHandler;
 use Sip\Psinder\Adoption\Application\Command\Shelter\PostOffer\PostOffer;
@@ -21,7 +23,8 @@ return [
                 'handlers'   => [
                     PostOffer::class => [PostOfferHandler::class],
                     RegisterShelter::class => [RegisterShelterHandler::class],
-                    RegisterAdopter::class => [RegisterAdopterHandler::class]
+                    RegisterAdopter::class => [RegisterAdopterHandler::class],
+                    ApplyForAdoption::class => [ApplyForAdoptionHandler::class],
                 ],
                 'middleware' => [
                     'messenger.command.middleware.sender',

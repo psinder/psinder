@@ -22,6 +22,13 @@ final class AdopterName
         return new self($firstName, $lastName);
     }
 
+    public static function fromFullName(string $fullName) : self
+    {
+        $parts = explode(' ', $fullName);
+
+        return new self($parts[0], $parts[1]);
+    }
+
     public function firstName() : string
     {
         return $this->firstName;
