@@ -16,9 +16,8 @@ use function Functional\select;
 final class InMemoryOffers implements Offers
 {
     /** @var Offer[] */
-    private $offers;
-    /** @var EventPublisher */
-    private $eventPublisher;
+    private array $offers;
+    private EventPublisher $eventPublisher;
 
     public function __construct(EventPublisher $eventPublisher)
     {
@@ -56,8 +55,9 @@ final class InMemoryOffers implements Offers
     /** @return Offer[] */
     public function forShelter(ShelterId $shelterId) : array
     {
-        return array_values(select($this->offers, static function (Offer $offer) use ($shelterId) : bool {
-            return $offer->shelterId()->equals($shelterId);
-        }));
+        return array_values(select(
+            $this->offers,
+            static fn(Offer $offer): bool => $offer->shelterId()->equals($shelterId)
+        ));
     }
 }

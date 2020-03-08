@@ -8,8 +8,7 @@ use Assert\Assertion;
 
 final class Email
 {
-    /** @var string */
-    private $address;
+    private string $address;
 
     public function __construct(string $address)
     {

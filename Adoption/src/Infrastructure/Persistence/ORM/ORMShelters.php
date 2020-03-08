@@ -16,8 +16,7 @@ use function assert;
 
 final class ORMShelters implements Shelters
 {
-    /** @var ORMCollection */
-    private $collection;
+    private ORMCollection $collection;
 
     public function __construct(EntityManagerInterface $entityManager, EventPublisher $eventPublisher)
     {
@@ -25,9 +24,7 @@ final class ORMShelters implements Shelters
             $entityManager,
             $eventPublisher,
             Shelter::class,
-            static function (ShelterId $id) : Throwable {
-                return ShelterNotFound::forId($id);
-            }
+            static fn(ShelterId $id): Throwable => ShelterNotFound::forId($id)
         );
     }
 

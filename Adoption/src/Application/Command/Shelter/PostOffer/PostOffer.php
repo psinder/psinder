@@ -9,14 +9,11 @@ use Sip\Psinder\SharedKernel\Application\Command\Command;
 
 final class PostOffer implements Command
 {
-    /** @var string */
-    private $shelterId;
+    private string $shelterId;
 
-    /** @var Pet */
-    private $pet;
+    private Pet $pet;
 
-    /** @var string */
-    private $offerId;
+    private string $offerId;
 
     public function __construct(string $offerId, string $shelterId, Pet $pet)
     {

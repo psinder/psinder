@@ -8,10 +8,8 @@ use function sprintf;
 
 final class Phone
 {
-    /** @var string */
-    private $prefix;
-    /** @var string */
-    private $number;
+    private string $prefix;
+    private string $number;
 
     public function __construct(string $prefix, string $number)
     {

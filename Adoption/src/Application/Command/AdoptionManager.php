@@ -13,8 +13,7 @@ use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
 
 final class AdoptionManager
 {
-    /** @var CommandBus */
-    private $commandBus;
+    private CommandBus $commandBus;
 
     public function __construct(CommandBus $commandBus)
     {

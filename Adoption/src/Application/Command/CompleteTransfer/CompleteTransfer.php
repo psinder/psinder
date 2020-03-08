@@ -8,8 +8,7 @@ use Sip\Psinder\SharedKernel\Application\Command\Command;
 
 final class CompleteTransfer implements Command
 {
-    /** @var string */
-    private $transferId;
+    private string $transferId;
 
     public function __construct(string $transferId)
     {

@@ -12,11 +12,9 @@ use function assert;
 
 final class RegisterShelterHandler implements CommandHandler
 {
-    /** @var Shelters */
-    private $shelters;
+    private Shelters $shelters;
 
-    /** @var ShelterFactory */
-    private $factory;
+    private ShelterFactory $factory;
 
     public function __construct(Shelters $shelters, ShelterFactory $factory)
     {

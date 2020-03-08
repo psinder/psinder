@@ -6,11 +6,9 @@ namespace Sip\Psinder\Security\Application\UseCase;
 
 final class LoginUserDTO
 {
-    /** @var string */
-    private $email;
+    private string $email;
 
-    /** @var string */
-    private $password;
+    private string $password;
 
     public function __construct(string $email, string $password)
     {

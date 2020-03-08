@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\SharedKernel\Infrastructure\Persistence\DBAL\Types;
 
+use DateTimeImmutable;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\DateImmutableType;
-use Doctrine\DBAL\Types\DateType;
 use Sip\Psinder\SharedKernel\Domain\Birthdate;
+use function is_string;
 
 final class BirthdateType extends DateImmutableType implements DBALType
 {
@@ -16,25 +17,35 @@ final class BirthdateType extends DateImmutableType implements DBALType
         return 'Birthdate';
     }
 
-    public function getName()
+    public function getName() : string
     {
         return static::name();
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
     {
         return true;
     }
 
+    /**
+     * @param mixed $value
+     *
+     * @return mixed
+     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if ($value instanceof Birthdate) {
-            $value = \DateTimeImmutable::createFromFormat('Y-m-d', $value->toString());
+            $value = DateTimeImmutable::createFromFormat('Y-m-d', $value->toString());
         }
 
         return parent::convertToDatabaseValue($value, $platform);
     }
 
+    /**
+     * @param mixed $value
+     *
+     * @return mixed
+     */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         $birthdateScalar = parent::convertToPHPValue($value, $platform);

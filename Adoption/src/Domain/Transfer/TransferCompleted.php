@@ -11,17 +11,14 @@ use Sip\Psinder\SharedKernel\Domain\Event;
 
 final class TransferCompleted implements Event
 {
-    /** @var string */
-    private $transferId;
+    private string $transferId;
 
     /** @var string[] */
-    private $pet;
+    private array $pet;
 
-    /** @var string */
-    private $adopterId;
+    private string $adopterId;
 
-    /** @var DateTimeImmutable */
-    private $occurredAt;
+    private DateTimeImmutable $occurredAt;
 
     /**
      * @param string[] $pet

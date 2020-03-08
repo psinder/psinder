@@ -5,6 +5,7 @@ namespace Sip\Psinder\E2E\Context;
 use Assert\Assertion;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
+use Faker\Factory;
 use Sip\Psinder\E2E\Collection\Shelters;
 use Sip\Psinder\E2E\Collection\Tokens;
 
@@ -32,6 +33,10 @@ class ShelterContext implements Context
     public function givenShelter(TableNode $table)
     {
         $this->shelter = array_combine($table->getRow(0), $table->getRow(1));
+
+        $faker = Factory::create();
+        $this->shelter['email'] = $faker->email;
+        $this->shelter['password'] = $faker->password;
     }
 
     /**
@@ -49,7 +54,7 @@ class ShelterContext implements Context
      */
     public function thenCanLogIn()
     {
-        $token = $this->tokens->retrieve(
+        $token = $this->tokens->obtain(
             $this->shelter['email'],
             $this->shelter['password']
         );

@@ -15,7 +15,7 @@ use function Functional\some;
 final class Roles implements IteratorAggregate
 {
     /** @var Role[] */
-    private $roles;
+    private array $roles;
 
     /** @param Role[] $roles */
     public function __construct(array $roles)
@@ -32,23 +32,19 @@ final class Roles implements IteratorAggregate
 
     public function exists(Role $role) : bool
     {
-        return some($this->roles, static function (Role $existingRole) use ($role) : bool {
-            return $existingRole->equals($role);
-        });
+        return some($this->roles, static fn(Role $existingRole): bool => $existingRole->equals($role));
     }
 
     /** @return string[] */
     public function toScalarArray() : array
     {
-        return map($this->roles, static function (Role $role) : string {
-            return $role->identifier();
-        });
+        return map($this->roles, static fn(Role $role): string => $role->identifier());
     }
 
     /**
      * @return Role[]
      *
-     * @phpstan-return \Traversable<mixed,Role>
+     * @phpstan-return \Traversable<mixed, Role>
      */
     public function getIterator() : iterable
     {

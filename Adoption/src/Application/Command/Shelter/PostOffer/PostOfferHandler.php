@@ -18,14 +18,11 @@ use function sprintf;
 
 final class PostOfferHandler implements CommandHandler
 {
-    /** @var Shelters */
-    private $shelters;
+    private Shelters $shelters;
 
-    /** @var PetFactory */
-    private $petFactory;
+    private PetFactory $petFactory;
 
-    /** @var Offers */
-    private $offers;
+    private Offers $offers;
 
     public function __construct(Shelters $shelters, Offers $offers, PetFactory $petFactory)
     {

@@ -8,6 +8,7 @@ use DI;
 use Psr\Container\ContainerInterface;
 use Sip\Psinder\E2E\Collection\Api\ApiOffers;
 use Sip\Psinder\E2E\Collection\Offers;
+use Sip\Psinder\E2E\Collection\Tokens;
 use Sip\Psinder\E2E\Container\DefinitionsProvider;
 
 final class ApiOfferContainerFactory extends DefinitionsProvider
@@ -17,7 +18,10 @@ final class ApiOfferContainerFactory extends DefinitionsProvider
         return [
             Offers::class => DI\get(ApiOffers::class),
             ApiOffers::class => DI\factory(function (ContainerInterface $container) {
-                return new ApiOffers($container->get('app.client'));
+                return new ApiOffers(
+                    $container->get('app.client'),
+                    $container->get(Tokens::class)
+                );
             })
         ];
     }

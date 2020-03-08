@@ -12,8 +12,7 @@ use function Functional\some;
 
 final class LaminasRbacAuthorization implements Authorization
 {
-    /** @var Rbac */
-    private $rbac;
+    private Rbac $rbac;
 
     public function __construct(Rbac $rbac)
     {

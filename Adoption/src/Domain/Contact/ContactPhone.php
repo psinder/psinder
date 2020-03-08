@@ -8,8 +8,7 @@ use Sip\Psinder\SharedKernel\Domain\Phone;
 
 final class ContactPhone implements ContactForm
 {
-    /** @var Phone */
-    private $phone;
+    private Phone $phone;
 
     private function __construct(Phone $phone)
     {

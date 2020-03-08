@@ -14,9 +14,8 @@ use function array_key_exists;
 final class InMemoryTransfers implements Transfers
 {
     /** @var Transfer[] */
-    private $transfers;
-    /** @var EventPublisher */
-    private $eventPublisher;
+    private array $transfers;
+    private EventPublisher $eventPublisher;
 
     public function __construct(EventPublisher $eventPublisher)
     {

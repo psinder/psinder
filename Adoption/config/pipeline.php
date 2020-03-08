@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Psr\Container\ContainerInterface;
+use Sip\Psinder\SharedKernel\UI\Http\Middleware\AuthenticationMiddleware;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\JsonDeserializeMiddleware;
 use Mezzio\Application;
 use Mezzio\Handler\NotFoundHandler;
@@ -25,6 +26,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
     $app->pipe(MethodNotAllowedMiddleware::class);
     $app->pipe(UrlHelperMiddleware::class);
     $app->pipe(JsonDeserializeMiddleware::class);
+    $app->pipe(AuthenticationMiddleware::class);
     $app->pipe(DispatchMiddleware::class);
     $app->pipe(NotFoundHandler::class);
 };

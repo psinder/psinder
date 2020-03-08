@@ -14,11 +14,9 @@ use function assert;
 
 final class ScheduleTransferHandler implements CommandHandler
 {
-    /** @var Offers */
-    private $offers;
+    private Offers $offers;
 
-    /** @var Transfers */
-    private $transfers;
+    private Transfers $transfers;
 
     public function __construct(Offers $offers, Transfers $transfers)
     {

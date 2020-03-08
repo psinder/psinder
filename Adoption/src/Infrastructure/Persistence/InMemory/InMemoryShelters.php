@@ -14,9 +14,8 @@ use function array_key_exists;
 final class InMemoryShelters implements Shelters
 {
     /** @var Shelter[] */
-    private $shelters;
-    /** @var EventPublisher */
-    private $eventPublisher;
+    private array $shelters;
+    private EventPublisher $eventPublisher;
 
     public function __construct(EventPublisher $eventPublisher)
     {

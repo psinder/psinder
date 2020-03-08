@@ -10,8 +10,7 @@ use function sprintf;
 
 abstract class UUIDIdentity implements Identity
 {
-    /** @var string */
-    private $id;
+    private string $id;
 
     public function __construct(string $id)
     {
@@ -31,7 +30,7 @@ abstract class UUIDIdentity implements Identity
             && $this->id === $otherIdentity->id;
     }
 
-    public function __toString()
+    public function __toString() : string
     {
         return $this->id;
     }

@@ -10,14 +10,12 @@ use Sip\Psinder\SharedKernel\Domain\Event;
 
 final class ReceivedPet implements Event
 {
-    /** @var string */
-    private $adopterId;
+    private string $adopterId;
 
     /** @var string[] */
-    private $pet;
+    private array $pet;
 
-    /** @var DateTimeImmutable */
-    private $occurredAt;
+    private DateTimeImmutable $occurredAt;
 
     /**
      * @param string[] $pet

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Lcobucci\Clock\Clock;
+use Lcobucci\Clock\SystemClock;
 use Sip\Psinder\Adoption\Application\Query\Shelter\OfferDetailsRepository;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Read\Shelter\DBALOfferDetailsRepository;
 use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
@@ -15,6 +17,7 @@ return [
             CommandBus::class => SymfonyMessengerCommandBus::class,
             QueryBus::class => SymfonyMessengerQueryBus::class,
             OfferDetailsRepository::class => DBALOfferDetailsRepository::class,
+            Clock::class => SystemClock::class,
         ],
     ],
 ];

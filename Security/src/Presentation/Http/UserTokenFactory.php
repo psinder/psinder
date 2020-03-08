@@ -4,34 +4,47 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Security\Presentation\Http;
 
+use Lcobucci\Clock\Clock;
 use Lcobucci\JWT\Builder;
-use Sip\Psinder\Security\Domain\User\User;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Lcobucci\JWT\Signer\Key;
 
 final class UserTokenFactory
 {
-    /** @var Builder */
-    private $builder;
+    private Builder $builder;
+    private string $issuer;
+    private int $expiration;
+    private Clock $clock;
+    private Key $key;
 
-    /** @var string */
-    private $issuer;
-
-    /** @var int */
-    private $expiration;
-
-    public function __construct(Builder $builder, string $issuer, int $expiration = 20 * 60)
-    {
+    public function __construct(
+        Key $key,
+        Clock $clock,
+        Builder $builder,
+        string $issuer,
+        int $expiration = 20 * 60
+    ) {
         $this->builder    = $builder;
         $this->issuer     = $issuer;
         $this->expiration = $expiration;
+        $this->clock      = $clock;
+        $this->key        = $key;
     }
 
-    public function create(User $user) : string
+    /**
+     * @param string[] $roles
+     */
+    public function create(string $userId, array $roles) : string
     {
+        $now = $this->clock->now()->getTimestamp();
+
         return $this->builder
-            ->setId($user->id()->toScalar())
-            ->setExpiration($this->expiration)
-            ->setIssuer($this->issuer)
-            ->getToken()
+            ->identifiedBy($userId)
+            ->withClaim('roles', $roles)
+            ->expiresAt($now + $this->expiration)
+            ->issuedAt($now)
+            ->issuedBy($this->issuer)
+            ->getToken(new Sha256(), $this->key)
             ->__toString();
     }
 }

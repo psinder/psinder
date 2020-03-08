@@ -18,8 +18,7 @@ final class Gender
         self::OTHER,
     ];
 
-    /** @var string */
-    private $value;
+    private string $value;
 
     private function __construct(string $name)
     {

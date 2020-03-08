@@ -7,7 +7,7 @@ namespace Sip\Psinder\SharedKernel\Domain;
 trait EventsPublishingAggregateRoot
 {
     /** @var Event[] */
-    protected $events = [];
+    protected array $events = [];
 
     public function publishEvents(EventPublisher $publisher) : void
     {

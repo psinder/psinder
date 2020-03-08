@@ -15,11 +15,9 @@ use function assert;
 
 final class ApplyForAdoptionHandler implements CommandHandler
 {
-    /** @var Offers */
-    private $offers;
+    private Offers $offers;
 
-    /** @var Adopters */
-    private $adopters;
+    private Adopters $adopters;
 
     public function __construct(Adopters $adopters, Offers $offers)
     {
@@ -37,7 +35,7 @@ final class ApplyForAdoptionHandler implements CommandHandler
         // Checks if exists
         $this->adopters->get($adopterId);
 
-        $offer = $this->offers->get($offerId);
+        $offer       = $this->offers->get($offerId);
         $application = Application::prepare($adopterId);
 
         $offer->apply($application);

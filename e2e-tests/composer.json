@@ -22,7 +22,9 @@
         "fig/http-message-util": "^1.1",
         "nyholm/psr7": "^1.1",
         "sip/psinder-php-sharedkernel": "dev-master",
-        "monolog/monolog": "^1.24"
+        "monolog/monolog": "^1.24",
+        "fzaninotto/faker": "^1.9",
+        "lcobucci/jwt": "^3.3"
     },
     "require-dev": {
         "behat/behat": "^3.5"

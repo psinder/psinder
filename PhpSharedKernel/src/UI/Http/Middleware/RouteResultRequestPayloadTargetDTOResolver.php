@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\SharedKernel\UI\Http\Middleware;
 
+use Mezzio\Middleware\LazyLoadingMiddleware;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use ReflectionObject;
 use Stringy\Stringy;
-use Zend\Expressive\Middleware\LazyLoadingMiddleware;
 use Zend\Expressive\Router\RouteResult;
 use function class_exists;
 use function get_class;
-use function is_object;
 
 final class RouteResultRequestPayloadTargetDTOResolver implements RequestPayloadTargetDTOResolver
 {
@@ -60,10 +59,6 @@ final class RouteResultRequestPayloadTargetDTOResolver implements RequestPayload
             return $middlewareProperty->getValue($middleware);
         }
 
-        if (is_object($middleware)) {
-            return get_class($middleware);
-        }
-
-        return null;
+        return get_class($middleware);
     }
 }

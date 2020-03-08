@@ -9,17 +9,26 @@ use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 use InvalidArgumentException;
 use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
+use function is_string;
 
 abstract class UUIDType extends Type
 {
-    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
+    /**
+     * @param mixed[] $fieldDeclaration
+     */
+    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform) : string
     {
         return $platform->getGuidTypeDeclarationSQL($fieldDeclaration);
     }
 
+    /**
+     * @param mixed $value
+     *
+     * @return mixed
+     */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        if (empty($value)) {
+        if ($value === null) {
             return null;
         }
 
@@ -36,9 +45,14 @@ abstract class UUIDType extends Type
         }
     }
 
+    /**
+     * @param mixed $value
+     *
+     * @return mixed
+     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if (empty($value)) {
+        if ($value === null) {
             return null;
         }
 
@@ -50,19 +64,19 @@ abstract class UUIDType extends Type
             return $value;
         }
 
-        throw ConversionException::conversionFailed($value, static::name());
+        throw ConversionException::conversionFailedInvalidType($value, 'string', [Identity::class, 'string']);
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
     {
         return true;
     }
 
-    public function getName()
+    public function getName() : string
     {
         return static::name();
     }
 
-    abstract public function identityClass(): string;
-    abstract public static function name(): string;
+    abstract public function identityClass() : string;
+    abstract public static function name() : string;
 }

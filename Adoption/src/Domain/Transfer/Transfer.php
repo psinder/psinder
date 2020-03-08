@@ -11,7 +11,6 @@ use Sip\Psinder\Adoption\Domain\Pet\Pet;
 use Sip\Psinder\SharedKernel\Domain\AggregateRoot;
 use Sip\Psinder\SharedKernel\Domain\Event;
 use Sip\Psinder\SharedKernel\Domain\EventsPublishingAggregateRoot;
-use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
 
 final class Transfer implements AggregateRoot
 {
@@ -20,20 +19,15 @@ final class Transfer implements AggregateRoot
     private const COMPLETED = true;
     private const SCHEDULED = false;
 
-    /** @var TransferId */
-    private $id;
+    private TransferId $id;
 
-    /** @var OfferId */
-    private $offerId;
+    private OfferId $offerId;
 
-    /** @var Pet */
-    private $pet;
+    private Pet $pet;
 
-    /** @var AdopterId */
-    private $adopterId;
+    private AdopterId $adopterId;
 
-    /** @var bool */
-    private $completed;
+    private bool $completed;
 
     /**
      * @param Event[] $events
@@ -66,10 +60,7 @@ final class Transfer implements AggregateRoot
         );
     }
 
-    /**
-     * @return TransferId
-     */
-    public function id() : Identity
+    public function id() : TransferId
     {
         return $this->id;
     }

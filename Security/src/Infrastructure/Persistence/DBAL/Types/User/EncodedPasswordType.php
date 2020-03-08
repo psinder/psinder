@@ -6,7 +6,7 @@ namespace Sip\Psinder\Security\Infrastructure\Persistence\DBAL\Types\User;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
-use Sip\Psinder\Security\Domain\User\EncodedPassword;
+use Sip\Psinder\Security\Domain\User\HashedPassword;
 use function is_string;
 
 final class EncodedPasswordType extends StringType
@@ -23,7 +23,7 @@ final class EncodedPasswordType extends StringType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if ($value instanceof EncodedPassword) {
+        if ($value instanceof HashedPassword) {
             $value = $value->toString();
         }
 
@@ -38,7 +38,7 @@ final class EncodedPasswordType extends StringType
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         if (is_string($value)) {
-            return new EncodedPassword($value);
+            return new HashedPassword($value);
         }
 
         return $value;

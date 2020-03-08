@@ -11,14 +11,11 @@ use Sip\Psinder\SharedKernel\Domain\Event;
 
 final class ApplicationSelected implements Event
 {
-    /** @var string */
-    private $adopterId;
+    private string $adopterId;
 
-    /** @var string */
-    private $offerId;
+    private string $offerId;
 
-    /** @var DateTimeImmutable */
-    private $occurredAt;
+    private DateTimeImmutable $occurredAt;
 
     public function __construct(string $adopterId, string $offerId, DateTimeImmutable $occurredAt)
     {

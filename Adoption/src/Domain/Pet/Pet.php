@@ -8,16 +8,11 @@ use Sip\Psinder\SharedKernel\Domain\Birthdate;
 
 final class Pet
 {
-    /** @var PetId */
-    private $id;
-    /** @var PetName */
-    private $name;
-    /** @var Birthdate */
-    private $birthdate;
-    /** @var PetBreed */
-    private $breed;
-    /** @var PetSex */
-    private $sex;
+    private PetId $id;
+    private PetName $name;
+    private Birthdate $birthdate;
+    private PetBreed $breed;
+    private PetSex $sex;
 
     private function __construct(PetId $id, PetName $name, PetSex $sex, Birthdate $birthdate, PetBreed $breed)
     {

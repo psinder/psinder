@@ -9,11 +9,9 @@ use Symfony\Component\Serializer\Serializer as SymfonySerializerComponent;
 
 final class SymfonySerializer implements Serializer
 {
-    /** @var SymfonySerializerComponent */
-    private $serializer;
+    private SymfonySerializerComponent $serializer;
 
-    /** @var string */
-    private $format;
+    private string $format;
 
     public function __construct(SymfonySerializerComponent $serializer, string $format)
     {
@@ -28,6 +26,6 @@ final class SymfonySerializer implements Serializer
 
     public function deserialize(string $value, string $type) : object
     {
-        return $this->serializer->deserialize($value, $type, $this->format);
+        return (object) $this->serializer->deserialize($value, $type, $this->format);
     }
 }

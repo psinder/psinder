@@ -16,8 +16,7 @@ final class PetSex
         self::FEMALE,
     ];
 
-    /** @var string */
-    private $sex;
+    private string $sex;
 
     private function __construct(string $sex)
     {

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Sip\Psinder\Security\Infrastructure\Persistence\ORM;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sip\Psinder\Security\Domain\User\Credentials;
 use Sip\Psinder\Security\Domain\User\User;
 use Sip\Psinder\Security\Domain\User\UserId;
 use Sip\Psinder\Security\Domain\User\UserNotFound;
@@ -17,8 +16,7 @@ use function assert;
 
 final class ORMUsers implements Users
 {
-    /** @var ORMCollection  */
-    private $collection;
+    private ORMCollection $collection;
 
     public function __construct(EntityManagerInterface $entityManager, EventPublisher $eventPublisher)
     {
@@ -26,9 +24,7 @@ final class ORMUsers implements Users
             $entityManager,
             $eventPublisher,
             User::class,
-            static function (UserId $id) : UserNotFound {
-                return UserNotFound::forId($id);
-            }
+            static fn(UserId $id): UserNotFound => UserNotFound::forId($id)
         );
     }
 

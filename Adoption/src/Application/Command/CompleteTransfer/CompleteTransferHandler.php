@@ -12,8 +12,7 @@ use function assert;
 
 final class CompleteTransferHandler implements CommandHandler
 {
-    /** @var Transfers */
-    private $transfers;
+    private Transfers $transfers;
 
     public function __construct(Transfers $transfers)
     {

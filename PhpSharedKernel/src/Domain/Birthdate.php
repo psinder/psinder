@@ -9,8 +9,7 @@ use DateTimeImmutable;
 
 final class Birthdate
 {
-    /** @var DateTimeImmutable */
-    private $dateTime;
+    private DateTimeImmutable $dateTime;
 
     private function __construct(DateTimeImmutable $dateTime)
     {

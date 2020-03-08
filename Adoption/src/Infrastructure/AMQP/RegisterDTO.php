@@ -6,12 +6,10 @@ namespace Sip\Psinder\Adoption\Infrastructure\AMQP;
 
 final class RegisterDTO
 {
-    /** @var string */
-    public $id;
-    /** @var string */
-    public $email;
+    public string $id;
+    public string $email;
     /** @var mixed[] */
-    public $context;
+    public array $context;
     /** @var string[] */
-    public $roles;
+    public array $roles;
 }

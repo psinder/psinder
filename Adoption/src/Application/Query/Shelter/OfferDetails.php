@@ -8,14 +8,11 @@ use Sip\Psinder\Adoption\Application\Query\PetDetails;
 
 final class OfferDetails
 {
-    /** @var string */
-    private $id;
+    private string $id;
 
-    /** @var string */
-    private $shelterId;
+    private string $shelterId;
 
-    /** @var PetDetails */
-    private $pet;
+    private PetDetails $pet;
 
     public function __construct(string $id, string $shelterId, PetDetails $pet)
     {

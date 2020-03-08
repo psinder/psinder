@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Security\Domain\User;
 
-final class EncodedPassword
+final class HashedPassword
 {
-    /** @var string */
-    private $password;
+    private string $password;
 
     public function __construct(string $password)
     {

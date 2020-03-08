@@ -8,11 +8,9 @@ use Sip\Psinder\SharedKernel\Application\Command\Command;
 
 final class ApplyForAdoption implements Command
 {
-    /** @var string */
-    private $adopterId;
+    private string $adopterId;
 
-    /** @var string */
-    private $offerId;
+    private string $offerId;
 
     public function __construct(string $adopterId, string $offerId)
     {

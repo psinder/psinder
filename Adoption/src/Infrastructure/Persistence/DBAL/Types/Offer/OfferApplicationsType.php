@@ -26,11 +26,9 @@ final class OfferApplicationsType extends JsonType
             return null;
         }
 
-        $applicationsData = map($value, static function (Application $application) : array {
-            return [
-                'adopterId' => $application->adopterId()->toScalar(),
-            ];
-        });
+        $applicationsData = map($value, static fn(Application $application): array => [
+            'adopterId' => $application->adopterId()->toScalar(),
+        ]);
 
         return parent::convertToDatabaseValue($applicationsData, $platform);
     }
@@ -44,8 +42,11 @@ final class OfferApplicationsType extends JsonType
     {
         $value = parent::convertToPHPValue($value, $platform);
 
-        return map($value, static function (array $applicationData) : Application {
-            return Application::prepare(new AdopterId($applicationData['adopterId']));
-        });
+        return map(
+            $value,
+            static function (array $applicationData) : Application {
+                return Application::prepare(new AdopterId($applicationData['adopterId']));
+            }
+        );
     }
 }

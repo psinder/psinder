@@ -13,5 +13,5 @@ interface Identity
 
     public function equals(Identity $otherIdentity) : bool;
 
-    public function __toString();
+    public function __toString() : string;
 }

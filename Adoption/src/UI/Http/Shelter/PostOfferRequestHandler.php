@@ -13,12 +13,10 @@ use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Adoption\Application\Command\Pet;
 use Sip\Psinder\Adoption\Application\Command\Shelter\PostOffer\PostOffer;
 use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
-use function assert;
 
 final class PostOfferRequestHandler implements RequestHandlerInterface
 {
-    /** @var CommandBus */
-    private $commandBus;
+    private CommandBus $commandBus;
 
     public function __construct(CommandBus $commandBus)
     {
@@ -32,9 +30,7 @@ final class PostOfferRequestHandler implements RequestHandlerInterface
 
         if ($offerRequest === null) {
             return new JsonResponse(
-                [
-                    'message' => 'Bad request'
-                ],
+                ['message' => 'Bad request'],
                 StatusCodeInterface::STATUS_BAD_REQUEST
             );
         }

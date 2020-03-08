@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use Lcobucci\Clock\Clock;
 use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Signer\Key;
 use Psr\Container\ContainerInterface;
 use Sip\Psinder\Adoption\UI\Http\Handler\Shelter\PostOfferRequestHandler;
 use Sip\Psinder\Security\Presentation\Http\UserTokenFactory;
@@ -29,8 +31,10 @@ return [
             RouteResultRequestPayloadTargetDTOResolver::class => static function () {
                 return new RouteResultRequestPayloadTargetDTOResolver();
             },
-            UserTokenFactory::class => static function () {
+            UserTokenFactory::class => static function (ContainerInterface $c) {
                 return new UserTokenFactory(
+                    new Key(getenv('JWT_KEY')),
+                    $c->get(Clock::class),
                     new Builder(),
                     'psinder'
                 );

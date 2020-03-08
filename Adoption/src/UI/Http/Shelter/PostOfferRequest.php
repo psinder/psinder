@@ -6,9 +6,8 @@ namespace Sip\Psinder\Adoption\UI\Http\Shelter;
 
 final class PostOfferRequest
 {
-    /** @var string */
-    public $shelterId;
+    public string $shelterId;
 
     /** @var string[] */
-    public $pet;
+    public array $pet;
 }

@@ -6,17 +6,13 @@ namespace Sip\Psinder\Adoption\Application\Command;
 
 final class Address
 {
-    /** @var string */
-    private $street;
+    private string $street;
 
-    /** @var string */
-    private $number;
+    private string $number;
 
-    /** @var string */
-    private $postalCode;
+    private string $postalCode;
 
-    /** @var string */
-    private $city;
+    private string $city;
 
     public function __construct(
         string $street,

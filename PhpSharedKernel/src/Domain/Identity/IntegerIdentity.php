@@ -9,8 +9,7 @@ use function sprintf;
 
 abstract class IntegerIdentity implements Identity
 {
-    /** @var int */
-    private $id;
+    private int $id;
 
     public function __construct(int $id)
     {
@@ -34,7 +33,7 @@ abstract class IntegerIdentity implements Identity
             && $this->id === $otherIdentity->id;
     }
 
-    public function __toString()
+    public function __toString() : string
     {
         return (string) $this->id;
     }

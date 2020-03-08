@@ -9,14 +9,13 @@ use Sip\Psinder\Security\Domain\User\User;
 
 final class AuthenticationUser implements UserInterface
 {
-    /** @var string */
-    private $identity;
+    private string $identity;
 
     /** @var string[] */
-    private $roles;
+    private array $roles;
 
     /** @var mixed[] */
-    private $details;
+    private array $details;
 
     /**
      * @param string[] $roles

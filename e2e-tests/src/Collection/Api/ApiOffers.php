@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\E2E\Collection\Api;
 
+use Sip\Psinder\E2E\Collection\Tokens;
 use function DI\value;
 use Fig\Http\Message\RequestMethodInterface;
 use Fig\Http\Message\StatusCodeInterface;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Sip\Psinder\E2E\Collection\Offers;
 
@@ -16,12 +16,13 @@ final class ApiOffers implements Offers
 {
     private const OFFERS_URL = '/offers';
 
-    /** @var ClientInterface */
-    private $client;
+    private ClientInterface $client;
+    private Tokens $tokens;
 
-    public function __construct(ClientInterface $client)
+    public function __construct(ClientInterface $client, Tokens $tokens)
     {
         $this->client = $client;
+        $this->tokens = $tokens;
     }
 
     public function post(array $offer) : string
@@ -29,7 +30,9 @@ final class ApiOffers implements Offers
         $request = new Request(
             RequestMethodInterface::METHOD_POST,
             self::OFFERS_URL,
-            [],
+            [
+                'Authorization' => 'Bearer ' . $this->tokens->get($offer['shelterId'])->__toString()
+            ],
             \GuzzleHttp\json_encode($offer)
         );
 

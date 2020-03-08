@@ -15,11 +15,9 @@ use Sip\Psinder\SharedKernel\Domain\Email;
 
 final class RegisterUser
 {
-    /** @var Users */
-    private $users;
+    private Users $users;
 
-    /** @var PasswordHasher */
-    private $encoder;
+    private PasswordHasher $encoder;
 
     public function __construct(Users $accounts, PasswordHasher $encoder)
     {

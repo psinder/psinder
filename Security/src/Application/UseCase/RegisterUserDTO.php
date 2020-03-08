@@ -6,20 +6,16 @@ namespace Sip\Psinder\Security\Application\UseCase;
 
 final class RegisterUserDTO
 {
-    /** @var string */
-    private $id;
+    private string $id;
 
-    /** @var string */
-    private $type;
+    private string $type;
 
     /** @var mixed[] */
-    private $context;
+    private array $context;
 
-    /** @var string */
-    private $email;
+    private string $email;
 
-    /** @var string */
-    private $password;
+    private string $password;
 
     /**
      * @param mixed[] $context

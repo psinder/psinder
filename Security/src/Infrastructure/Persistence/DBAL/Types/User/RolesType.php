@@ -26,9 +26,7 @@ final class RolesType extends JsonType
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if ($value instanceof Roles) {
-            $value = map($value, static function (Role $role) : string {
-                return $role->identifier();
-            });
+            $value = map($value, static fn(Role $role): string => $role->identifier());
         }
 
         return parent::convertToDatabaseValue($value, $platform);
@@ -44,9 +42,7 @@ final class RolesType extends JsonType
         $value = parent::convertToPHPValue($value, $platform);
 
         if (is_array($value)) {
-            return new Roles(map($value, static function (string $role) : Role {
-                return Role::fromString($role);
-            }));
+            return new Roles(map($value, static fn(string $role): Role => Role::fromString($role)));
         }
 
         return $value;

@@ -8,10 +8,8 @@ use function sprintf;
 
 final class AdopterName
 {
-    /** @var string */
-    private $firstName;
-    /** @var string */
-    private $lastName;
+    private string $firstName;
+    private string $lastName;
 
     private function __construct(string $firstName, string $lastName)
     {

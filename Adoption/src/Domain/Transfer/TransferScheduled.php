@@ -12,20 +12,16 @@ use Sip\Psinder\SharedKernel\Domain\Event;
 
 final class TransferScheduled implements Event
 {
-    /** @var string */
-    private $id;
+    private string $id;
 
-    /** @var string */
-    private $offerId;
+    private string $offerId;
 
     /** @var string[] */
-    private $pet;
+    private array $pet;
 
-    /** @var string */
-    private $adopterId;
+    private string $adopterId;
 
-    /** @var DateTimeImmutable */
-    private $occurredAt;
+    private DateTimeImmutable $occurredAt;
 
     /**
      * @param string[] $pet

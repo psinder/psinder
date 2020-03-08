@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Security\Infrastructure\Persistence\InMemory;
 
-use Sip\Psinder\Security\Domain\User\Credentials;
 use Sip\Psinder\Security\Domain\User\User;
 use Sip\Psinder\Security\Domain\User\UserId;
 use Sip\Psinder\Security\Domain\User\UserNotFound;
@@ -16,10 +15,8 @@ use function Functional\first;
 final class InMemoryUsers implements Users
 {
     /** @var User[] */
-    private $users;
-
-    /** @var EventPublisher */
-    private $eventPublisher;
+    private array $users;
+    private EventPublisher $eventPublisher;
 
     public function __construct(EventPublisher $eventPublisher)
     {
@@ -51,9 +48,7 @@ final class InMemoryUsers implements Users
     public function forEmail(Email $email) : User
     {
         /** @var User|null $user */
-        $user = first($this->users, static function (User $user) use ($email) : bool {
-            return $user->email()->equals($email);
-        });
+        $user = first($this->users, static fn(User $user): bool => $user->email()->equals($email));
 
         if ($user === null) {
             throw UserNotFound::forEmail($email);

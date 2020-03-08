@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\Infrastructure\AMQP;
 
-use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Adoption\Application\Command\Address;
-use Sip\Psinder\Adoption\Application\Command\Adopter\RegisterAdopter\RegisterAdopter;
 use Sip\Psinder\Adoption\Application\Command\Shelter\RegisterShelter\RegisterShelter;
 use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
 use function current;
 
 final class RegisterConsumer
 {
-    /** @var CommandBus */
-    private $bus;
+    private CommandBus $bus;
 
     public function __construct(CommandBus $bus)
     {
@@ -39,7 +36,6 @@ final class RegisterConsumer
                     $data->email
                 ));
                 break;
-//
 //            case 'adopter':
 //                $this->bus->dispatch(new RegisterAdopter(
 //                    Uuid::uuid4()->toString(),

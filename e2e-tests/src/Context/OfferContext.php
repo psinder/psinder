@@ -5,20 +5,21 @@ namespace Sip\Psinder\E2E\Context;
 use Assert\Assertion;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
+use Sip\Psinder\E2E\Collection\Api\ApiTokens;
 use Sip\Psinder\E2E\Collection\Offers;
 
 class OfferContext implements Context
 {
-    /** @var Offers */
-    private $offers;
-
+    private Offers $offers;
     /** @var mixed[] */
-    private $offer;
+    private array $offer;
+    private ApiTokens $tokens;
 
-    public function __construct(Offers $offers)
+    public function __construct(Offers $offers, ApiTokens $tokens)
     {
         $this->offers = $offers;
         $this->offer = [];
+        $this->tokens = $tokens;
     }
 
     /**
@@ -26,7 +27,16 @@ class OfferContext implements Context
      */
     public function givenExampleShelter()
     {
-        $this->offer['shelterId'] = 'baec7e53-bbc9-4537-9541-d6a8df844c6a';
+        $token = $this->tokens->obtain(
+            'example@shelter.com',
+            'foobar'
+        );
+
+        if ($token === null) {
+            throw new \RuntimeException('Cannot retrieve token');
+        }
+
+        $this->offer['shelterId'] = $token->getClaim('jti');
     }
 
     /**

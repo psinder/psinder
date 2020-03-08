@@ -12,8 +12,7 @@ use function assert;
 
 final class GetOfferDetailsHandler implements QueryHandler
 {
-    /** @var OfferDetailsRepository */
-    private $repository;
+    private OfferDetailsRepository $repository;
 
     public function __construct(OfferDetailsRepository $repository)
     {

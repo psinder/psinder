@@ -8,12 +8,12 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 abstract class JsonType extends \Doctrine\DBAL\Types\JsonType implements DBALType
 {
-    public function getName()
+    public function getName() : string
     {
         return static::name();
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
     {
         return true;
     }

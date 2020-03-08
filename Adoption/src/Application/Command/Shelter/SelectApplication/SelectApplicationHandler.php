@@ -13,8 +13,7 @@ use function assert;
 
 final class SelectApplicationHandler implements CommandHandler
 {
-    /** @var Offers */
-    private $offers;
+    private Offers $offers;
 
     public function __construct(Offers $offers)
     {

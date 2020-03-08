@@ -13,25 +13,18 @@ use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Domain\Event;
 use Sip\Psinder\SharedKernel\Domain\EventsPublishingAggregateRoot;
 use Sip\Psinder\SharedKernel\Domain\Gender;
-use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
 
 final class Adopter implements AggregateRoot
 {
     use EventsPublishingAggregateRoot;
 
-    /** @var AdopterName */
-    private $name;
-    /** @var Birthdate */
-    private $birthdate;
-    /** @var Gender */
-    private $gender;
+    private AdopterName $name;
+    private Birthdate $birthdate;
+    private Gender $gender;
     /** @var Pet[] */
-    private $pets;
-    /** @var ContactForms */
-    private $contactForms;
-
-    /** @var AdopterId */
-    private $id;
+    private array $pets;
+    private ContactForms $contactForms;
+    private AdopterId $id;
 
     /**
      * @param Pet[]   $pets
@@ -73,10 +66,7 @@ final class Adopter implements AggregateRoot
         );
     }
 
-    /**
-     * @return AdopterId
-     */
-    public function id() : Identity
+    public function id() : AdopterId
     {
         return $this->id;
     }

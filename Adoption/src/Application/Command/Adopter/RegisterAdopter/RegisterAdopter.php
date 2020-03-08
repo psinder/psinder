@@ -8,20 +8,14 @@ use Sip\Psinder\SharedKernel\Application\Command\Command;
 
 final class RegisterAdopter implements Command
 {
-    /** @var string */
-    private $firstName;
-    /** @var string */
-    private $lastName;
-    /** @var string */
-    private $birthdate;
-    /** @var string */
-    private $gender;
+    private string $firstName;
+    private string $lastName;
+    private string $birthdate;
+    private string $gender;
 
-    /** @var string */
-    private $id;
+    private string $id;
 
-    /** @var string */
-    private $email;
+    private string $email;
 
     public function __construct(
         string $id,

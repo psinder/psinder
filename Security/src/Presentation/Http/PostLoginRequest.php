@@ -6,9 +6,7 @@ namespace Sip\Psinder\Security\Presentation\Http;
 
 final class PostLoginRequest
 {
-    /** @var string */
-    public $email;
+    public string $email;
 
-    /** @var string */
-    public $password;
+    public string $password;
 }

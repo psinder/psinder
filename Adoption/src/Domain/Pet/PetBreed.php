@@ -6,10 +6,8 @@ namespace Sip\Psinder\Adoption\Domain\Pet;
 
 final class PetBreed
 {
-    /** @var PetType */
-    private $type;
-    /** @var string */
-    private $name;
+    private PetType $type;
+    private string $name;
 
     private function __construct(PetType $type, string $name)
     {

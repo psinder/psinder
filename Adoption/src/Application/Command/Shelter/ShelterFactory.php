@@ -13,8 +13,7 @@ use Sip\Psinder\SharedKernel\Domain\Email;
 
 final class ShelterFactory
 {
-    /** @var AddressFactory */
-    private $addressFactory;
+    private AddressFactory $addressFactory;
 
     public function __construct(AddressFactory $addressFactory)
     {

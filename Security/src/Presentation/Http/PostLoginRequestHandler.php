@@ -10,15 +10,14 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Sip\Psinder\Security\Application\UseCase\LoginUser;
 use Sip\Psinder\Security\Application\UseCase\LoginUserDTO;
+use Sip\Psinder\Security\Presentation\Http\UserTokenFactory;
 use function assert;
 
 final class PostLoginRequestHandler implements RequestHandlerInterface
 {
-    /** @var UserTokenFactory */
-    private $tokenFactory;
+    private UserTokenFactory $tokenFactory;
 
-    /** @var LoginUser */
-    private $loginUser;
+    private LoginUser $loginUser;
 
     public function __construct(LoginUser $loginUser, UserTokenFactory $tokenFactory)
     {
@@ -37,9 +36,12 @@ final class PostLoginRequestHandler implements RequestHandlerInterface
             $requestData->password
         ));
 
-        $token = $this->tokenFactory->create($user);
+        $token = $this->tokenFactory->create(
+            $user->id()->toScalar(),
+            $user->roles()->toScalarArray()
+        );
 
         return (new EmptyResponse())
-            ->withHeader('Authentication', $token);
+            ->withHeader('Authorization', 'Bearer ' . $token);
     }
 }

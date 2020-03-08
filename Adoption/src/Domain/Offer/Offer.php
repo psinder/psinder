@@ -16,7 +16,6 @@ use Sip\Psinder\Adoption\Domain\Transfer\TransferId;
 use Sip\Psinder\SharedKernel\Domain\AggregateRoot;
 use Sip\Psinder\SharedKernel\Domain\Event;
 use Sip\Psinder\SharedKernel\Domain\EventsPublishingAggregateRoot;
-use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
 use function Functional\some;
 
 final class Offer implements AggregateRoot
@@ -26,23 +25,13 @@ final class Offer implements AggregateRoot
     private const OPEN   = true;
     private const CLOSED = false;
 
-    /** @var OfferId */
-    private $id;
-
-    /** @var ShelterId */
-    private $shelterId;
-
-    /** @var Pet */
-    private $pet;
-
+    private OfferId $id;
+    private ShelterId $shelterId;
+    private Pet $pet;
     /** @var Application[] */
-    private $applications = [];
-
-    /** @var AdopterId|null */
-    private $selectedAdopter;
-
-    /** @var bool */
-    private $isOpen;
+    private array $applications         = [];
+    private ?AdopterId $selectedAdopter = null;
+    private bool $isOpen;
 
     /**
      * @param Event[] $events
@@ -66,10 +55,7 @@ final class Offer implements AggregateRoot
         return new self($id, $shelterId, $pet, self::OPEN, [OfferPosted::occur($id, $shelterId, $pet)]);
     }
 
-    /**
-     * @return OfferId
-     */
-    public function id() : Identity
+    public function id() : OfferId
     {
         return $this->id;
     }
@@ -115,9 +101,10 @@ final class Offer implements AggregateRoot
 
     private function alreadyApplied(AdopterId $adopterId) : bool
     {
-        return some($this->applications, static function (Application $application) use ($adopterId) : bool {
-            return $application->adopterId()->equals($adopterId);
-        });
+        return some(
+            $this->applications,
+            static fn(Application $application): bool => $application->adopterId()->equals($adopterId)
+        );
     }
 
     public function prepareTransfer(TransferId $transferId) : Transfer

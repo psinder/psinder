@@ -13,14 +13,11 @@ final class User implements AggregateRoot
 {
     use EventsPublishingAggregateRoot;
 
-    /** @var UserId */
-    private $id;
+    private UserId $id;
 
-    /** @var Credentials */
-    private $credentials;
+    private Credentials $credentials;
 
-    /** @var Roles */
-    private $roles;
+    private Roles $roles;
 
     private function __construct(UserId $id, Roles $roles, Credentials $credentials)
     {

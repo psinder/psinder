@@ -14,9 +14,8 @@ use function array_key_exists;
 final class InMemoryAdopters implements Adopters
 {
     /** @var Adopter[] */
-    private $adopters;
-    /** @var EventPublisher */
-    private $eventPublisher;
+    private array $adopters;
+    private EventPublisher $eventPublisher;
 
     public function __construct(EventPublisher $eventPublisher)
     {

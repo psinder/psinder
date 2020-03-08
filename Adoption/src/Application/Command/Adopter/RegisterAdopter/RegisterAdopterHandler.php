@@ -12,11 +12,9 @@ use function assert;
 
 final class RegisterAdopterHandler implements CommandHandler
 {
-    /** @var Adopters */
-    private $adopters;
+    private Adopters $adopters;
 
-    /** @var AdopterFactory */
-    private $factory;
+    private AdopterFactory $factory;
 
     public function __construct(Adopters $adopters, AdopterFactory $factory)
     {

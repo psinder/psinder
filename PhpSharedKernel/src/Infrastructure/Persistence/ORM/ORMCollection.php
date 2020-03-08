@@ -11,14 +11,11 @@ use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
 
 final class ORMCollection
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    /** @var EventPublisher */
-    private $eventPublisher;
+    private EventPublisher $eventPublisher;
 
-    /** @var string */
-    private $class;
+    private string $class;
 
     /** @var callable */
     private $exceptionFactory;
@@ -29,9 +26,9 @@ final class ORMCollection
         string $class,
         callable $exceptionFactory
     ) {
-        $this->entityManager = $entityManager;
-        $this->eventPublisher = $eventPublisher;
-        $this->class = $class;
+        $this->entityManager    = $entityManager;
+        $this->eventPublisher   = $eventPublisher;
+        $this->class            = $class;
         $this->exceptionFactory = $exceptionFactory;
     }
 
@@ -48,7 +45,7 @@ final class ORMCollection
     {
         $id = $aggregate->id();
 
-        if (!$this->exists($id)) {
+        if (! $this->exists($id)) {
             throw ($this->exceptionFactory)($id);
         }
 

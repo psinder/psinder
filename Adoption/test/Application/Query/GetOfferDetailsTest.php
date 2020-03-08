@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Sip\Psinder\Adoption\Test\Application\Query;
 
 use Sip\Psinder\Adoption\Application\Query\Shelter\GetOfferDetails\GetOfferDetails;
-use Sip\Psinder\Adoption\Application\Query\Shelter\OfferDetails;
-use Sip\Psinder\Adoption\Domain\Offer\OfferPosted;
 use Sip\Psinder\Adoption\Domain\Offer\Offers;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferBuilder;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferMother;
@@ -40,10 +38,10 @@ class GetOfferDetailsTest extends TransactionalTestCase
 
     public function testFetchesDetailsForExistingOffer() : void
     {
-        $pet   = PetMother::example();
-        $id    = OfferMother::randomId();
+        $pet       = PetMother::example();
+        $id        = OfferMother::randomId();
         $shelterId = ShelterMother::randomId();
-        $offer = (new OfferBuilder())
+        $offer     = (new OfferBuilder())
             ->id($id)
             ->shelter($shelterId)
             ->pet($pet)

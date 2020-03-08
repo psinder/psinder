@@ -10,17 +10,13 @@ use Sip\Psinder\SharedKernel\Domain\Event;
 
 final class ShelterContactFormAdded implements Event
 {
-    /** @var string */
-    private $shelterId;
+    private string $shelterId;
 
-    /** @var string */
-    private $name;
+    private string $name;
 
-    /** @var string */
-    private $value;
+    private string $value;
 
-    /** @var DateTimeImmutable */
-    private $occurredAt;
+    private DateTimeImmutable $occurredAt;
 
     public function __construct(string $shelterId, string $name, string $value, DateTimeImmutable $occurredAt)
     {

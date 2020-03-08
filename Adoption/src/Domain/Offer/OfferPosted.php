@@ -11,17 +11,14 @@ use Sip\Psinder\SharedKernel\Domain\Event;
 
 final class OfferPosted implements Event
 {
-    /** @var string */
-    private $shelterId;
+    private string $shelterId;
 
-    /** @var string */
-    private $offerId;
+    private string $offerId;
 
     /** @var string[] */
-    private $pet;
+    private array $pet;
 
-    /** @var DateTimeImmutable */
-    private $occurredAt;
+    private DateTimeImmutable $occurredAt;
 
     /**
      * @param string[] $pet

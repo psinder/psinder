@@ -22,7 +22,7 @@ return [
             AuthenticationInterface::class => PhpSession::class,
             EntityManagerInterface::class => 'doctrine.entity_manager.orm_default',
             Connection::class => 'doctrine.connection.default',
-            AbstractClient::class => Client::class,
+            AbstractClient::class => Client::class
         ],
     ],
 ];

@@ -16,8 +16,7 @@ use function assert;
 
 final class PostRegisterRequestHandler implements RequestHandlerInterface
 {
-    /** @var RegisterUser */
-    private $registerUser;
+    private RegisterUser $registerUser;
 
     public function __construct(RegisterUser $registerUser)
     {

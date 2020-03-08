@@ -9,17 +9,13 @@ use Sip\Psinder\SharedKernel\Application\Command\Command;
 
 final class RegisterShelter implements Command
 {
-    /** @var string */
-    private $id;
+    private string $id;
 
-    /** @var string */
-    private $name;
+    private string $name;
 
-    /** @var Address */
-    private $address;
+    private Address $address;
 
-    /** @var string */
-    private $email;
+    private string $email;
 
     public function __construct(string $id, string $name, Address $address, string $email)
     {

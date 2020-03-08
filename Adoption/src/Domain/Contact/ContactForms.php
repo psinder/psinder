@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\Domain\Contact;
 
-use function array_merge;
-
 final class ContactForms
 {
     /** @var ContactForm[] */
-    private $forms;
+    private array $forms;
 
     /**
      * @param ContactForm[] $forms
@@ -21,7 +19,7 @@ final class ContactForms
 
     public static function fromForms(ContactForm $contactForm, ContactForm ...$contactForms) : self
     {
-        return new self(array_merge([$contactForm], $contactForms));
+        return new self([...[$contactForm], ...$contactForms]);
     }
 
     public static function empty() : self

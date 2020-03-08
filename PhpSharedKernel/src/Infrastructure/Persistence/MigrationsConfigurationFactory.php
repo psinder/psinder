@@ -4,20 +4,22 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\SharedKernel\Infrastructure\Persistence;
 
-use ContainerInteropDoctrine\AbstractFactory;
-use ContainerInteropDoctrine\ConnectionFactory;
+use Doctrine\Migrations\Configuration\Configuration;
 use Psr\Container\ContainerInterface;
+use Roave\PsrContainerDoctrine\AbstractFactory;
+use Roave\PsrContainerDoctrine\ConnectionFactory;
+use function class_exists;
 
 final class MigrationsConfigurationFactory extends AbstractFactory
 {
-    protected function createWithConfig(ContainerInterface $container, $configKey)
+    protected function createWithConfig(ContainerInterface $container, string $configKey) : ?Configuration
     {
         $config = $this->retrieveConfig($container, $configKey, 'migrations');
 
         $configuration = null;
 
         if (class_exists('\Doctrine\DBAL\Migrations\Configuration\Configuration')) {
-            $configuration = new \Doctrine\DBAL\Migrations\Configuration\Configuration(
+            $configuration = new Configuration(
                 $this->retrieveDependency(
                     $container,
                     $configKey,
@@ -28,7 +30,7 @@ final class MigrationsConfigurationFactory extends AbstractFactory
         }
 
         if (class_exists('\Doctrine\Migrations\Configuration\Configuration')) {
-            $configuration = new \Doctrine\Migrations\Configuration\Configuration(
+            $configuration = new Configuration(
                 $this->retrieveDependency(
                     $container,
                     $configKey,
@@ -36,6 +38,10 @@ final class MigrationsConfigurationFactory extends AbstractFactory
                     ConnectionFactory::class
                 )
             );
+        }
+
+        if ($configuration === null) {
+            return null;
         }
 
         $configuration->setMigrationsNamespace($config['namespace']);
@@ -47,16 +53,17 @@ final class MigrationsConfigurationFactory extends AbstractFactory
     }
 
     /**
-     * @phpstan-return array<string, mixed>
      * @return mixed[]
+     *
+     * @phpstan-return array<string, mixed>
      */
-    protected function getDefaultConfig(string $configKey): array
+    protected function getDefaultConfig(string $configKey) : array
     {
         return [
             'directory' => 'data/migrations',
             'name'      => 'Doctrine database migrations',
             'namespace' => 'Migrations',
-            'table'     => 'migrations'
+            'table'     => 'migrations',
         ];
     }
 }

@@ -36,7 +36,7 @@ class IdentitiesTest extends TestCase
                 return true;
             }
 
-            public function __toString()
+            public function __toString() : string
             {
                 return '1';
             }

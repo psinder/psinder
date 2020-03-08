@@ -8,6 +8,7 @@ use Laminas\Diactoros\ServerRequestFactory;
 use Laminas\Diactoros\StreamFactory;
 use Laminas\Diactoros\UriFactory;
 use Laminas\Stratigility\Middleware\ErrorHandler;
+use Lcobucci\Clock\SystemClock;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Nyholm\Psr7\Factory\Psr17Factory;
@@ -28,6 +29,7 @@ use Sip\Psinder\SharedKernel\Infrastructure\Persistence\MigrationsConfigurationF
 use Sip\Psinder\SharedKernel\Infrastructure\QueryBus\SymfonyMessengerQueryBus;
 use Sip\Psinder\SharedKernel\Infrastructure\Serializer\SymfonySerializer\SymfonySerializer;
 use Sip\Psinder\SharedKernel\UI\Http\RequestBuilderFactory;
+use Sip\Psinder\Security\Presentation\Http\UserTokenFactory;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\DataUriNormalizer;
@@ -45,6 +47,9 @@ return [
         ],
 
         'factories'  => [
+            SystemClock::class => static function (ContainerInterface $container) {
+                return new SystemClock();
+            },
             SymfonySerializer::class => static function (ContainerInterface $container) {
                 return new SymfonySerializer(
                     $container->get(SymfonySerializerComponent::class),
@@ -110,7 +115,7 @@ return [
                 );
             },
             BunnyConsumerCommand::class => BunnyConsumerCommandFactory::class,
-            RequestBuilderFactory::class => static function () {
+            RequestBuilderFactory::class => static function (ContainerInterface $container) {
                 return new RequestBuilderFactory(
                     new RequestFactory(),
                     new ServerRequestFactory(),

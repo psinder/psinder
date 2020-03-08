@@ -7,6 +7,7 @@ use Bunny\Client;
 use ContainerInteropDoctrine\ConnectionFactory;
 use ContainerInteropDoctrine\EntityManagerFactory;
 use Laminas\Stratigility\Middleware\ErrorHandler;
+use Lcobucci\Clock\SystemClock;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
@@ -38,6 +39,9 @@ return [
         ],
 
         'factories'  => [
+            SystemClock::class => static function () {
+                return new SystemClock();
+            },
             SymfonySerializer::class => static function (ContainerInterface $container) {
                 return new SymfonySerializer(
                     $container->get(Serializer::class),

@@ -37,10 +37,10 @@ final class OfferTest extends TestCase
 
     public function testSendsTwoApplicationsForDifferentAdopters() : void
     {
-        $offer            = OfferMother::example();
+        $offer = OfferMother::example();
 
-        $adopterId        = AdopterMother::randomId();
-        $application      = ApplicationMother::withAdopter($adopterId);
+        $adopterId   = AdopterMother::randomId();
+        $application = ApplicationMother::withAdopter($adopterId);
 
         $otherAdopterId   = AdopterMother::randomId();
         $otherApplication = ApplicationMother::withAdopter($otherAdopterId);

@@ -11,20 +11,16 @@ use Sip\Psinder\SharedKernel\Domain\Event;
 
 final class ShelterRegistered implements Event
 {
-    /** @var string */
-    private $shelterId;
+    private string $shelterId;
 
-    /** @var string */
-    private $name;
+    private string $name;
 
     /** @var string[] */
-    private $address;
+    private array $address;
 
-    /** @var string */
-    private $email;
+    private string $email;
 
-    /** @var DateTimeImmutable */
-    private $occurredAt;
+    private DateTimeImmutable $occurredAt;
 
     /**
      * @param string[] $address

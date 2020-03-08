@@ -13,11 +13,9 @@ use function assert;
 
 final class GivePetHandler implements CommandHandler
 {
-    /** @var Adopters */
-    private $adopters;
+    private Adopters $adopters;
 
-    /** @var PetFactory */
-    private $petFactory;
+    private PetFactory $petFactory;
 
     public function __construct(Adopters $adopters, PetFactory $petFactory)
     {

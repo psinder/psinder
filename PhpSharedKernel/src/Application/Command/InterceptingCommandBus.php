@@ -4,23 +4,29 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\SharedKernel\Application\Command;
 
+use ArrayIterator;
 use Countable;
-use Ds\Set;
 use IteratorAggregate;
+use Traversable;
+use function count;
+use function end;
 
+/**
+ * @implements IteratorAggregate<Command>
+ */
 final class InterceptingCommandBus implements CommandBus, Countable, IteratorAggregate
 {
-    /** @var Set&Command[] */
-    private $commands;
+    /** @var Command[] */
+    private array $commands;
 
     public function __construct()
     {
-        $this->commands = new Set();
+        $this->commands = [];
     }
 
     public function dispatch(Command $command) : void
     {
-        $this->commands->add($command);
+        $this->commands[] = $command;
     }
 
     /**
@@ -28,29 +34,37 @@ final class InterceptingCommandBus implements CommandBus, Countable, IteratorAgg
      */
     public function commands() : array
     {
-        return $this->commands->toArray();
+        return $this->commands;
     }
 
     public function reset() : void
     {
-        $this->commands->clear();
+        $this->commands = [];
     }
 
     public function count() : int
     {
-        return $this->commands->count();
+        return count($this->commands);
     }
 
     /**
      * @return Command[]
+     *
+     * @phpstan-return Traversable<Command>
      */
-    public function getIterator() : iterable
+    public function getIterator() : Traversable
     {
-        return $this->commands->getIterator();
+        return new ArrayIterator($this->commands);
     }
 
     public function last() : ?Command
     {
-        return $this->commands->last();
+        $last = end($this->commands);
+
+        if ($last === false) {
+            return null;
+        }
+
+        return $last;
     }
 }

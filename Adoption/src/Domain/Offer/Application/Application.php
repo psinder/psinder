@@ -8,8 +8,7 @@ use Sip\Psinder\Adoption\Domain\Adopter\AdopterId;
 
 final class Application
 {
-    /** @var AdopterId */
-    private $adopterId;
+    private AdopterId $adopterId;
 
     private function __construct(
         AdopterId $adopterId

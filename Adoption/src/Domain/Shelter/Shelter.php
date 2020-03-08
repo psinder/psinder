@@ -12,20 +12,15 @@ use Sip\Psinder\SharedKernel\Domain\AggregateRoot;
 use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Domain\Event;
 use Sip\Psinder\SharedKernel\Domain\EventsPublishingAggregateRoot;
-use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
 
 final class Shelter implements AggregateRoot
 {
     use EventsPublishingAggregateRoot;
 
-    /** @var ShelterId */
-    private $id;
-    /** @var ShelterName */
-    private $name;
-    /** @var Address */
-    private $address;
-    /** @var ContactForms */
-    private $contactForms;
+    private ShelterId $id;
+    private ShelterName $name;
+    private Address $address;
+    private ContactForms $contactForms;
 
     /**
      * @param Event[] $events
@@ -59,10 +54,7 @@ final class Shelter implements AggregateRoot
         );
     }
 
-    /**
-     * @return ShelterId
-     */
-    public function id() : Identity
+    public function id() : ShelterId
     {
         return $this->id;
     }

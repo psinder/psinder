@@ -35,15 +35,17 @@ docker-build:
 
 reload-db:
 	cd Adoption && $(MAKE) db-fixtures-load && cd ..
-	cd Security && $(MAKE) db-reset && cd ..
+	cd Security && $(MAKE) db-fixtures-load && cd ..
 
 .env:
 	cp .env.dist .env
 
 initial-setup:
+	docker build -t sip/psinder-php docker/php-fpm
 	$(MAKE) docker-compose-down
 	cd PhpSharedKernel && $(MAKE) setup && cd ..
+	$(MAKE) docker-compose-build
 	$(MAKE) docker-compose-up
-	cd Adoption && $(MAKE) setup && cd ..
 	cd Security && $(MAKE) setup && cd ..
+	cd Adoption && $(MAKE) setup && cd ..
 	cd e2e-tests && $(MAKE) setup && cd ..

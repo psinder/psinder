@@ -13,8 +13,7 @@ use function assert;
 
 final class DBALOfferDetailsRepository implements OfferDetailsRepository
 {
-    /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -44,9 +43,9 @@ final class DBALOfferDetailsRepository implements OfferDetailsRepository
 
         assert($statement instanceof Statement);
 
-        $detailsData = $statement->fetch();
+        $detailsData = $statement->fetchAll()[0] ?? null;
 
-        if (! $detailsData) {
+        if ($detailsData === null) {
             return null;
         }
 

@@ -10,11 +10,8 @@ use Sip\Psinder\SharedKernel\UI\Http\RequestBuilderFactory;
 
 final class ApiShelters implements Shelters
 {
-    /** @var ClientInterface */
-    private $client;
-
-    /** @var RequestBuilderFactory */
-    private $requestBuilderFactory;
+    private ClientInterface $client;
+    private RequestBuilderFactory $requestBuilderFactory;
 
     public function __construct(ClientInterface $client, RequestBuilderFactory $requestBuilderFactory)
     {
@@ -42,8 +39,6 @@ final class ApiShelters implements Shelters
                 ]
             )
             ->create();
-
-//        | name | email | password | address_street | address_number | address_postal | address_city |
 
         $response = $this->client->send($request);
 

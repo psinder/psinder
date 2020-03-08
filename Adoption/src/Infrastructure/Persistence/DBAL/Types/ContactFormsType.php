@@ -23,9 +23,7 @@ final class ContactFormsType extends JsonType
     public function convertToDatabaseValue($value, AbstractPlatform $platform) : string
     {
         if ($value instanceof ContactForms) {
-            $value = map($value->forms(), static function (ContactForm $form) : array {
-                return $form->toArray();
-            });
+            $value = map($value->forms(), static fn(ContactForm $form): array => $form->toArray());
         }
 
         return parent::convertToDatabaseValue($value, $platform);

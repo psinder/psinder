@@ -8,11 +8,9 @@ use Sip\Psinder\SharedKernel\Application\Command\Command;
 
 final class ScheduleTransfer implements Command
 {
-    /** @var string */
-    private $offerId;
+    private string $offerId;
 
-    /** @var string */
-    private $transferId;
+    private string $transferId;
 
     public function __construct(string $transferId, string $offerId)
     {

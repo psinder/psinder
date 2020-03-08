@@ -10,8 +10,7 @@ use Sip\Psinder\SharedKernel\Infrastructure\InterceptingEventPublisher;
 
 abstract class ExpressiveIntegrationTestCase extends TestCase implements ContainerInterface
 {
-    /** @var ContainerInterface */
-    protected $container;
+    protected ContainerInterface $container;
 
     protected function setUp() : void
     {
@@ -30,10 +29,8 @@ abstract class ExpressiveIntegrationTestCase extends TestCase implements Contain
 
     /**
      * @param mixed $id
-     *
-     * @return mixed
      */
-    public function has($id)
+    public function has($id) : bool
     {
         return $this->container->has($id);
     }

@@ -9,11 +9,9 @@ use Sip\Psinder\SharedKernel\Application\Command\Command;
 
 final class GivePet implements Command
 {
-    /** @var string */
-    private $adopterId;
+    private string $adopterId;
 
-    /** @var Pet */
-    private $pet;
+    private Pet $pet;
 
     public function __construct(string $adopterId, Pet $pet)
     {

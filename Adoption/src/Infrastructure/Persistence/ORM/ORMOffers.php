@@ -17,8 +17,7 @@ use function assert;
 
 final class ORMOffers implements Offers
 {
-    /** @var ORMCollection  */
-    private $collection;
+    private ORMCollection $collection;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -28,9 +27,7 @@ final class ORMOffers implements Offers
             $entityManager,
             $eventPublisher,
             Offer::class,
-            static function (OfferId $id) : Throwable {
-                return OfferNotFound::forId($id);
-            }
+            static fn(OfferId $id): Throwable => OfferNotFound::forId($id)
         );
     }
 

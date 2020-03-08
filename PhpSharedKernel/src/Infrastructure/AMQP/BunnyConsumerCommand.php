@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Sip\Psinder\SharedKernel\Infrastructure\AMQP;
 
@@ -17,21 +17,20 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class BunnyConsumerCommand extends Command
 {
-    /** @var Client */
-    private $client;
+    private Client $client;
+    private LoggerInterface $logger;
+    private ContainerInterface $container;
+    /**
+     * @phpstan-var array<string, array>
+     *
+     * @var array[]
+     */
+    private array $config;
+    private Serializer $serializer;
 
-    /** @var LoggerInterface */
-    private $logger;
-
-    /** @var ContainerInterface */
-    private $container;
-
-    /** @var array */
-    private $config;
-
-    /** @var Serializer */
-    private $serializer;
-
+    /**
+     * @param mixed[] $config
+     */
     public function __construct(
         Client $client,
         LoggerInterface $logger,
@@ -39,10 +38,10 @@ final class BunnyConsumerCommand extends Command
         array $config,
         ContainerInterface $container
     ) {
-        $this->client = $client;
-        $this->logger = $logger;
-        $this->container = $container;
-        $this->config = $config;
+        $this->client     = $client;
+        $this->logger     = $logger;
+        $this->container  = $container;
+        $this->config     = $config;
         $this->serializer = $serializer;
 
         parent::__construct();
@@ -51,7 +50,7 @@ final class BunnyConsumerCommand extends Command
     /**
      * Configures the command
      */
-    protected function configure()
+    protected function configure() : void
     {
         $this
             ->setName('amqp:consume')
@@ -64,21 +63,26 @@ final class BunnyConsumerCommand extends Command
     /**
      * Executes the current command
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
+        /** @var string $name */
         $name = $input->getArgument('queue');
 
         $this->client->connect();
 
         $config = $this->config[$name];
 
-        $this->client->channel()->run(
-            function (Message $message, Channel $channel, Client $client) use ($config) {
+        /** @var Channel $channel */
+        $channel = $this->client->channel();
+        $channel->run(
+            function (Message $message, Channel $channel) use ($config) : void {
                 $dto = $this->serializer->deserialize($message->content, $config['dto']);
                 $this->container->get($config['service'])($dto);
                 $channel->ack($message);
             },
             $name
         );
+
+        return 0;
     }
 }

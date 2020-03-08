@@ -8,19 +8,17 @@ use Sip\Psinder\SharedKernel\Domain\Email;
 
 final class Credentials
 {
-    /** @var EncodedPassword */
-    private $password;
+    private HashedPassword $password;
 
-    /** @var Email */
-    private $email;
+    private Email $email;
 
-    private function __construct(Email $email, EncodedPassword $password)
+    private function __construct(Email $email, HashedPassword $password)
     {
         $this->password = $password;
         $this->email    = $email;
     }
 
-    public static function fromEmailAndPassword(Email $email, EncodedPassword $password) : self
+    public static function fromEmailAndPassword(Email $email, HashedPassword $password) : self
     {
         return new self($email, $password);
     }
@@ -30,7 +28,7 @@ final class Credentials
         return $this->email;
     }
 
-    public function password() : EncodedPassword
+    public function password() : HashedPassword
     {
         return $this->password;
     }

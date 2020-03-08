@@ -12,26 +12,19 @@ use Sip\Psinder\SharedKernel\Domain\Gender;
 
 final class AdopterRegistered implements Event
 {
-    /** @var string */
-    private $id;
+    private string $id;
 
-    /** @var string */
-    private $birthdate;
+    private string $birthdate;
 
-    /** @var string */
-    private $gender;
+    private string $gender;
 
-    /** @var string */
-    private $email;
+    private string $email;
 
-    /** @var string */
-    private $firstName;
+    private string $firstName;
 
-    /** @var string */
-    private $lastName;
+    private string $lastName;
 
-    /** @var DateTimeImmutable */
-    private $occurredAt;
+    private DateTimeImmutable $occurredAt;
 
     public function __construct(
         string $id,

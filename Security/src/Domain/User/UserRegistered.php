@@ -11,20 +11,17 @@ use Sip\Psinder\SharedKernel\Domain\PayloadableEvent;
 
 final class UserRegistered implements Event, PayloadableEvent
 {
-    /** @var string */
-    private $id;
+    private string $id;
 
     /** @var mixed[] */
-    private $context;
+    private array $context;
 
     /** @var string[] */
-    private $roles;
+    private array $roles;
 
-    /** @var DateTimeImmutable */
-    private $occurredAt;
+    private DateTimeImmutable $occurredAt;
 
-    /** @var string */
-    private $email;
+    private string $email;
 
     /**
      * @param mixed[]  $context

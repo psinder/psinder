@@ -8,8 +8,7 @@ use Sip\Psinder\SharedKernel\Domain\Email;
 
 final class ContactEmail implements ContactForm
 {
-    /** @var Email */
-    private $email;
+    private Email $email;
 
     private function __construct(Email $email)
     {

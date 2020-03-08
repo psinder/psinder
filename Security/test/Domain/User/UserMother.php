@@ -6,7 +6,7 @@ namespace Sip\Psinder\Security\Test\Domain\User;
 
 use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Security\Domain\User\Credentials;
-use Sip\Psinder\Security\Domain\User\EncodedPassword;
+use Sip\Psinder\Security\Domain\User\HashedPassword;
 use Sip\Psinder\Security\Domain\User\Roles;
 use Sip\Psinder\Security\Domain\User\User;
 use Sip\Psinder\Security\Domain\User\UserId;
@@ -26,7 +26,7 @@ final class UserMother
             new Roles([]),
             Credentials::fromEmailAndPassword(
                 Email::fromString('foo@example.com'),
-                new EncodedPassword('foobar')
+                new HashedPassword('foobar')
             ),
             []
         );

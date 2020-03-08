@@ -10,8 +10,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class SymfonyMessengerEventPublisher implements EventPublisher
 {
-    /** @var MessageBusInterface */
-    private $bus;
+    private MessageBusInterface $bus;
 
     public function __construct(MessageBusInterface $bus)
     {

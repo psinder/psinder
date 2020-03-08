@@ -6,23 +6,17 @@ namespace Sip\Psinder\Adoption\Application\Query;
 
 final class PetDetails
 {
-    /** @var string */
-    private $id;
+    private string $id;
 
-    /** @var string */
-    private $name;
+    private string $name;
 
-    /** @var string */
-    private $birthdate;
+    private string $birthdate;
 
-    /** @var string */
-    private $breed;
+    private string $breed;
 
-    /** @var string */
-    private $sex;
+    private string $sex;
 
-    /** @var string */
-    private $type;
+    private string $type;
 
     public function __construct(string $id, string $name, string $sex, string $birthdate, string $type, string $breed)
     {

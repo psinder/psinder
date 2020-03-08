@@ -4,18 +4,23 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\SharedKernel\Domain\Identity;
 
+use ArrayIterator;
 use Assert\Assertion;
 use Countable;
-use Ds\Vector;
 use IteratorAggregate;
+use Traversable;
 use function array_diff;
 use function count;
+use function Functional\map;
 use function Functional\some;
 use function implode;
 
+/**
+ * @implements IteratorAggregate<Identity>
+ */
 abstract class Identities implements IteratorAggregate, Countable
 {
-    /** @var Vector|Identity[] */
+    /** @var Identity[] */
     private $ids;
 
     /**
@@ -26,7 +31,7 @@ abstract class Identities implements IteratorAggregate, Countable
         Assertion::notEmpty($ids);
         Assertion::allIsInstanceOf($ids, $this->storedIdentityClass());
 
-        $this->ids = new Vector();
+        $this->ids = [];
 
         foreach ($ids as $id) {
             $this->add($id);
@@ -35,10 +40,12 @@ abstract class Identities implements IteratorAggregate, Countable
 
     /**
      * @return Identity[]
+     *
+     * @phpstan-return Traversable<Identity>
      */
-    public function getIterator() : iterable
+    public function getIterator() : Traversable
     {
-        return $this->ids;
+        return new ArrayIterator($this->ids);
     }
 
     public function count() : int
@@ -52,7 +59,7 @@ abstract class Identities implements IteratorAggregate, Countable
             return;
         }
 
-        $this->ids->push($id);
+        $this->ids[] = $id;
     }
 
     public function toString() : string
@@ -65,9 +72,7 @@ abstract class Identities implements IteratorAggregate, Countable
      */
     public function toScalarArray() : array
     {
-        return $this->ids->map(static function (Identity $identity) {
-            return $identity->toScalar();
-        })->toArray();
+        return map($this->ids, static fn(Identity $identity) => $identity->toScalar());
     }
 
     public function equals(Identities $otherServices) : bool
@@ -80,8 +85,6 @@ abstract class Identities implements IteratorAggregate, Countable
 
     public function exists(Identity $id) : bool
     {
-        return some($this->ids, static function (Identity $identity) use ($id) {
-            return $identity->equals($id);
-        });
+        return some($this->ids, static fn(Identity $identity) => $identity->equals($id));
     }
 }

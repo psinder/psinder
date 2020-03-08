@@ -6,8 +6,7 @@ namespace Sip\Psinder\Adoption\Domain\Shelter;
 
 final class ShelterName
 {
-    /** @var string */
-    private $name;
+    private string $name;
 
     private function __construct(string $name)
     {

@@ -16,8 +16,7 @@ final class Role
         self::ROLE_SHELTER,
     ];
 
-    /** @var string */
-    private $identifier;
+    private string $identifier;
 
     private function __construct(string $identifier)
     {
