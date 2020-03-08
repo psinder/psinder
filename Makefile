@@ -40,7 +40,7 @@ reload-db:
 .env:
 	cp .env.dist .env
 
-initial-setup:
+initial-setup: .env
 	docker build -t sip/psinder-php docker/php-fpm
 	$(MAKE) docker-compose-down
 	cd PhpSharedKernel && $(MAKE) setup && cd ..
