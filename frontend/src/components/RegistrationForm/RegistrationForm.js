@@ -1,7 +1,6 @@
 import React from "react";
 import AdopterRegistrationForm from "./AdopterRegistrationForm";
 import ShelterRegistrationForm from "./ShelterRegistrationForm";
-import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 

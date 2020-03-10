@@ -47,8 +47,8 @@ export default function ShelterRegistrationForm() {
                 label="Nazwa"
                 className={classes.textField}
                 onChange={handleChange("name")}
-                fullWidth="true"
                 margin="normal"
+                fullWidth={true}
               />
             </Grid>
             <Grid item xs={12}>
@@ -59,7 +59,7 @@ export default function ShelterRegistrationForm() {
                 className={classes.textField}
                 onChange={handleChange("email")}
                 margin="normal"
-                fullWidth="true"
+                fullWidth={true}
               />
             </Grid>
             <Grid item xs={12}>
@@ -69,7 +69,7 @@ export default function ShelterRegistrationForm() {
                 className={classes.textField}
                 onChange={handleChange("street")}
                 margin="normal"
-                fullWidth="true"
+                fullWidth={true}
               />
             </Grid>
             <Grid item xs={12}>
@@ -79,7 +79,7 @@ export default function ShelterRegistrationForm() {
                 className={classes.textField}
                 onChange={handleChange("number")}
                 margin="normal"
-                fullWidth="true"
+                fullWidth={true}
               />
             </Grid>
             <Grid item xs={12}>
@@ -89,7 +89,7 @@ export default function ShelterRegistrationForm() {
                 className={classes.textField}
                 onChange={handleChange("postal-code")}
                 margin="normal"
-                fullWidth="true"
+                fullWidth={true}
               />
             </Grid>
             <Grid item xs={12}>
@@ -99,7 +99,7 @@ export default function ShelterRegistrationForm() {
                 className={classes.textField}
                 onChange={handleChange("city")}
                 margin="normal"
-                fullWidth="true"
+                fullWidth={true}
               />
             </Grid>
             <Button
