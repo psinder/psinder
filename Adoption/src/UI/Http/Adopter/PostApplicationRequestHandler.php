@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\UI\Http\Adopter;
 
@@ -22,13 +22,15 @@ final class PostApplicationRequestHandler implements RequestHandlerInterface
         $this->commandBus = $commandBus;
     }
 
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         /** @var LoggedInUser $user */
         $user = $request->getAttribute(AuthenticatedUser::class);
+        /** @var string $adopterId */
+        $adopterId = $user->userId();
 
         $this->commandBus->dispatch(new ApplyForAdoption(
-            $user->userId(),
+            $adopterId,
             $request->getAttribute('offerId')
         ));
 

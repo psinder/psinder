@@ -17,7 +17,7 @@ final class LoggedInUser implements AuthenticatedUser
         $this->roles  = $roles;
     }
 
-    public function userId() : ?string
+    public function userId() : string
     {
         return $this->userId;
     }

@@ -60,7 +60,6 @@ abstract class FromStringableVOType extends StringType
     }
 
     abstract protected function voClass() : string;
-    /** @param mixed $value */
-    abstract protected function convertToString($value) : string;
+    abstract protected function convertToString(object $value) : string;
     abstract public static function name() : string;
 }

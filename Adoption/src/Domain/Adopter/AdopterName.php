@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\Domain\Adopter;
 
+use function explode;
 use function sprintf;
 
 final class AdopterName

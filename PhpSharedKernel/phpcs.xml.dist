@@ -7,6 +7,7 @@
     <!-- inherit rules from: -->
     <rule ref="vendor/doctrine/coding-standard/lib/Doctrine/ruleset.xml">
         <exclude name="SlevomatCodingStandard.Commenting.DocCommentSpacing.IncorrectAnnotationsGroup" />
+        <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint" />
     </rule>
 
     <!-- Paths to check -->

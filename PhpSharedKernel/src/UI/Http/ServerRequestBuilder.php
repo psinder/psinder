@@ -20,7 +20,7 @@ final class ServerRequestBuilder
 
     private string $method;
     private UriInterface $url;
-    private string $body = '';
+    private string $body   = '';
     private ?string $token = null;
 
     public function __construct(
@@ -65,7 +65,8 @@ final class ServerRequestBuilder
         return $this;
     }
 
-    public function as(string $token) : self {
+    public function as(string $token) : self
+    {
         $this->token = $token;
 
         return $this;
@@ -78,7 +79,7 @@ final class ServerRequestBuilder
             $this->url
         );
 
-        if ($this->token) {
+        if ($this->token !== null) {
             $request = $request->withHeader('Authorization', 'Bearer ' . $this->token);
         }
 

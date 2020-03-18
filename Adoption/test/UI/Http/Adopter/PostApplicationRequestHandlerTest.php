@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\Test\UI\Http\Adopter;
 
@@ -9,16 +10,16 @@ use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferMother;
 use Sip\Psinder\Adoption\Test\Domain\Pet\PetMother;
 use Sip\Psinder\Adoption\Test\Domain\Shelter\ShelterMother;
-use PHPUnit\Framework\TestCase;
 use Sip\Psinder\Adoption\Test\FunctionalTestCase;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authentication\LoggedInUser;
 use Sip\Psinder\SharedKernel\UI\Http\RequestBuilderFactory;
+use function Safe\sprintf;
 
 final class PostApplicationRequestHandlerTest extends FunctionalTestCase
 {
     public function testAppliesForOffer() : void
     {
-        $offerId = OfferMother::randomId();
+        $offerId   = OfferMother::randomId();
         $shelterId = ShelterMother::exampleId();
         $adopterId = AdopterMother::exampleId();
         /** @var Offers $offers */
@@ -35,10 +36,10 @@ final class PostApplicationRequestHandlerTest extends FunctionalTestCase
             ['adopter']
         ));
 
-        $request   = $this->get(RequestBuilderFactory::class)
+        $request = $this->get(RequestBuilderFactory::class)
             ->createServerRequestBuilder()
             ->post()
-            ->url(\Safe\sprintf('/offers/%s/apply', $offerId->toScalar()))
+            ->url(sprintf('/offers/%s/apply', $offerId->toScalar()))
             ->create();
 
         $this->impersonate(new LoggedInUser(

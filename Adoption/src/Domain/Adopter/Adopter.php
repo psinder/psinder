@@ -24,7 +24,10 @@ final class Adopter implements AggregateRoot
     private AdopterName $name;
     private Birthdate $birthdate;
     private Gender $gender;
-    /** @var Collection|Pet[] */
+    /**
+     * @phpstan-var Collection<int, Pet>
+     * @var Collection|Pet[]
+     */
     private Collection $pets;
     private ContactForms $contactForms;
 

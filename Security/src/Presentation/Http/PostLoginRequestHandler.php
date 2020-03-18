@@ -10,7 +10,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Sip\Psinder\Security\Application\UseCase\LoginUser;
 use Sip\Psinder\Security\Application\UseCase\LoginUserDTO;
-use Sip\Psinder\Security\Presentation\Http\UserTokenFactory;
 use function assert;
 
 final class PostLoginRequestHandler implements RequestHandlerInterface

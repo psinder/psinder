@@ -25,6 +25,11 @@ final class Birthdate
         return new self($date);
     }
 
+    public static function fromDateTimeImmutable(DateTimeImmutable $birthDate) : self
+    {
+        return new self($birthDate);
+    }
+
     public function age() : int
     {
         return (new DateTimeImmutable())->diff($this->dateTime)->y;

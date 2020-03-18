@@ -48,12 +48,16 @@ final class BirthdateType extends DateImmutableType implements DBALType
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        $birthdateScalar = parent::convertToPHPValue($value, $platform);
+        $birthdate = parent::convertToPHPValue($value, $platform);
 
-        if (is_string($birthdateScalar)) {
-            return Birthdate::fromString($birthdateScalar);
+        if (is_string($birthdate)) {
+            return Birthdate::fromString($birthdate);
         }
 
-        return $birthdateScalar;
+        if ($birthdate instanceof DateTimeImmutable) {
+            return Birthdate::fromDateTimeImmutable($birthdate);
+        }
+
+        return $birthdate;
     }
 }
