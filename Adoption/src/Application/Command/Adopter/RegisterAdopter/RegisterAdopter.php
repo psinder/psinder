@@ -8,20 +8,20 @@ use Sip\Psinder\SharedKernel\Application\Command\Command;
 
 final class RegisterAdopter implements Command
 {
+    private string $id;
     private string $firstName;
     private string $lastName;
     private string $birthdate;
     private string $gender;
-
-    private string $id;
-
     private string $email;
+    private string $password;
 
     public function __construct(
         string $id,
         string $firstName,
         string $lastName,
         string $email,
+        string $password,
         string $birthdate,
         string $gender
     ) {
@@ -31,6 +31,7 @@ final class RegisterAdopter implements Command
         $this->gender    = $gender;
         $this->id        = $id;
         $this->email     = $email;
+        $this->password  = $password;
     }
 
     public function id() : string
@@ -56,6 +57,11 @@ final class RegisterAdopter implements Command
     public function gender() : string
     {
         return $this->gender;
+    }
+
+    public function password() : string
+    {
+        return $this->password;
     }
 
     public function email() : string

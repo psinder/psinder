@@ -133,7 +133,9 @@ return [
             GuzzleUserRegisterer::class => static function(ContainerInterface $container): GuzzleUserRegisterer {
                 return new GuzzleUserRegisterer(
                     // TODO: Introdue internal client
-                    $container->get(ClientInterface::class),
+                    new \GuzzleHttp\Client([
+                        'base_uri' => 'http://security-web'
+                    ]),
                     $container->get(RequestBuilderFactory::class),
                     $container->get(LoggerInterface::class)
                 );

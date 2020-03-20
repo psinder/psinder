@@ -15,11 +15,11 @@ use Sip\Psinder\Security\Domain\User\UserRegistered;
 use Sip\Psinder\Security\Infrastructure\Persistence\InMemory\InMemoryUsers;
 use Sip\Psinder\Security\Infrastructure\PlainPasswordHasher;
 use Sip\Psinder\SharedKernel\Domain\Email;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
 final class RegisterUserTest extends TestCase
 {
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
 
     private InMemoryUsers $users;
     private RegisterUser $useCase;

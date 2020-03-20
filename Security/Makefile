@@ -8,7 +8,7 @@ PHP_SERVICE=security-php
 
 include ../Makefile-php
 
-db-prepare: db-migrations-migrate
+db-prepare: db-migrations-migrate db-fixtures-load
 
 db-fixtures-load:
 	service=${PHP_SERVICE} cmd="php bin/doctrine-fixtures" $(MAKE) docker-compose-exec

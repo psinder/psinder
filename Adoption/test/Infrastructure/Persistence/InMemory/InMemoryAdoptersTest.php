@@ -8,12 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Sip\Psinder\Adoption\Domain\Adopter\Adopters;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryAdopters;
 use Sip\Psinder\Adoption\Test\Domain\Adopter\AdoptersTest;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
 final class InMemoryAdoptersTest extends TestCase
 {
     use AdoptersTest;
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
 
     /** @var InMemoryAdopters */
     private $adopters;

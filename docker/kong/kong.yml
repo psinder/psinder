@@ -28,6 +28,10 @@ services:
         strip_path: false
         paths:
           - /register/shelter
+      - name: adoption-register-adopter
+        strip_path: false
+        paths:
+          - /register/adopter
   - name: security
     url: http://security-web
     routes:

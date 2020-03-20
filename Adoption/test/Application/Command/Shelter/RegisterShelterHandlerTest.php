@@ -14,12 +14,11 @@ use Sip\Psinder\Adoption\Application\Command\UserRegisterer;
 use Sip\Psinder\Adoption\Domain\Shelter\ShelterRegistered;
 use Sip\Psinder\Adoption\Test\Application\UserRegistererStub;
 use Sip\Psinder\Adoption\Test\TransactionalTestCase;
-use Sip\Psinder\SharedKernel\Domain\EventPublisher;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
 
 final class RegisterShelterHandlerTest extends TransactionalTestCase
 {
-    use EventsInterceptingTest;
+    use EventsPublishingTest;
 
     /** @var RegisterShelterHandler */
     private $handler;
@@ -27,7 +26,6 @@ final class RegisterShelterHandlerTest extends TransactionalTestCase
     public function setUp() : void
     {
         $this->overrideServiceAliasWithInstance(UserRegisterer::class, new UserRegistererStub());
-        $this->overrideServiceAliasWithInstance(EventPublisher::class, $this->eventPublisher());
         parent::setUp();
         $this->handler = $this->get(RegisterShelterHandler::class);
     }

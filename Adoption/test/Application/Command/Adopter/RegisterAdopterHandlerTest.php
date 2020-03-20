@@ -9,24 +9,25 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Adoption\Application\Command\Adopter\RegisterAdopter\RegisterAdopter;
 use Sip\Psinder\Adoption\Application\Command\Adopter\RegisterAdopter\RegisterAdopterHandler;
+use Sip\Psinder\Adoption\Application\Command\UserRegisterer;
 use Sip\Psinder\Adoption\Domain\Adopter\AdopterRegistered;
-use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemoryAdoptersFactory;
+use Sip\Psinder\Adoption\Test\Application\UserRegistererStub;
+use Sip\Psinder\Adoption\Test\TransactionalTestCase;
 use Sip\Psinder\SharedKernel\Domain\Gender;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
 
-final class RegisterAdopterHandlerTest extends TestCase
+final class RegisterAdopterHandlerTest extends TransactionalTestCase
 {
-    use EventsInterceptingTest;
+    use EventsPublishingTest;
 
     /** @var RegisterAdopterHandler */
     private $handler;
 
     public function setUp() : void
     {
-        $this->handler = new RegisterAdopterHandler(
-            InMemoryAdoptersFactory::create($this->eventPublisher()),
-            AdopterFactoryFactory::create()
-        );
+        $this->overrideServiceAliasWithInstance(UserRegisterer::class, new UserRegistererStub());
+        parent::setUp();
+        $this->handler = $this->get(RegisterAdopterHandler::class);
     }
 
     public function testRegistersValidShelter() : void
@@ -43,6 +44,7 @@ final class RegisterAdopterHandlerTest extends TestCase
             $firstName,
             $lastName,
             $email,
+            'foobar',
             $birthdate,
             $gender
         );

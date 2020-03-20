@@ -16,6 +16,9 @@ return [
             ],
             $GLOBALS['TEST_FACTORY_OVERRIDES']
         ),
+        'shared' => [
+            EventPublisher::class => true,
+        ],
         'aliases' => array_merge(
             [
                 EventPublisher::class => InterceptingEventPublisher::class,

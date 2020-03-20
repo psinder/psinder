@@ -14,11 +14,11 @@ use Sip\Psinder\Adoption\Test\Application\Command\PetFactoryFactory;
 use Sip\Psinder\Adoption\Test\Application\Command\PetMother;
 use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
 use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemoryAdoptersFactory;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
 final class GivePetHandlerTest extends TestCase
 {
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
 
     /** @var GivePetHandler */
     private $handler;

@@ -12,12 +12,12 @@ use Sip\Psinder\Adoption\Domain\Transfer\TransferScheduled;
 use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferMother;
 use Sip\Psinder\Adoption\Test\Domain\Pet\PetMother;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAwareTrait;
 
 trait TransfersTest
 {
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
     use TestCaseAwareTrait;
 
     public function testPublishesEventsWhenCreatingTransfer() : void

@@ -18,11 +18,11 @@ use Sip\Psinder\Adoption\Test\Application\Command\PetMother;
 use Sip\Psinder\Adoption\Test\Domain\Shelter\ShelterMother;
 use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemoryOffersFactory;
 use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemorySheltersFactory;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
 final class PostOfferHandlerTest extends TestCase
 {
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
 
     /** @var PostOfferHandler */
     private $handler;

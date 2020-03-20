@@ -14,11 +14,11 @@ use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
 use Sip\Psinder\Adoption\Test\Domain\Application\ApplicationMother;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferMother;
 use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemoryOffersFactory;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
 final class SelectApplicationHandlerTest extends TestCase
 {
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
 
     /** @var SelectApplicationHandler */
     private $handler;

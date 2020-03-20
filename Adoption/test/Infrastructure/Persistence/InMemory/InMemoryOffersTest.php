@@ -8,12 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Sip\Psinder\Adoption\Domain\Offer\Offers;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryOffers;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OffersTest;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
 final class InMemoryOffersTest extends TestCase
 {
     use OffersTest;
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
 
     /** @var InMemoryOffers */
     private $offers;

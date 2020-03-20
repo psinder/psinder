@@ -9,11 +9,11 @@ use Sip\Psinder\Security\Domain\User\UserNotFound;
 use Sip\Psinder\Security\Domain\User\UserRegistered;
 use Sip\Psinder\Security\Domain\User\Users;
 use Sip\Psinder\SharedKernel\Domain\Email;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
 trait UsersTest
 {
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
 
     public function testPublishesEventsOfAddedUser() : void
     {

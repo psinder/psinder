@@ -8,12 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Sip\Psinder\Adoption\Domain\Shelter\Shelters;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryShelters;
 use Sip\Psinder\Adoption\Test\Domain\Shelter\SheltersTest;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
 final class InMemorySheltersTest extends TestCase
 {
     use SheltersTest;
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
 
     /** @var Shelters */
     private $shelters;

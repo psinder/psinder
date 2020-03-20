@@ -8,12 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Sip\Psinder\Adoption\Domain\Transfer\Transfers;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryTransfers;
 use Sip\Psinder\Adoption\Test\Domain\Transfer\TransfersTest;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
 final class InMemoryTransfersTest extends TestCase
 {
     use TransfersTest;
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
 
     /** @var Transfers */
     private $transfers;

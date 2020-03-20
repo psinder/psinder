@@ -7,7 +7,7 @@ namespace Sip\Psinder\SharedKernel\Infrastructure\Testing;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\InterceptingEventPublisher;
 
-trait EventsInterceptingTest
+trait EventsInterceptingIsolatedTest
 {
     use TestCaseAwareTrait;
     use EventsPublishingTest;

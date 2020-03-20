@@ -16,12 +16,12 @@ use Sip\Psinder\Adoption\Test\Domain\Pet\PetMother;
 use Sip\Psinder\SharedKernel\Domain\Birthdate;
 use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Domain\Gender;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAwareTrait;
 
 trait AdoptersTest
 {
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
     use TestCaseAwareTrait;
 
     public function testPublishesEventsWhenCreatingAdopter() : void

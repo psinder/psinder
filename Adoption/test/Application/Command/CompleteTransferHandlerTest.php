@@ -12,11 +12,11 @@ use Sip\Psinder\Adoption\Domain\Transfer\TransferCompleted;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryTransfers;
 use Sip\Psinder\Adoption\Test\Domain\Transfer\TransferMother;
 use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemoryTransfersFactory;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
 final class CompleteTransferHandlerTest extends TestCase
 {
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
 
     /** @var CompleteTransferHandler */
     private $handler;

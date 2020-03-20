@@ -12,11 +12,11 @@ use Sip\Psinder\Adoption\Domain\Transfer\CannotScheduleTransfer;
 use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
 use Sip\Psinder\Adoption\Test\Domain\Application\ApplicationMother;
 use Sip\Psinder\Adoption\Test\Domain\Transfer\TransferMother;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
 final class OfferTest extends TestCase
 {
-    use EventsInterceptingTest;
+    use EventsInterceptingIsolatedTest;
 
     public function testSendsApplication() : void
     {
