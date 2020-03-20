@@ -24,13 +24,13 @@ services:
         strip_path: false
         paths:
           - /offers
+      - name: adoption-register-shelter
+        strip_path: false
+        paths:
+          - /register/shelter
   - name: security
     url: http://security-web
     routes:
-      - name: register
-        strip_path: false
-        paths:
-          - /register
       - name: login
         strip_path: false
         paths:

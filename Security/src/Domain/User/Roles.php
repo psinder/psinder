@@ -24,10 +24,10 @@ final class Roles implements IteratorAggregate
     }
 
 
-    /** @param Role[] $roles */
-    public static function fromArray(array $roles) : self
+    /** @param string[] $roles */
+    public static function fromStringArray(array $roles) : self
     {
-        return new self($roles);
+        return new self(map($roles, fn ($role) => Role::fromString($role)));
     }
 
     public function exists(Role $role) : bool

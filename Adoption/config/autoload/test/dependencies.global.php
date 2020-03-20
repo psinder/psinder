@@ -8,13 +8,19 @@ use Sip\Psinder\SharedKernel\Infrastructure\InterceptingEventPublisher;
 return [
     'dependencies' => [
         'invokables' => [],
-        'factories'  => [
-            InterceptingEventPublisher::class => static function () {
-                return new InterceptingEventPublisher();
-            },
-        ],
-        'aliases' => [
-            EventPublisher::class => InterceptingEventPublisher::class,
-        ],
+        'factories'  => array_merge(
+            [
+                InterceptingEventPublisher::class => static function () {
+                    return new InterceptingEventPublisher();
+                },
+            ],
+            $GLOBALS['TEST_FACTORY_OVERRIDES']
+        ),
+        'aliases' => array_merge(
+            [
+                EventPublisher::class => InterceptingEventPublisher::class,
+            ],
+            $GLOBALS['TEST_ALIAS_OVERRIDES']
+        )
     ],
 ];

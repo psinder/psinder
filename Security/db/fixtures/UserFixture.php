@@ -31,12 +31,11 @@ final class UserFixture extends AbstractFixture
                 new Roles([Role::fromString('shelter')]),
                 Credentials::fromEmailAndPassword(
                     Email::fromString('example@shelter.com'),
-                    (new Sha256PasswordHasher())->encode(
+                    (new Sha256PasswordHasher())->hash(
                         'foobar',
                         self::EXAMPLE_ID
                     )
-                ),
-                []
+                )
             )
         ];
 

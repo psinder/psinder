@@ -53,9 +53,8 @@ final class LoginUserTest extends TestCase
             new Roles([Role::fromString('shelter')]),
             Credentials::fromEmailAndPassword(
                 Email::fromString($email),
-                $this->passwordEncoder->encode($password, $id)
-            ),
-            []
+                $this->passwordEncoder->hash($password, $id)
+            )
         );
         $this->users->add($user);
 

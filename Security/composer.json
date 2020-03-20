@@ -21,6 +21,7 @@
         "doctrine/coding-standard": "^5.0",
         "doctrine/migrations": "^2.0",
         "filp/whoops": "^2.3",
+        "guzzlehttp/guzzle": "^6.5",
         "helmich/phpunit-json-assert": "^3.0",
         "helmich/phpunit-psr7-assert": "^4.0",
         "laminas/laminas-config-aggregator": "^1.1",

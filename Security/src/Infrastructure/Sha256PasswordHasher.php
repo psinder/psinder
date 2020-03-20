@@ -10,7 +10,7 @@ use function hash;
 
 final class Sha256PasswordHasher implements PasswordHasher
 {
-    public function encode(string $plainPassword, string $salt) : HashedPassword
+    public function hash(string $plainPassword, string $salt) : HashedPassword
     {
         return new HashedPassword(
             hash('sha256', $plainPassword . $salt)

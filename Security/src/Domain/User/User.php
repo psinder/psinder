@@ -14,9 +14,7 @@ final class User implements AggregateRoot
     use EventsPublishingAggregateRoot;
 
     private UserId $id;
-
     private Credentials $credentials;
-
     private Roles $roles;
 
     private function __construct(UserId $id, Roles $roles, Credentials $credentials)
@@ -26,14 +24,11 @@ final class User implements AggregateRoot
         $this->roles       = $roles;
     }
 
-    /**
-     * @param mixed[] $details
-     */
-    public static function register(UserId $id, Roles $roles, Credentials $credentials, array $details) : self
+    public static function register(UserId $id, Roles $roles, Credentials $credentials) : self
     {
         $instance = new self($id, $roles, $credentials);
 
-        $instance->events[] = UserRegistered::occur($id, $credentials->email(), $roles, $details);
+        $instance->events[] = UserRegistered::occur($id, $credentials->email(), $roles);
 
         return $instance;
     }

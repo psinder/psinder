@@ -10,11 +10,14 @@ use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Adoption\Application\Command\Address;
 use Sip\Psinder\Adoption\Application\Command\Shelter\RegisterShelter\RegisterShelter;
 use Sip\Psinder\Adoption\Application\Command\Shelter\RegisterShelter\RegisterShelterHandler;
+use Sip\Psinder\Adoption\Application\Command\UserRegisterer;
 use Sip\Psinder\Adoption\Domain\Shelter\ShelterRegistered;
-use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemorySheltersFactory;
+use Sip\Psinder\Adoption\Test\Application\UserRegistererStub;
+use Sip\Psinder\Adoption\Test\TransactionalTestCase;
+use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingTest;
 
-final class RegisterShelterHandlerTest extends TestCase
+final class RegisterShelterHandlerTest extends TransactionalTestCase
 {
     use EventsInterceptingTest;
 
@@ -23,29 +26,31 @@ final class RegisterShelterHandlerTest extends TestCase
 
     public function setUp() : void
     {
-        $this->handler = new RegisterShelterHandler(
-            InMemorySheltersFactory::create($this->eventPublisher()),
-            ShelterFactoryFactory::create()
-        );
+        $this->overrideServiceAliasWithInstance(UserRegisterer::class, new UserRegistererStub());
+        $this->overrideServiceAliasWithInstance(EventPublisher::class, $this->eventPublisher());
+        parent::setUp();
+        $this->handler = $this->get(RegisterShelterHandler::class);
     }
 
     public function testRegistersValidShelter() : void
     {
-        $id      = Uuid::uuid4()->toString();
-        $name    = 'Foo';
-        $address = new Address(
+        $id       = Uuid::uuid4()->toString();
+        $name     = 'Foo';
+        $address  = new Address(
             'foo street',
             '1',
             '00-000',
             'Barville'
         );
-        $email   = 'foo@example.com';
+        $email    = 'foo@example.com';
+        $password = 'foobar';
 
         $command = new RegisterShelter(
             $id,
             $name,
             $address,
-            $email
+            $email,
+            $password
         );
 
         ($this->handler)($command);

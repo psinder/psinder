@@ -27,8 +27,7 @@ final class UserMother
             Credentials::fromEmailAndPassword(
                 Email::fromString('foo@example.com'),
                 new HashedPassword('foobar')
-            ),
-            []
+            )
         );
     }
 }

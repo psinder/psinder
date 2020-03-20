@@ -10,6 +10,7 @@ use Sip\Psinder\Adoption\UI\Http\Shelter\PostOfferRequest;
 use Sip\Psinder\Adoption\UI\Http\Shelter\PostOfferRequestHandler;
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
+use Sip\Psinder\Adoption\UI\Http\Shelter\PostRegisterShelterRequestHandler;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authorization\HasRole;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\AuthorizationMiddleware;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\JsonDeserializeToSpecifiedDTOMiddlewareFactory;
@@ -34,5 +35,10 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
             new AuthorizationMiddleware(new HasRole('adopter')),
             PostApplicationRequestHandler::class
         ]
+    );
+
+    $app->post(
+        '/register/shelter',
+        PostRegisterShelterRequestHandler::class
     );
 };

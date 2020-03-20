@@ -8,5 +8,5 @@ use Sip\Psinder\Security\Domain\User\HashedPassword;
 
 interface PasswordHasher
 {
-    public function encode(string $plainPassword, string $salt) : HashedPassword;
+    public function hash(string $plainPassword, string $salt) : HashedPassword;
 }

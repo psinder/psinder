@@ -12,6 +12,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use Sip\Psinder\Security\Infrastructure\Guzzle\GuzzleAdoptionRegistrator;
 use Sip\Psinder\SharedKernel\Infrastructure\AMQP\BunnyDeclareCommand;
 use Sip\Psinder\SharedKernel\Infrastructure\AMQP\BunnyEventHandler;
 use Sip\Psinder\SharedKernel\Infrastructure\EventPublisher\SymfonyMessengerEventPublisher;

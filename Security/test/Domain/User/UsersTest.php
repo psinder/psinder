@@ -25,8 +25,7 @@ trait UsersTest
             UserRegistered::occur(
                 $account->id(),
                 new Email('foo@example.com'),
-                new Roles([]),
-                []
+                new Roles([])
             )
         );
     }

@@ -7,26 +7,20 @@ namespace Sip\Psinder\Security\Application\UseCase;
 final class RegisterUserDTO
 {
     private string $id;
-
-    private string $type;
-
-    /** @var mixed[] */
-    private array $context;
-
     private string $email;
-
     private string $password;
+    /** @var  string[] */
+    private array $roles;
 
     /**
-     * @param mixed[] $context
+     * @param string[] $roles
      */
-    public function __construct(string $id, string $type, string $email, string $password, array $context)
+    public function __construct(string $id, array $roles, string $email, string $password)
     {
         $this->id       = $id;
-        $this->type     = $type;
-        $this->context  = $context;
         $this->email    = $email;
         $this->password = $password;
+        $this->roles    = $roles;
     }
 
     public function id() : string
@@ -34,17 +28,10 @@ final class RegisterUserDTO
         return $this->id;
     }
 
-    public function type() : string
+    /** @return string[] */
+    public function roles() : array
     {
-        return $this->type;
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function context() : array
-    {
-        return $this->context;
+        return $this->roles;
     }
 
     public function email() : string

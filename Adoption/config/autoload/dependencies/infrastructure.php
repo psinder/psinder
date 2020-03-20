@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Bunny\Client;
+use Doctrine\ORM\EntityManagerInterface;
+use GuzzleHttp\ClientInterface;
 use Laminas\Diactoros\RequestFactory;
 use Laminas\Diactoros\ServerRequestFactory;
 use Laminas\Diactoros\StreamFactory;
@@ -17,6 +19,7 @@ use Psr\Log\LoggerInterface;
 use Roave\PsrContainerDoctrine\ConnectionFactory;
 use Roave\PsrContainerDoctrine\EntityManagerFactory;
 use Sip\Psinder\Adoption\Infrastructure\AMQP\BunnyConsumerCommandFactory;
+use Sip\Psinder\Adoption\Infrastructure\Guzzle\GuzzleUserRegisterer;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryOffers;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryShelters;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
@@ -26,6 +29,7 @@ use Sip\Psinder\SharedKernel\Infrastructure\CommandBus\SymfonyMessengerCommandBu
 use Sip\Psinder\SharedKernel\Infrastructure\EventPublisher\SymfonyMessengerEventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\LoggingErrorListenerDelegatorFactory;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\MigrationsConfigurationFactory;
+use Sip\Psinder\SharedKernel\Infrastructure\Persistence\ORM\ORMTransactionManager;
 use Sip\Psinder\SharedKernel\Infrastructure\QueryBus\SymfonyMessengerQueryBus;
 use Sip\Psinder\SharedKernel\Infrastructure\Serializer\SymfonySerializer\SymfonySerializer;
 use Sip\Psinder\SharedKernel\UI\Http\RequestBuilderFactory;
@@ -121,6 +125,17 @@ return [
                     new ServerRequestFactory(),
                     new StreamFactory(),
                     new UriFactory()
+                );
+            },
+            ORMTransactionManager::class => static function(ContainerInterface $container) {
+                return new ORMTransactionManager($container->get(EntityManagerInterface::class));
+            },
+            GuzzleUserRegisterer::class => static function(ContainerInterface $container): GuzzleUserRegisterer {
+                return new GuzzleUserRegisterer(
+                    // TODO: Introdue internal client
+                    $container->get(ClientInterface::class),
+                    $container->get(RequestBuilderFactory::class),
+                    $container->get(LoggerInterface::class)
                 );
             },
         ],

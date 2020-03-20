@@ -9,7 +9,6 @@ use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Security\Application\UseCase\RegisterUser;
 use Sip\Psinder\Security\Application\UseCase\RegisterUserDTO;
 use function assert;
@@ -29,19 +28,13 @@ final class PostRegisterRequestHandler implements RequestHandlerInterface
 
         assert($requestData instanceof PostRegisterRequest);
 
-        $id = Uuid::uuid4()->toString();
-
         $this->registerUser->handle(new RegisterUserDTO(
-            $id,
-            $requestData->type,
+            $requestData->id,
+            $requestData->roles,
             $requestData->email,
-            $requestData->password,
-            $requestData->context
+            $requestData->password
         ));
 
-        return new JsonResponse(
-            ['id' => $id],
-            StatusCodeInterface::STATUS_CREATED
-        );
+        return new JsonResponse(StatusCodeInterface::STATUS_OK);
     }
 }

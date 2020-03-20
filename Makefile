@@ -13,7 +13,7 @@ docker-compose-exec:
 	$(DOCKER_COMPOSE) exec $(service) $(cmd)
 
 docker-compose-up:
-	$(DOCKER_COMPOSE) up -d $(service)
+	$(DOCKER_COMPOSE) up --force-recreate -d $(service)
 
 docker-compose-build:
 	$(DOCKER_COMPOSE) build
@@ -47,7 +47,7 @@ service-execute:
 initial-setup: .env
 	docker build -t sip/psinder-php docker/php-fpm
 	$(MAKE) docker-compose-down
-	cd PhpSharedKernel && $(MAKE) setup && cd ..
+	SERVICE=PhpSharedKernel cmd=setup $(MAKE) service-execute
 	$(MAKE) docker-compose-build
 	$(MAKE) docker-compose-up
 	SERVICE=Security cmd=setup $(MAKE) service-execute
@@ -58,3 +58,4 @@ qa-all:
 	SERVICE=PhpSharedKernel cmd=qa $(MAKE) service-execute
 	SERVICE=Security cmd=qa $(MAKE) service-execute
 	SERVICE=Adoption cmd=qa $(MAKE) service-execute
+	SERVICE=e2e-tests cmd=e2e-run $(MAKE) service-execute

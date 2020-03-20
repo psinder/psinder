@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
+use Sip\Psinder\Security\Application\RegisterAdopterOnUserRegistered;
 use Sip\Psinder\Security\Domain\User\UserRegistered;
-use Sip\Psinder\SharedKernel\Infrastructure\AMQP\BunnyEventHandler;
 
 return [
     'messenger' => [
@@ -13,9 +13,7 @@ return [
         'buses'              => [
             'messenger.event.bus'   => [
                 'allows_no_handler' => true,
-                'handlers'   => [
-                    UserRegistered::class => [BunnyEventHandler::class]
-                ],
+                'handlers'   => [],
                 'middleware' => [
                     'messenger.event.middleware.sender',
                     'messenger.event.middleware.handler'

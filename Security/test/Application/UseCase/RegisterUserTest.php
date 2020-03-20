@@ -21,16 +21,16 @@ final class RegisterUserTest extends TestCase
 {
     use EventsInterceptingTest;
 
-    /** @var InMemoryUsers */
-    private $users;
-
-    /** @var RegisterUser */
-    private $useCase;
+    private InMemoryUsers $users;
+    private RegisterUser $useCase;
 
     public function setUp() : void
     {
         $this->users   = new InMemoryUsers($this->eventPublisher());
-        $this->useCase = new RegisterUser($this->users, new PlainPasswordHasher());
+        $this->useCase = new RegisterUser(
+            $this->users,
+            new PlainPasswordHasher()
+        );
     }
 
     public function testRegistersShelterUser() : void
@@ -38,10 +38,9 @@ final class RegisterUserTest extends TestCase
         $id  = Uuid::uuid4()->toString();
         $dto = new RegisterUserDTO(
             $id,
-            'shelter',
+            ['shelter'],
             'foo@example.com',
-            'foobar',
-            []
+            'foobar'
         );
 
         $this->useCase->handle($dto);
@@ -54,8 +53,7 @@ final class RegisterUserTest extends TestCase
             UserRegistered::occur(
                 new UserId($id),
                 new Email('foo@example.com'),
-                new Roles([Role::fromString('shelter')]),
-                []
+                new Roles([Role::fromString('shelter')])
             )
         );
     }

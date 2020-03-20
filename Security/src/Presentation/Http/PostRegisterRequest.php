@@ -6,12 +6,9 @@ namespace Sip\Psinder\Security\Presentation\Http;
 
 final class PostRegisterRequest
 {
-    public string $type;
-
+    public string $id;
+    /** @var string[] */
+    public array $roles;
     public string $email;
-
     public string $password;
-
-    /** @var mixed[] */
-    public array $context;
 }

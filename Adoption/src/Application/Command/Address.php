@@ -7,11 +7,8 @@ namespace Sip\Psinder\Adoption\Application\Command;
 final class Address
 {
     private string $street;
-
     private string $number;
-
     private string $postalCode;
-
     private string $city;
 
     public function __construct(

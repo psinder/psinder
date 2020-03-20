@@ -18,12 +18,7 @@ final class BunnyConsumerCommandFactory
             $container->get(Client::class),
             $container->get(LoggerInterface::class),
             $container->get(Serializer::class),
-            [
-                'adoption.register' => [
-                    'service' => RegisterConsumer::class,
-                    'dto' => RegisterDTO::class,
-                ],
-            ],
+            [],
             $container
         );
     }

@@ -15,12 +15,12 @@ final class LoginUser
 {
     private Users $users;
 
-    private PasswordHasher $passwordEncoder;
+    private PasswordHasher $passwordHasher;
 
     public function __construct(Users $users, PasswordHasher $passwordEncoder)
     {
-        $this->users           = $users;
-        $this->passwordEncoder = $passwordEncoder;
+        $this->users          = $users;
+        $this->passwordHasher = $passwordEncoder;
     }
 
     public function handle(LoginUserDTO $dto) : User
@@ -30,7 +30,7 @@ final class LoginUser
 
         $credentials = Credentials::fromEmailAndPassword(
             $email,
-            $this->passwordEncoder->encode($dto->password(), $user->id()->toScalar())
+            $this->passwordHasher->hash($dto->password(), $user->id()->toScalar())
         );
 
         if (! $user->matchesCredentials($credentials)) {
