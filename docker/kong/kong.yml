@@ -27,11 +27,11 @@ services:
       - name: adoption-register-shelter
         strip_path: false
         paths:
-          - /register/shelter
+          - /shelters
       - name: adoption-register-adopter
         strip_path: false
         paths:
-          - /register/adopter
+          - /adopters
   - name: security
     url: http://security-web
     routes:

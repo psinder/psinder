@@ -7,6 +7,9 @@ default:
          - Sip\Psinder\E2E\Context\OfferContext:
              - '@Sip\Psinder\E2E\Collection\Offers'
              - '@Sip\Psinder\E2E\Collection\Tokens'
+         - Sip\Psinder\E2E\Context\AdopterContext:
+             - '@Sip\Psinder\E2E\Collection\Adopters'
+             - '@Sip\Psinder\E2E\Collection\Tokens'
          - Sip\Psinder\E2E\Context\ShelterContext:
              - '@Sip\Psinder\E2E\Collection\Shelters'
              - '@Sip\Psinder\E2E\Collection\Tokens'

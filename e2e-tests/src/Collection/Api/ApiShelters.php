@@ -23,16 +23,16 @@ final class ApiShelters implements Shelters
     {
         $request = $this->requestBuilderFactory->create()
             ->post()
-            ->url('/register/shelter')
+            ->url('/shelters')
             ->jsonBodyArray(
                 [
                     'email' => $shelter['email'],
                     'password' => $shelter['password'],
                     'name' => $shelter['name'],
-                    'addressStreet' => $shelter['address_street'],
-                    'addressNumber' => $shelter['address_number'],
-                    'addressPostalCode' => $shelter['address_postal'],
-                    'addressCity' => $shelter['address_city'],
+                    'addressStreet' => $shelter['addressStreet'],
+                    'addressNumber' => $shelter['addressNumber'],
+                    'addressPostalCode' => $shelter['addressPostal'],
+                    'addressCity' => $shelter['addressCity'],
                 ]
             )
             ->create();

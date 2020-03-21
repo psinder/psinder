@@ -42,6 +42,7 @@ final class ApiContainerFactory extends ContainerFactory
             ],
             ApiAppClientContainerFactory::definitions(),
             ApiOfferContainerFactory::definitions(),
+            ApiAdoptersContainerFactory::definitions(),
             ApiShelterContainerFactory::definitions(),
             ApiTokensContainerFactory::definitions(),
             [

@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Psr\Container\ContainerInterface;
 use Sip\Psinder\Adoption\UI\Http\Adopter\PostApplicationRequest;
 use Sip\Psinder\Adoption\UI\Http\Adopter\PostApplicationRequestHandler;
+use Sip\Psinder\Adoption\UI\Http\Adopter\PostRegisterAdopterRequestHandler;
 use Sip\Psinder\Adoption\UI\Http\Shelter\GetOfferRequestHandler;
 use Sip\Psinder\Adoption\UI\Http\Shelter\PostOfferRequest;
 use Sip\Psinder\Adoption\UI\Http\Shelter\PostOfferRequestHandler;
@@ -38,7 +39,12 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
     );
 
     $app->post(
-        '/register/shelter',
+        '/shelters',
         PostRegisterShelterRequestHandler::class
+    );
+
+    $app->post(
+        '/adopters',
+        PostRegisterAdopterRequestHandler::class
     );
 };
