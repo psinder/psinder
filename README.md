@@ -5,12 +5,15 @@ Run `make initial-setup`. It will run docker-compose, install deps and prepare d
 
 To start it without recreating everything, use `make docker-compose-up`.
 
+To do a full setup and test run, execute:
+`make initial-setup qa-all`.
+
 ## Makefiles
 Each part of the system should have its own Makefile.
 
-Some common parts can be defined in root dir's `Makefile`, `Makefile-php`, etc.
+Common parts can be defined in root dir's `Makefile`, `Makefile-php`, etc.
 
-In some cases service-specific makefile has to define configuration variabless before including common Makefile, like here:
+Service-specific makefile has to define common configuration variabless before including common Makefile, like here:
 ```makefile
 PROJECT_DIR = ../
 
@@ -34,4 +37,7 @@ Manages users - registration, login, etc
 ### e2e-tests
 Experiment about introducing clean e2e test using behat.
 ### frontend
-Probably broken, initial try to implement basic ui for registration
+Broken frontend skeleton that uses React.
+
+### Kong
+I decided to use Kong as an API gateway. Right now it requires to specifiy explicityle addresses available outside. It will be significantly changed in the future.
