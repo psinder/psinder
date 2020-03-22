@@ -7,36 +7,40 @@ namespace Sip\Psinder\Adoption\Test\Application\Command;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Sip\Psinder\Adoption\Application\Command\ScheduleTransfer\ScheduleTransfer;
-use Sip\Psinder\Adoption\Application\Command\ScheduleTransfer\ScheduleTransferHandler;
+use Sip\Psinder\Adoption\Domain\Offer\Offers;
+use Sip\Psinder\Adoption\Domain\Transfer\Transfers;
 use Sip\Psinder\Adoption\Domain\Transfer\TransferScheduled;
-use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryOffers;
-use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryTransfers;
 use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferBuilder;
 use Sip\Psinder\Adoption\Test\Domain\Pet\PetMother;
 use Sip\Psinder\Adoption\Test\Domain\Transfer\TransferMother;
-use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemoryOffersFactory;
 use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemoryTransfersFactory;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
+use Sip\Psinder\Adoption\Test\TransactionalTestCase;
+use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
+use Sip\Psinder\SharedKernel\Domain\EventPublisher;
+use Sip\Psinder\SharedKernel\Infrastructure\InterceptingEventPublisher;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
 
-final class ScheduleTransferHandlerTest extends TestCase
+final class ScheduleTransferHandlerTest extends TransactionalTestCase
 {
-    use EventsInterceptingIsolatedTest;
+    use EventsPublishingTest;
 
-    /** @var ScheduleTransferHandler */
-    private $handler;
-
-    /** @var InMemoryOffers */
-    private $offers;
-
-    /** @var InMemoryTransfers */
-    private $transfers;
+    private Offers $offers;
+    private Transfers $transfers;
+    private CommandBus $bus;
+    private InterceptingEventPublisher $eventPublisher;
 
     public function setUp() : void
     {
-        $this->offers    = InMemoryOffersFactory::create($this->eventPublisher());
-        $this->transfers = InMemoryTransfersFactory::create($this->eventPublisher());
-        $this->handler   = new ScheduleTransferHandler($this->offers, $this->transfers);
+        $this->eventPublisher = new InterceptingEventPublisher();
+        $this->transfers      = InMemoryTransfersFactory::create($this->eventPublisher());
+        $this->overrideServiceAliasWithInstance(EventPublisher::class, $this->eventPublisher());
+        $this->overrideServiceAliasWithInstance(Transfers::class, $this->transfers);
+
+        parent::setUp();
+
+        $this->offers = $this->get(Offers::class);
+        $this->bus    = $this->get(CommandBus::class);
     }
 
     public function testSchedulesTransfer() : void
@@ -55,7 +59,7 @@ final class ScheduleTransferHandlerTest extends TestCase
 
         // When
         $command = new ScheduleTransfer($id, $offer->id()->toScalar());
-        ($this->handler)($command);
+        $this->bus->dispatch($command);
 
         // Then
         $this->assertPublishedEvents(
@@ -72,5 +76,10 @@ final class ScheduleTransferHandlerTest extends TestCase
     protected function context() : TestCase
     {
         return $this;
+    }
+
+    protected function eventPublisher() : InterceptingEventPublisher
+    {
+        return $this->eventPublisher;
     }
 }

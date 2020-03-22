@@ -9,7 +9,6 @@ use Sip\Psinder\Adoption\Domain\Offer\Offer;
 use Sip\Psinder\Adoption\Domain\Offer\OfferId;
 use Sip\Psinder\Adoption\Domain\Pet\Pet;
 use Sip\Psinder\Adoption\Domain\Shelter\ShelterId;
-use Sip\Psinder\Adoption\Test\Domain\Application\ApplicationMother;
 use Sip\Psinder\Adoption\Test\Domain\Pet\PetMother;
 use Sip\Psinder\Adoption\Test\Domain\Shelter\ShelterMother;
 
@@ -17,17 +16,10 @@ final class OfferBuilder
 {
     public const EXAMPLE_ID = '56ce4d17-f1cd-4b44-adf1-1f11b36781ec';
 
-    /** @var OfferId */
-    private $id;
-
-    /** @var ShelterId */
-    private $shelterId;
-
-    /** @var Pet */
-    private $pet;
-
-    /** @var AdopterId|null */
-    private $selectedAdopterId = null;
+    private OfferId $id;
+    private ShelterId $shelterId;
+    private Pet $pet;
+    private ?AdopterId $selectedAdopterId = null;
 
     public function __construct()
     {
@@ -73,7 +65,7 @@ final class OfferBuilder
         );
 
         if ($this->selectedAdopterId !== null) {
-            $offer->apply(ApplicationMother::withAdopter($this->selectedAdopterId));
+            $offer->apply($this->selectedAdopterId);
             $offer->selectApplication($this->selectedAdopterId);
         }
 

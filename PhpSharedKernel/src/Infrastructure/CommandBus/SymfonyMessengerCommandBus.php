@@ -6,6 +6,7 @@ namespace Sip\Psinder\SharedKernel\Infrastructure\CommandBus;
 
 use Sip\Psinder\SharedKernel\Application\Command\Command;
 use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class SymfonyMessengerCommandBus implements CommandBus
@@ -19,6 +20,13 @@ final class SymfonyMessengerCommandBus implements CommandBus
 
     public function dispatch(Command $command) : void
     {
-        $this->bus->dispatch($command);
+        try {
+            $this->bus->dispatch($command);
+        } catch (HandlerFailedException $e) {
+            $cause = $e->getPrevious();
+            if ($cause !== null) {
+                throw $cause;
+            }
+        }
     }
 }

@@ -2,13 +2,11 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Sip\Psinder\Adoption\Domain\Shelter\Shelter" table="shelter">
-        <id name="id" type="ShelterId">
+    <entity name="Sip\Psinder\Adoption\Domain\Offer\Application\Application" table="offer_application">
+        <id name="id" type="ApplicationId">
             <generator strategy="NONE" />
         </id>
-
-        <field name="name" type="ShelterName" />
-        <embedded name="address" class="Sip\Psinder\SharedKernel\Domain\Address" />
-        <field name="contactForms" column="contact_forms" type="ContactForms" />
+        <many-to-one field="offer" target-entity="Sip\Psinder\Adoption\Domain\Offer\Offer" inversed-by="applications" />
+        <field name="adopterId" column="adopter_id" type="AdopterId" />
     </entity>
 </doctrine-mapping>

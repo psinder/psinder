@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sip\Psinder\Adoption\Application\Query\Shelter;
+namespace Sip\Psinder\Adoption\Application\Query\Offer;
 
 use Sip\Psinder\Adoption\Application\Query\PetDetails;
 

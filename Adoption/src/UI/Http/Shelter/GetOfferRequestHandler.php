@@ -10,7 +10,7 @@ use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Sip\Psinder\Adoption\Application\Query\Shelter\GetOfferDetails\GetOfferDetails;
+use Sip\Psinder\Adoption\Application\Query\Offer\GetOfferDetails\GetOfferDetails;
 use Sip\Psinder\SharedKernel\Application\Query\QueryBus;
 
 final class GetOfferRequestHandler implements RequestHandlerInterface

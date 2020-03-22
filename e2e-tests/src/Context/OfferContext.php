@@ -4,7 +4,9 @@ namespace Sip\Psinder\E2E\Context;
 
 use Assert\Assertion;
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
+use Ramsey\Uuid\Uuid;
 use Sip\Psinder\E2E\Collection\Api\ApiTokens;
 use Sip\Psinder\E2E\Collection\Offers;
 
@@ -23,7 +25,7 @@ class OfferContext implements Context
     }
 
     /**
-     * @Given /^example shelter$/
+     * @Given /^logged in as example shelter$/
      */
     public function givenExampleShelter()
     {
@@ -70,5 +72,30 @@ class OfferContext implements Context
         Assertion::eq($this->offer['pet']['birthday'], $result['pet']['birthday']);
         Assertion::eq($this->offer['pet']['type'], $result['pet']['type']);
         Assertion::eq($this->offer['pet']['breed'], $result['pet']['breed']);
+    }
+
+    /**
+     * @When /^I apply to offer$/
+     */
+    public function whenApplyToThisOffer()
+    {
+        $this->offers->apply(
+            $this->offer['id'],
+            $this->tokens->current()->getClaim('jti')
+        );
+    }
+
+    /**
+     * @Then /^I should be visible on offer applicants list$/
+     */
+    public function thenShouldBeVisibleOnApplicationList()
+    {
+        $applications = $this->offers->getApplications(
+            $this->offer['id']
+        );
+
+        assert(count($applications) === 1);
+        assert($applications[0]['offerId'] === $this->offer['id']);
+        assert($applications[0]['adopterId'] === $this->tokens->current()->getClaim('jti'));
     }
 }

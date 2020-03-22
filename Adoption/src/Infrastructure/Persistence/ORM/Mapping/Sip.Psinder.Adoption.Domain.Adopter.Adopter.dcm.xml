@@ -8,7 +8,7 @@
         </id>
 
         <many-to-many field="pets" target-entity="Sip\Psinder\Adoption\Domain\Pet\Pet">
-            <join-table name="adopters_pets">
+            <join-table name="adopter_pet">
                 <join-columns>
                     <join-column name="adopter_id" />
                 </join-columns>
@@ -18,7 +18,7 @@
             </join-table>
         </many-to-many>
         <field name="name" type="AdopterName" />
-        <field name="contactForms" type="ContactForms" />
+        <field name="contactForms" column="contact_forms" type="ContactForms" />
         <field name="birthdate" type="Birthdate" />
         <field name="gender" type="Gender" />
     </entity>

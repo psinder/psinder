@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use Psr\Container\ContainerInterface;
-use Sip\Psinder\Adoption\UI\Http\Adopter\PostApplicationRequest;
 use Sip\Psinder\Adoption\UI\Http\Adopter\PostApplicationRequestHandler;
 use Sip\Psinder\Adoption\UI\Http\Adopter\PostRegisterAdopterRequestHandler;
+use Sip\Psinder\Adoption\UI\Http\Offer\GetOfferApplicationsRequest;
+use Sip\Psinder\Adoption\UI\Http\Offer\GetOfferApplicationsRequestHandler;
+use Sip\Psinder\Adoption\UI\Http\Offer\PostApplyForOfferRequestHandler;
 use Sip\Psinder\Adoption\UI\Http\Shelter\GetOfferRequestHandler;
 use Sip\Psinder\Adoption\UI\Http\Shelter\PostOfferRequest;
 use Sip\Psinder\Adoption\UI\Http\Shelter\PostOfferRequestHandler;
@@ -31,10 +33,10 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
     );
 
     $app->post(
-        '/offers/{offerId}/apply',
+        '/offers/{offerId}/applications',
         [
             new AuthorizationMiddleware(new HasRole('adopter')),
-            PostApplicationRequestHandler::class
+            PostApplyForOfferRequestHandler::class
         ]
     );
 
@@ -47,4 +49,6 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
         '/adopters',
         PostRegisterAdopterRequestHandler::class
     );
+
+    $app->get('/offers/{offerId}/applications', GetOfferApplicationsRequestHandler::class);
 };

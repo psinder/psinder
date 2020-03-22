@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Sip\Psinder\Adoption\UI\Http\Adopter;
+namespace Sip\Psinder\Adoption\UI\Http\Offer;
 
-use Laminas\Diactoros\Response\EmptyResponse;
+use Fig\Http\Message\StatusCodeInterface;
+use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -13,9 +14,9 @@ use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authentication\AuthenticatedUser;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authentication\LoggedInUser;
 
-final class PostApplicationRequestHandler implements RequestHandlerInterface
+final class PostApplyForOfferRequestHandler implements RequestHandlerInterface
 {
-    private CommandBus $commandBus;
+    protected CommandBus $commandBus;
 
     public function __construct(CommandBus $commandBus)
     {
@@ -28,12 +29,12 @@ final class PostApplicationRequestHandler implements RequestHandlerInterface
         $user = $request->getAttribute(AuthenticatedUser::class);
         /** @var string $adopterId */
         $adopterId = $user->userId();
-
+        $offerId   = $request->getAttribute('offerId');
         $this->commandBus->dispatch(new ApplyForAdoption(
             $adopterId,
-            $request->getAttribute('offerId')
+            $offerId
         ));
 
-        return new EmptyResponse();
+        return new JsonResponse(null, StatusCodeInterface::STATUS_CREATED);
     }
 }

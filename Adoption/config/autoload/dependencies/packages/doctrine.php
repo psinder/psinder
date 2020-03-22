@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Adopter\AdopterIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Adopter\AdopterNameType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\ContactFormsType;
-use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Offer\OfferApplicationsType;
+use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Offer\ApplicationIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Offer\OfferIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Pet\PetIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Pet\PetNameType;
@@ -56,7 +56,7 @@ return [
             PetTypeType::name() => PetTypeType::class,
             BirthdateType::name() => BirthdateType::class,
             OfferIdType::name() => OfferIdType::class,
-            OfferApplicationsType::name() => OfferApplicationsType::class,
+            ApplicationIdType::name() => ApplicationIdType::class,
             AdopterIdType::name() => AdopterIdType::class,
             AdopterNameType::name() => AdopterNameType::class,
             GenderType::name() => GenderType::class

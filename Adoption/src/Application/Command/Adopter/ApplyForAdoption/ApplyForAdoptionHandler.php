@@ -6,7 +6,6 @@ namespace Sip\Psinder\Adoption\Application\Command\Adopter\ApplyForAdoption;
 
 use Sip\Psinder\Adoption\Domain\Adopter\AdopterId;
 use Sip\Psinder\Adoption\Domain\Adopter\Adopters;
-use Sip\Psinder\Adoption\Domain\Offer\Application\Application;
 use Sip\Psinder\Adoption\Domain\Offer\OfferId;
 use Sip\Psinder\Adoption\Domain\Offer\Offers;
 use Sip\Psinder\SharedKernel\Application\Command\Command;
@@ -35,10 +34,9 @@ final class ApplyForAdoptionHandler implements CommandHandler
         // Checks if exists
         $this->adopters->get($adopterId);
 
-        $offer       = $this->offers->get($offerId);
-        $application = Application::prepare($adopterId);
+        $offer = $this->offers->get($offerId);
 
-        $offer->apply($application);
+        $offer->apply($adopterId);
 
         $this->offers->update($offer);
     }

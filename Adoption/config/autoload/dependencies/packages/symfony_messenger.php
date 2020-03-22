@@ -8,12 +8,18 @@ use Sip\Psinder\Adoption\Application\Command\Adopter\ApplyForAdoption\ApplyForAd
 use Sip\Psinder\Adoption\Application\Command\Adopter\ApplyForAdoption\ApplyForAdoptionHandler;
 use Sip\Psinder\Adoption\Application\Command\Adopter\RegisterAdopter\RegisterAdopter;
 use Sip\Psinder\Adoption\Application\Command\Adopter\RegisterAdopter\RegisterAdopterHandler;
+use Sip\Psinder\Adoption\Application\Command\ScheduleTransfer\ScheduleTransfer;
+use Sip\Psinder\Adoption\Application\Command\ScheduleTransfer\ScheduleTransferHandler;
 use Sip\Psinder\Adoption\Application\Command\Shelter\PostOffer\PostOffer;
 use Sip\Psinder\Adoption\Application\Command\Shelter\PostOffer\PostOfferHandler;
 use Sip\Psinder\Adoption\Application\Command\Shelter\RegisterShelter\RegisterShelter;
 use Sip\Psinder\Adoption\Application\Command\Shelter\RegisterShelter\RegisterShelterHandler;
-use Sip\Psinder\Adoption\Application\Query\Shelter\GetOfferDetails\GetOfferDetails;
-use Sip\Psinder\Adoption\Application\Query\Shelter\GetOfferDetails\GetOfferDetailsHandler;
+use Sip\Psinder\Adoption\Application\Command\Shelter\SelectApplication\SelectApplication;
+use Sip\Psinder\Adoption\Application\Command\Shelter\SelectApplication\SelectApplicationHandler;
+use Sip\Psinder\Adoption\Application\Query\Offer\GetOfferApplications\GetOfferApplications;
+use Sip\Psinder\Adoption\Application\Query\Offer\GetOfferApplications\GetOfferApplicationsHandler;
+use Sip\Psinder\Adoption\Application\Query\Offer\GetOfferDetails\GetOfferDetails;
+use Sip\Psinder\Adoption\Application\Query\Offer\GetOfferDetails\GetOfferDetailsHandler;
 
 return [
     'messenger' => [
@@ -25,6 +31,8 @@ return [
                     RegisterShelter::class => [RegisterShelterHandler::class],
                     RegisterAdopter::class => [RegisterAdopterHandler::class],
                     ApplyForAdoption::class => [ApplyForAdoptionHandler::class],
+                    SelectApplication::class => [SelectApplicationHandler::class],
+                    ScheduleTransfer::class => [ScheduleTransferHandler::class],
                 ],
                 'middleware' => [
                     'messenger.command.middleware.sender',
@@ -34,13 +42,14 @@ return [
             ],
             'messenger.query.bus'   => [
                 'handlers'   => [
-                    GetOfferDetails::class => [GetOfferDetailsHandler::class]
+                    GetOfferDetails::class => [GetOfferDetailsHandler::class],
+                    GetOfferApplications::class => [GetOfferApplicationsHandler::class]
                 ],
                 'middleware' => [
                     'messenger.query.middleware.sender',
                     'messenger.query.middleware.handler'
                 ],
-                'routes'     => [],
+                'routes' => [],
             ],
             'messenger.event.bus'   => [
                 'allows_no_handler' => true,

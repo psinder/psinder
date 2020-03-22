@@ -6,7 +6,8 @@ namespace Sip\Psinder\Adoption\Domain\Pet;
 
 use Sip\Psinder\SharedKernel\Domain\Birthdate;
 
-final class Pet
+/** @final */
+class Pet
 {
     private PetId $id;
     private PetName $name;

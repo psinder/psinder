@@ -11,7 +11,7 @@ use Sip\Psinder\Adoption\Domain\Offer\OfferId;
 use Sip\Psinder\Adoption\Domain\Offer\OfferNotFound;
 use Sip\Psinder\Adoption\Domain\Offer\OfferPosted;
 use Sip\Psinder\Adoption\Domain\Offer\Offers;
-use Sip\Psinder\Adoption\Test\Domain\Application\ApplicationMother;
+use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
 use Sip\Psinder\Adoption\Test\Domain\Pet\PetMother;
 use Sip\Psinder\Adoption\Test\Domain\Shelter\ShelterMother;
 use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
@@ -37,18 +37,18 @@ trait OffersTest
 
     public function testPublishesEventsWhenUpdatingOffer() : void
     {
-        $offer       = OfferMother::example();
-        $application = ApplicationMother::example();
+        $offer     = OfferMother::example();
+        $adopterId = AdopterMother::randomId();
 
         $this->offers()->create($offer);
 
         $this->eventPublisher()->clear();
 
-        $offer->apply($application);
+        $offer->apply($adopterId);
 
         $this->offers()->update($offer);
 
-        $this->assertPublishedEvents(ApplicationSent::occur($application->adopterId(), $offer->id()));
+        $this->assertPublishedEvents(ApplicationSent::occur($adopterId, $offer->id()));
     }
 
     public function testFetchesExistingOffer() : void

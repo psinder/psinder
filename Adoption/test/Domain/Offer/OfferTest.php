@@ -10,7 +10,6 @@ use Sip\Psinder\Adoption\Domain\Offer\Application\ApplicationSent;
 use Sip\Psinder\Adoption\Domain\Offer\OfferNotOpen;
 use Sip\Psinder\Adoption\Domain\Transfer\CannotScheduleTransfer;
 use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
-use Sip\Psinder\Adoption\Test\Domain\Application\ApplicationMother;
 use Sip\Psinder\Adoption\Test\Domain\Transfer\TransferMother;
 use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
 
@@ -20,16 +19,16 @@ final class OfferTest extends TestCase
 
     public function testSendsApplication() : void
     {
-        $offer       = OfferMother::example();
-        $application = ApplicationMother::example();
+        $offer     = OfferMother::example();
+        $adopterId = AdopterMother::randomId();
 
-        $offer->apply($application);
+        $offer->apply($adopterId);
 
         $offer->publishEvents($this->eventPublisher());
 
         $this->assertPublishedEvent(
             ApplicationSent::occur(
-                $application->adopterId(),
+                $adopterId,
                 $offer->id()
             )
         );
@@ -39,14 +38,11 @@ final class OfferTest extends TestCase
     {
         $offer = OfferMother::example();
 
-        $adopterId   = AdopterMother::randomId();
-        $application = ApplicationMother::withAdopter($adopterId);
+        $adopterId      = AdopterMother::randomId();
+        $otherAdopterId = AdopterMother::randomId();
 
-        $otherAdopterId   = AdopterMother::randomId();
-        $otherApplication = ApplicationMother::withAdopter($otherAdopterId);
-
-        $offer->apply($application);
-        $offer->apply($otherApplication);
+        $offer->apply($adopterId);
+        $offer->apply($otherAdopterId);
 
         $offer->publishEvents($this->eventPublisher());
 
@@ -56,31 +52,28 @@ final class OfferTest extends TestCase
 
     public function testSendsTwoApplicationsForTheSameAdopterAndThrows() : void
     {
-        $offer            = OfferMother::example();
-        $adopterId        = AdopterMother::randomId();
-        $application      = ApplicationMother::withAdopter($adopterId);
-        $otherApplication = ApplicationMother::withAdopter($adopterId);
+        $offer     = OfferMother::example();
+        $adopterId = AdopterMother::randomId();
 
-        $offer->apply($application);
+        $offer->apply($adopterId);
 
         $this->expectException(AlreadyApplied::class);
 
-        $offer->apply($otherApplication);
+        $offer->apply($adopterId);
     }
 
     public function testSendsApplicationAfterApplicationWasSelectedAndThrows() : void
     {
-        $application = ApplicationMother::example();
-        $offer       = (new OfferBuilder())
-            ->selectedAdopter($application->adopterId())
+        $adopterId = AdopterMother::randomId();
+        $offer     = (new OfferBuilder())
+            ->selectedAdopter($adopterId)
             ->get();
 
-        $otherAdopterId   = AdopterMother::randomId();
-        $otherApplication = ApplicationMother::withAdopter($otherAdopterId);
+        $otherAdopterId = AdopterMother::randomId();
 
         $this->expectException(OfferNotOpen::class);
 
-        $offer->apply($otherApplication);
+        $offer->apply($otherAdopterId);
     }
 
     public function testSchedulesTransfer() : void

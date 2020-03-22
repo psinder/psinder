@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\Test\UI\Http\Adopter;
 
+use Sip\Psinder\Adoption\Domain\Adopter\Adopters;
 use Sip\Psinder\Adoption\Domain\Offer\Offer;
 use Sip\Psinder\Adoption\Domain\Offer\Offers;
 use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
@@ -21,14 +22,18 @@ final class PostApplicationRequestHandlerTest extends FunctionalTestCase
     {
         $offerId   = OfferMother::randomId();
         $shelterId = ShelterMother::exampleId();
-        $adopterId = AdopterMother::exampleId();
+        $adopter   = AdopterMother::registeredExample();
+        $adopterId = $adopter->id();
         /** @var Offers $offers */
         $offers = $this->get(Offers::class);
+        /** @var Adopters $adopters */
+        $adopters = $this->get(Adopters::class);
+        $adopters->create($adopter);
 
         $offers->create(Offer::post(
             $offerId,
             $shelterId,
-            PetMother::example()
+            PetMother::random()
         ));
 
         $this->impersonate(new LoggedInUser(
@@ -39,7 +44,7 @@ final class PostApplicationRequestHandlerTest extends FunctionalTestCase
         $request = $this->get(RequestBuilderFactory::class)
             ->createServerRequestBuilder()
             ->post()
-            ->url(sprintf('/offers/%s/apply', $offerId->toScalar()))
+            ->url(sprintf('/offers/%s/applications', $offerId->toScalar()))
             ->create();
 
         $this->impersonate(new LoggedInUser(

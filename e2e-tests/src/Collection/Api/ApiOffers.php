@@ -70,4 +70,35 @@ final class ApiOffers implements Offers
 
         return \GuzzleHttp\json_decode((string) $response->getBody(), true);
     }
+
+    public function getApplications(string $id) : ?array
+    {
+        $request = new Request(
+            RequestMethodInterface::METHOD_GET,
+            sprintf('%s/%s/applications', self::OFFERS_URL, $id)
+        );
+
+        $response = $this->client->send($request);
+
+        if ($response->getStatusCode() === StatusCodeInterface::STATUS_NOT_FOUND) {
+            return null;
+        }
+
+        return \GuzzleHttp\json_decode((string) $response->getBody(), true);
+    }
+
+    public function apply(string $offerId, string $adopterId)
+    {
+        $request = new Request(
+            RequestMethodInterface::METHOD_POST,
+            self::OFFERS_URL . '/' . $offerId . '/applications',
+            [
+                'Authorization' => 'Bearer ' . $this->tokens->get($adopterId)->__toString()
+            ]
+        );
+
+        $response = $this->client->send($request);
+
+        assert($response->getStatusCode() === StatusCodeInterface::STATUS_CREATED);
+    }
 }

@@ -16,6 +16,7 @@ final class ApiTokens implements Tokens
     private RequestBuilderFactory $requestBuilderFactory;
     /** @var string[] */
     private array $tokens;
+    private ?Token $currentToken;
 
     public function __construct(ClientInterface $client, RequestBuilderFactory $requestBuilderFactory)
     {
@@ -44,11 +45,28 @@ final class ApiTokens implements Tokens
         $token = (new Parser())->parse($token);
         $this->tokens[$token->getClaim('jti')] = $token;
 
+        $this->currentToken = $token;
+
         return $token;
     }
 
     public function get(string $id): ?Token
     {
-        return $this->tokens[$id] ?? null;
+        $token = $this->tokens[$id] ?? null;
+
+        if ($token) {
+            $this->currentToken = $token;
+        }
+
+        return $token;
+    }
+
+    public function current(): Token
+    {
+        if ($this->currentToken === null) {
+            throw new \RuntimeException('No current token');
+        }
+
+        return $this->currentToken;
     }
 }

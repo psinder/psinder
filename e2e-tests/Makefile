@@ -10,7 +10,7 @@ PHP_SERVICE=e2e
 include ../Makefile-php
 
 e2e-run:
-	cd .. && $(MAKE) reload-db && cd e2e-tests
+	$(MAKE) -C .. reload-db
 	service=${PHP_SERVICE} cmd="php vendor/bin/behat --profile=api" $(MAKE) docker-compose-exec
 
 behat:

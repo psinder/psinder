@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Sip\Psinder\Adoption\Application\Query\Shelter\GetOfferDetails;
+namespace Sip\Psinder\Adoption\Application\Query\Offer\GetOfferDetails;
 
-use Sip\Psinder\Adoption\Application\Query\Shelter\OfferDetails;
-use Sip\Psinder\Adoption\Application\Query\Shelter\OfferDetailsRepository;
+use Sip\Psinder\Adoption\Application\Query\Offer\OfferDetails;
+use Sip\Psinder\Adoption\Application\Query\Offer\OfferRepository;
 use Sip\Psinder\SharedKernel\Application\Query\Query;
 use Sip\Psinder\SharedKernel\Application\Query\QueryHandler;
 use function assert;
 
 final class GetOfferDetailsHandler implements QueryHandler
 {
-    private OfferDetailsRepository $repository;
+    private OfferRepository $repository;
 
-    public function __construct(OfferDetailsRepository $repository)
+    public function __construct(OfferRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -23,6 +23,6 @@ final class GetOfferDetailsHandler implements QueryHandler
     {
         assert($query instanceof GetOfferDetails);
 
-        return $this->repository->find($query->id());
+        return $this->repository->findDetails($query->id());
     }
 }

@@ -19,7 +19,7 @@ use Sip\Psinder\SharedKernel\Test\Domain\AddressMother;
 
 final class AdopterFixture extends AbstractFixture
 {
-    public const EXAMPLE_ID = '5c5e43e7-a254-4653-bc51-19f03f2eb3ee';
+    public const EXAMPLE_ID = 'cc3cfe18-584c-4974-9c49-df331d198944';
 
     public function load(ObjectManager $manager)
     {

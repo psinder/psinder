@@ -37,10 +37,33 @@ class AdopterContext implements Context
     }
 
     /**
-     * @When /^I register adopter/
+     * @Given /^logged in as example adopter$/
      */
-    public function whenRegisterAdopter()
+    public function givenExampleAdopter()
     {
+        $token = $this->tokens->obtain(
+            'example@adopter.com',
+            'baz'
+        );
+
+        if ($token === null) {
+            throw new \RuntimeException('Cannot retrieve token');
+        }
+
+        $this->adopter['id'] = $token->getClaim('jti');
+    }
+
+    /**
+     * @When /^I register example adopter/
+     */
+    public function whenRegisterAdopter(TableNode $table)
+    {
+        $this->adopter = array_combine($table->getRow(0), $table->getRow(1));
+
+        $faker = Factory::create();
+        $this->adopter['email'] = $faker->email;
+        $this->adopter['password'] = $faker->password;
+
         $id = $this->adopters->register($this->adopter);
 
         $this->adopter['id'] = $id;

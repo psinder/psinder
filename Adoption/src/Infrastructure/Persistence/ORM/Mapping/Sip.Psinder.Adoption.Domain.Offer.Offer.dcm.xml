@@ -6,13 +6,17 @@
         <id name="id" type="OfferId">
             <generator strategy="NONE" />
         </id>
-        <field name="shelterId" type="ShelterId" />
+        <field name="shelterId" column="shelter_id" type="ShelterId" />
         <one-to-one field="pet" target-entity="Sip\Psinder\Adoption\Domain\Pet\Pet">
             <cascade><cascade-all/></cascade>
             <join-column name="pet_id" nullable="false" />
         </one-to-one>
-        <field name="applications" type="OfferApplications"/>
-        <field name="isOpen" type="boolean" />
-        <field name="selectedAdopter" type="AdopterId" nullable="true" />
+        <one-to-many field="applications"
+                     target-entity="Sip\Psinder\Adoption\Domain\Offer\Application\Application"
+                     mapped-by="offer">
+            <cascade><cascade-all/></cascade>
+        </one-to-many>
+        <field name="isOpen" column="is_open" type="boolean" />
+        <field name="selectedAdopter" column="selected_adopter_id" type="AdopterId" nullable="true" />
     </entity>
 </doctrine-mapping>

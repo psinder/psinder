@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\Test\Application\Query;
 
-use Sip\Psinder\Adoption\Application\Query\Shelter\GetOfferDetails\GetOfferDetails;
+use Sip\Psinder\Adoption\Application\Query\Offer\GetOfferDetails\GetOfferDetails;
 use Sip\Psinder\Adoption\Domain\Offer\Offers;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferBuilder;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferMother;

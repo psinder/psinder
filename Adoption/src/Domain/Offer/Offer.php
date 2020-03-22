@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\Domain\Offer;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sip\Psinder\Adoption\Domain\Adopter\AdopterId;
 use Sip\Psinder\Adoption\Domain\Offer\Application\Application;
 use Sip\Psinder\Adoption\Domain\Offer\Application\ApplicationSelected;
@@ -28,8 +30,11 @@ final class Offer implements AggregateRoot
     private OfferId $id;
     private ShelterId $shelterId;
     private Pet $pet;
-    /** @var Application[] */
-    private array $applications         = [];
+    /**
+     * @phpstan-var Collection<int, Application>
+     * @var Collection|Application[]
+     */
+    private Collection $applications;
     private ?AdopterId $selectedAdopter = null;
     private bool $isOpen;
 
@@ -43,11 +48,12 @@ final class Offer implements AggregateRoot
         bool $isOpen = self::OPEN,
         array $events = []
     ) {
-        $this->shelterId = $shelterId;
-        $this->pet       = $pet;
-        $this->id        = $id;
-        $this->events    = $events;
-        $this->isOpen    = $isOpen;
+        $this->shelterId    = $shelterId;
+        $this->pet          = $pet;
+        $this->id           = $id;
+        $this->events       = $events;
+        $this->isOpen       = $isOpen;
+        $this->applications = new ArrayCollection();
     }
 
     public static function post(OfferId $id, ShelterId $shelterId, Pet $pet) : self
@@ -65,24 +71,21 @@ final class Offer implements AggregateRoot
         return $this->shelterId;
     }
 
-    public function apply(Application $application) : void
+    public function apply(AdopterId $adopterId) : void
     {
         if (! $this->isOpen) {
             throw OfferNotOpen::forId($this->id);
         }
 
-        if ($this->alreadyApplied($application->adopterId())) {
+        if ($this->alreadyApplied($adopterId)) {
             throw AlreadyApplied::forAdopterAndOffer(
-                $application->adopterId(),
+                $adopterId,
                 $this->id
             );
         }
 
-        $this->applications[] = $application;
-        $this->events[]       = ApplicationSent::occur(
-            $application->adopterId(),
-            $this->id
-        );
+        $this->applications[] = Application::prepare($this, $adopterId);
+        $this->events[]       = ApplicationSent::occur($adopterId, $this->id);
     }
 
     public function selectApplication(AdopterId $adopterId) : void

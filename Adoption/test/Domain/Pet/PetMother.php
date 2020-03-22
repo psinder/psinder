@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\Test\Domain\Pet;
 
+use Faker\Factory;
+use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Adoption\Domain\Pet\Pet;
 use Sip\Psinder\Adoption\Domain\Pet\PetBreed;
 use Sip\Psinder\Adoption\Domain\Pet\PetId;
@@ -31,6 +33,22 @@ final class PetMother
             PetBreed::fromTypeAndName(
                 PetType::fromString('Dog'),
                 'Labrador'
+            )
+        );
+    }
+
+    public static function random() : Pet
+    {
+        $faker = Factory::create();
+
+        return Pet::register(
+            new PetId(Uuid::uuid4()->toString()),
+            PetName::fromString($faker->word),
+            PetSex::male(),
+            Birthdate::fromString($faker->date('Y-m-d', '-2 years')),
+            PetBreed::fromTypeAndName(
+                PetType::fromString('Dog'),
+                $faker->word
             )
         );
     }

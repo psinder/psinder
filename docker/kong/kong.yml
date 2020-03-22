@@ -23,7 +23,7 @@ services:
       - name: adoption-offers
         strip_path: false
         paths:
-          - /offers
+          - /offers(.*)
       - name: adoption-register-shelter
         strip_path: false
         paths:

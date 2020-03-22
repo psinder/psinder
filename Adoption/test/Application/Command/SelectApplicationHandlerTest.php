@@ -6,39 +6,36 @@ namespace Sip\Psinder\Adoption\Test\Application\Command;
 
 use PHPUnit\Framework\TestCase;
 use Sip\Psinder\Adoption\Application\Command\Shelter\SelectApplication\SelectApplication;
-use Sip\Psinder\Adoption\Application\Command\Shelter\SelectApplication\SelectApplicationHandler;
 use Sip\Psinder\Adoption\Domain\Offer\Application\ApplicationSelected;
 use Sip\Psinder\Adoption\Domain\Offer\OfferClosed;
-use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryOffers;
+use Sip\Psinder\Adoption\Domain\Offer\Offers;
 use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
-use Sip\Psinder\Adoption\Test\Domain\Application\ApplicationMother;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferMother;
-use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemoryOffersFactory;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
+use Sip\Psinder\Adoption\Test\TransactionalTestCase;
+use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
 
-final class SelectApplicationHandlerTest extends TestCase
+final class SelectApplicationHandlerTest extends TransactionalTestCase
 {
-    use EventsInterceptingIsolatedTest;
+    use EventsPublishingTest;
 
-    /** @var SelectApplicationHandler */
-    private $handler;
-
-    /** @var InMemoryOffers */
-    private $offers;
+    private Offers $offers;
+    private CommandBus $bus;
 
     public function setUp() : void
     {
-        $this->offers  = InMemoryOffersFactory::create($this->eventPublisher());
-        $this->handler = new SelectApplicationHandler($this->offers);
+        parent::setUp();
+
+        $this->offers = $this->get(Offers::class);
+        $this->bus    = $this->get(CommandBus::class);
     }
 
     public function testSelectsApplication() : void
     {
-        $adopterId   = AdopterMother::exampleId();
-        $offer       = OfferMother::example();
-        $application = ApplicationMother::withAdopter($adopterId);
+        $adopterId = AdopterMother::exampleId();
+        $offer     = OfferMother::example();
 
-        $offer->apply($application);
+        $offer->apply($adopterId);
 
         $this->offers->create($offer);
 
@@ -49,7 +46,7 @@ final class SelectApplicationHandlerTest extends TestCase
             $adopterId->toScalar()
         );
 
-        ($this->handler)($command);
+        $this->bus->dispatch($command);
 
         $this->assertPublishedEvents(
             ApplicationSelected::occur($adopterId, $offer->id()),

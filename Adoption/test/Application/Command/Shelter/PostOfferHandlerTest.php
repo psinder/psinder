@@ -9,39 +9,30 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Adoption\Application\Command\Shelter\PostOffer\PostOffer;
-use Sip\Psinder\Adoption\Application\Command\Shelter\PostOffer\PostOfferHandler;
 use Sip\Psinder\Adoption\Domain\Offer\OfferPosted;
-use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryOffers;
-use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryShelters;
-use Sip\Psinder\Adoption\Test\Application\Command\PetFactoryFactory;
+use Sip\Psinder\Adoption\Domain\Offer\Offers;
+use Sip\Psinder\Adoption\Domain\Shelter\Shelters;
 use Sip\Psinder\Adoption\Test\Application\Command\PetMother;
 use Sip\Psinder\Adoption\Test\Domain\Shelter\ShelterMother;
-use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemoryOffersFactory;
-use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemorySheltersFactory;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
+use Sip\Psinder\Adoption\Test\TransactionalTestCase;
+use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
 
-final class PostOfferHandlerTest extends TestCase
+final class PostOfferHandlerTest extends TransactionalTestCase
 {
-    use EventsInterceptingIsolatedTest;
+    use EventsPublishingTest;
 
-    /** @var PostOfferHandler */
-    private $handler;
-
-    /** @var InMemoryShelters */
-    private $shelters;
-
-    /** @var InMemoryOffers */
-    private $offers;
+    private CommandBus$bus;
+    private Shelters $shelters;
+    private Offers $offers;
 
     public function setUp() : void
     {
-        $this->shelters = InMemorySheltersFactory::create($this->eventPublisher());
-        $this->offers   = InMemoryOffersFactory::create($this->eventPublisher());
-        $this->handler  = new PostOfferHandler(
-            $this->shelters,
-            $this->offers,
-            PetFactoryFactory::create()
-        );
+        parent::setUp();
+
+        $this->shelters = $this->get(Shelters::class);
+        $this->offers   = $this->get(Offers::class);
+        $this->bus      = $this->get(CommandBus::class);
     }
 
     public function testCreatesNewOffer() : void
@@ -60,7 +51,7 @@ final class PostOfferHandlerTest extends TestCase
             $pet
         );
 
-        ($this->handler)($command);
+        $this->bus->dispatch($command);
 
         $this->assertPublishedEvents(
             new OfferPosted(
@@ -86,7 +77,7 @@ final class PostOfferHandlerTest extends TestCase
 
         $this->expectException(InvalidArgumentException::class);
 
-        ($this->handler)($command);
+        $this->bus->dispatch($command);
     }
 
     protected function context() : TestCase
