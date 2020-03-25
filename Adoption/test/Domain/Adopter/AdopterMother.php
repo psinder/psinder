@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Adoption\Test\Domain\Adopter;
 
+use Faker\Factory;
 use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Adoption\Domain\Adopter\Adopter;
 use Sip\Psinder\Adoption\Domain\Adopter\AdopterId;
@@ -34,6 +35,19 @@ final class AdopterMother
             Birthdate::fromString('1990-01-01'),
             Gender::other(),
             Email::fromString('foo.bar@example.com')
+        );
+    }
+
+    public static function registeredRandom() : Adopter
+    {
+        $faker = Factory::create();
+
+        return Adopter::register(
+            self::randomId(),
+            AdopterName::fromFirstAndLastName($faker->firstName, $faker->lastName),
+            Birthdate::fromString($faker->date('Y-m-d', '-18 years')),
+            Gender::other(),
+            Email::fromString($faker->email)
         );
     }
 }

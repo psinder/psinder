@@ -56,9 +56,9 @@ final class ServerRequestBuilder
     }
 
     /**
-     * @param mixed[] $body
+     * @param mixed $body
      */
-    public function jsonBodyArray(array $body) : self
+    public function jsonSerializableBody($body) : self
     {
         $this->body = safe_json_encode($body);
 

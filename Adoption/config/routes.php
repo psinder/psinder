@@ -40,15 +40,7 @@ return static function (Application $app, MiddlewareFactory $factory, ContainerI
         ]
     );
 
-    $app->post(
-        '/shelters',
-        PostRegisterShelterRequestHandler::class
-    );
-
-    $app->post(
-        '/adopters',
-        PostRegisterAdopterRequestHandler::class
-    );
-
+    $app->post('/shelters', PostRegisterShelterRequestHandler::class);
+    $app->post('/adopters', PostRegisterAdopterRequestHandler::class);
     $app->get('/offers/{offerId}/applications', GetOfferApplicationsRequestHandler::class);
 };

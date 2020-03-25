@@ -18,7 +18,7 @@ final class PostRegisterShelterRequestHandlerTest extends FunctionalTestCase
             ->createServerRequestBuilder()
             ->post()
             ->url('/shelters')
-            ->jsonBodyArray([
+            ->jsonSerializableBody([
                 'email' => $faker->email,
                 'password' => $faker->password,
                 'name' => $faker->name,

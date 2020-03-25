@@ -20,7 +20,7 @@ final class PostOfferRequestHandlerTest extends FunctionalTestCase
             ->createServerRequestBuilder()
             ->post()
             ->url('/offers')
-            ->jsonBodyArray([
+            ->jsonSerializableBody([
                 'shelterId' => $shelterId,
                 'pet' => PetMother::example()->toArray(),
             ])->create();
