@@ -8,6 +8,7 @@
         </id>
 
         <many-to-many field="pets" target-entity="Sip\Psinder\Adoption\Domain\Pet\Pet">
+            <cascade><cascade-all/></cascade>
             <join-table name="adopter_pet">
                 <join-columns>
                     <join-column name="adopter_id" />

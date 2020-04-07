@@ -6,8 +6,12 @@ namespace App;
 
 use Sip\Psinder\Adoption\Application\Command\Adopter\ApplyForAdoption\ApplyForAdoption;
 use Sip\Psinder\Adoption\Application\Command\Adopter\ApplyForAdoption\ApplyForAdoptionHandler;
+use Sip\Psinder\Adoption\Application\Command\Adopter\GivePet\GivePet;
+use Sip\Psinder\Adoption\Application\Command\Adopter\GivePet\GivePetHandler;
 use Sip\Psinder\Adoption\Application\Command\Adopter\RegisterAdopter\RegisterAdopter;
 use Sip\Psinder\Adoption\Application\Command\Adopter\RegisterAdopter\RegisterAdopterHandler;
+use Sip\Psinder\Adoption\Application\Command\CompleteTransfer\CompleteTransfer;
+use Sip\Psinder\Adoption\Application\Command\CompleteTransfer\CompleteTransferHandler;
 use Sip\Psinder\Adoption\Application\Command\ScheduleTransfer\ScheduleTransfer;
 use Sip\Psinder\Adoption\Application\Command\ScheduleTransfer\ScheduleTransferHandler;
 use Sip\Psinder\Adoption\Application\Command\Shelter\PostOffer\PostOffer;
@@ -33,6 +37,8 @@ return [
                     ApplyForAdoption::class => [ApplyForAdoptionHandler::class],
                     SelectApplication::class => [SelectApplicationHandler::class],
                     ScheduleTransfer::class => [ScheduleTransferHandler::class],
+                    GivePet::class => [GivePetHandler::class],
+                    CompleteTransfer::class => [CompleteTransferHandler::class],
                 ],
                 'middleware' => [
                     'messenger.command.middleware.sender',

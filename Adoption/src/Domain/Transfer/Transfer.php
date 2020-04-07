@@ -20,13 +20,9 @@ final class Transfer implements AggregateRoot
     private const SCHEDULED = false;
 
     private TransferId $id;
-
     private OfferId $offerId;
-
     private Pet $pet;
-
     private AdopterId $adopterId;
-
     private bool $completed;
 
     /**

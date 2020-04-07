@@ -9,9 +9,7 @@ use Sip\Psinder\Adoption\Application\Query\PetDetails;
 final class OfferDetails
 {
     private string $id;
-
     private string $shelterId;
-
     private PetDetails $pet;
 
     public function __construct(string $id, string $shelterId, PetDetails $pet)

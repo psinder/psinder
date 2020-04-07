@@ -11,6 +11,7 @@ use Sip\Psinder\Adoption\Infrastructure\Guzzle\GuzzleUserRegisterer;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\ORM\ORMAdopters;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\ORM\ORMOffers;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\ORM\ORMShelters;
+use Sip\Psinder\Adoption\Infrastructure\Persistence\ORM\ORMTransfers;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\EventPublisher\SymfonyMessengerEventPublisher;
 
@@ -20,6 +21,7 @@ return [
             Shelters::class => ORMShelters::class,
             Offers::class => ORMOffers::class,
             Adopters::class => ORMAdopters::class,
+            Transfers::class => ORMTransfers::class,
             EventPublisher::class => SymfonyMessengerEventPublisher::class,
             UserRegisterer::class => GuzzleUserRegisterer::class
         ],

@@ -7,27 +7,28 @@ namespace Sip\Psinder\Adoption\Test\Application\Command;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Sip\Psinder\Adoption\Application\Command\CompleteTransfer\CompleteTransfer;
-use Sip\Psinder\Adoption\Application\Command\CompleteTransfer\CompleteTransferHandler;
 use Sip\Psinder\Adoption\Domain\Transfer\TransferCompleted;
-use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryTransfers;
+use Sip\Psinder\Adoption\Domain\Transfer\Transfers;
 use Sip\Psinder\Adoption\Test\Domain\Transfer\TransferMother;
-use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemoryTransfersFactory;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
+use Sip\Psinder\Adoption\Test\TransactionalTestCase;
+use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
 
-final class CompleteTransferHandlerTest extends TestCase
+final class CompleteTransferHandlerTest extends TransactionalTestCase
 {
-    use EventsInterceptingIsolatedTest;
+    use EventsPublishingTest;
 
-    /** @var CompleteTransferHandler */
-    private $handler;
+    /** @var CommandBus */
+    private $bus;
 
-    /** @var InMemoryTransfers */
+    /** @var Transfers */
     private $transfers;
 
     public function setUp() : void
     {
-        $this->transfers = InMemoryTransfersFactory::create($this->eventPublisher());
-        $this->handler   = new CompleteTransferHandler($this->transfers);
+        parent::setUp();
+        $this->transfers = $this->get(Transfers::class);
+        $this->bus       = $this->get(CommandBus::class);
     }
 
     public function testCompletesTransfer() : void
@@ -41,7 +42,7 @@ final class CompleteTransferHandlerTest extends TestCase
 
         // When
         $command = new CompleteTransfer($transferId->toScalar());
-        ($this->handler)($command);
+        $this->bus->dispatch($command);
 
         // Then
         $this->assertPublishedEvents(

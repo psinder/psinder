@@ -7,32 +7,29 @@ namespace Sip\Psinder\Adoption\Test\Application\Command\Adopter;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Sip\Psinder\Adoption\Application\Command\Adopter\GivePet\GivePet;
-use Sip\Psinder\Adoption\Application\Command\Adopter\GivePet\GivePetHandler;
+use Sip\Psinder\Adoption\Domain\Adopter\Adopters;
 use Sip\Psinder\Adoption\Domain\Adopter\ReceivedPet;
-use Sip\Psinder\Adoption\Infrastructure\Persistence\InMemory\InMemoryAdopters;
-use Sip\Psinder\Adoption\Test\Application\Command\PetFactoryFactory;
 use Sip\Psinder\Adoption\Test\Application\Command\PetMother;
 use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
-use Sip\Psinder\Adoption\Test\Infrastructure\Persistence\InMemory\InMemoryAdoptersFactory;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
+use Sip\Psinder\Adoption\Test\TransactionalTestCase;
+use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
 
-final class GivePetHandlerTest extends TestCase
+final class GivePetHandlerTest extends TransactionalTestCase
 {
-    use EventsInterceptingIsolatedTest;
+    use EventsPublishingTest;
 
-    /** @var GivePetHandler */
-    private $handler;
+    /** @var CommandBus */
+    private $bus;
 
-    /** @var InMemoryAdopters */
+    /** @var Adopters */
     private $adopters;
 
     public function setUp() : void
     {
-        $this->adopters = InMemoryAdoptersFactory::create($this->eventPublisher());
-        $this->handler  = new GivePetHandler(
-            $this->adopters,
-            PetFactoryFactory::create()
-        );
+        parent::setUp();
+        $this->bus      = $this->get(CommandBus::class);
+        $this->adopters = $this->get(Adopters::class);
     }
 
     public function testGivesPet() : void
@@ -46,7 +43,7 @@ final class GivePetHandlerTest extends TestCase
 
         $adopterId = $adopter->id()->toScalar();
 
-        ($this->handler)(new GivePet(
+        $this->bus->dispatch(new GivePet(
             $adopterId,
             $pet
         ));

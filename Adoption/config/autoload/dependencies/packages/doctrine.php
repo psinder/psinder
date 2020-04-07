@@ -9,6 +9,7 @@ use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Adopter\AdopterNa
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\ContactFormsType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Offer\ApplicationIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Offer\OfferIdType;
+use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Transfer\TransferIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Pet\PetIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Pet\PetNameType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Pet\PetSexType;
@@ -59,7 +60,8 @@ return [
             ApplicationIdType::name() => ApplicationIdType::class,
             AdopterIdType::name() => AdopterIdType::class,
             AdopterNameType::name() => AdopterNameType::class,
-            GenderType::name() => GenderType::class
+            GenderType::name() => GenderType::class,
+            TransferIdType::name() => TransferIdType::class,
         ],
         'migrations' => [
             'orm_default' => [
