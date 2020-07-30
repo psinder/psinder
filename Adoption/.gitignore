@@ -4,3 +4,4 @@ vendor/
 reports/
 .env
 var/logs
+/data
