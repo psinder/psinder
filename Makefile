@@ -34,17 +34,22 @@ docker-build:
 	docker build -t $(IMAGE_NAME) .
 
 reload-db:
-	SERVICE=Adoption cmd=db-fixtures-load $(SERVICE_EXECUTE)
-	SERVICE=Security cmd=db-fixtures-load $(SERVICE_EXECUTE)
+	SERVICE=Adoption cmd=db-fixtures-load $(MAKE) service-execute
+	SERVICE=Security cmd=db-fixtures-load $(MAKE) service-execute
 
 .env:
 	cp .env.dist .env
+
+init-env: .env
+	SERVICE=Security cmd=.env $(MAKE) service-execute
+	SERVICE=Adoption cmd=.env $(MAKE) service-execute
+	SERVICE=e2e-tests cmd=.env $(MAKE) service-execute
 
 service-execute:
 	$(MAKE) -C $(SERVICE) $(cmd)
 
 # cross-service targets
-initial-setup: .env
+initial-setup: init-env
 	docker build -t sip/psinder-php docker/php-fpm
 	$(MAKE) docker-compose-down
 	SERVICE=PhpSharedKernel cmd=setup $(MAKE) service-execute
