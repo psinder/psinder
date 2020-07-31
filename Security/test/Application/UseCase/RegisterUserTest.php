@@ -12,25 +12,24 @@ use Sip\Psinder\Security\Domain\User\Role;
 use Sip\Psinder\Security\Domain\User\Roles;
 use Sip\Psinder\Security\Domain\User\UserId;
 use Sip\Psinder\Security\Domain\User\UserRegistered;
-use Sip\Psinder\Security\Infrastructure\Persistence\InMemory\InMemoryUsers;
-use Sip\Psinder\Security\Infrastructure\PlainPasswordHasher;
+use Sip\Psinder\Security\Domain\User\Users;
+use Sip\Psinder\Security\Test\TransactionalTestCase;
 use Sip\Psinder\SharedKernel\Domain\Email;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
 
-final class RegisterUserTest extends TestCase
+final class RegisterUserTest extends TransactionalTestCase
 {
-    use EventsInterceptingIsolatedTest;
+    use EventsPublishingTest;
 
-    private InMemoryUsers $users;
+    private Users $users;
     private RegisterUser $useCase;
 
     public function setUp() : void
     {
-        $this->users   = new InMemoryUsers($this->eventPublisher());
-        $this->useCase = new RegisterUser(
-            $this->users,
-            new PlainPasswordHasher()
-        );
+        parent::setUp();
+
+        $this->users   = $this->get(Users::class);
+        $this->useCase = $this->get(RegisterUser::class);
     }
 
     public function testRegistersShelterUser() : void

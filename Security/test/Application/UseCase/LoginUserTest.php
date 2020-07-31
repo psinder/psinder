@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\Security\Test\Application\UseCase;
 
-use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Security\Application\PasswordHasher;
 use Sip\Psinder\Security\Application\UseCase\LoginUser;
@@ -15,31 +14,23 @@ use Sip\Psinder\Security\Domain\User\Roles;
 use Sip\Psinder\Security\Domain\User\User;
 use Sip\Psinder\Security\Domain\User\UserId;
 use Sip\Psinder\Security\Domain\User\UserNotFound;
-use Sip\Psinder\Security\Infrastructure\Persistence\InMemory\InMemoryUsers;
-use Sip\Psinder\Security\Infrastructure\PlainPasswordHasher;
+use Sip\Psinder\Security\Domain\User\Users;
+use Sip\Psinder\Security\Test\TransactionalTestCase;
 use Sip\Psinder\SharedKernel\Domain\Email;
-use Sip\Psinder\SharedKernel\Infrastructure\InterceptingEventPublisher;
 
-final class LoginUserTest extends TestCase
+final class LoginUserTest extends TransactionalTestCase
 {
-    /** @var InterceptingEventPublisher */
-    private $eventPublisher;
-
-    /** @var InMemoryUsers */
-    private $users;
-
-    /** @var LoginUser */
-    private $useCase;
-
-    /** @var PasswordHasher */
-    private $passwordEncoder;
+    private Users $users;
+    private LoginUser $useCase;
+    private PasswordHasher $passwordHasher;
 
     public function setUp() : void
     {
-        $this->eventPublisher  = new InterceptingEventPublisher();
-        $this->users           = new InMemoryUsers($this->eventPublisher);
-        $this->passwordEncoder = new PlainPasswordHasher();
-        $this->useCase         = new LoginUser($this->users, $this->passwordEncoder);
+        parent::setUp();
+
+        $this->users          = $this->get(Users::class);
+        $this->passwordHasher = $this->get(PasswordHasher::class);
+        $this->useCase        = $this->get(LoginUser::class);
     }
 
     public function testLogsInExistingUserUsingValidCredentials() : void
@@ -53,7 +44,7 @@ final class LoginUserTest extends TestCase
             new Roles([Role::fromString('shelter')]),
             Credentials::fromEmailAndPassword(
                 Email::fromString($email),
-                $this->passwordEncoder->hash($password, $id)
+                $this->passwordHasher->hash($password, $id)
             )
         );
         $this->users->add($user);

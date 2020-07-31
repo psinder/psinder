@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Sip\Psinder\SharedKernel\Infrastructure;
 
-use Ds\Set;
 use Sip\Psinder\SharedKernel\Domain\Event;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
+use function array_push;
 
 final class InterceptingEventPublisher implements EventPublisher
 {
     /**
-     * @var Set<Event>
+     * @var Event[]
      */
-    private Set $events;
+    private array $events;
 
     public function __construct()
     {
-        $this->events = new Set();
+        $this->events = [];
     }
 
     public function publish(Event ...$events) : void
     {
-        $this->events->add(...$events);
+        array_push($this->events, ...$events);
     }
 
     /**
@@ -30,11 +30,11 @@ final class InterceptingEventPublisher implements EventPublisher
      */
     public function events() : array
     {
-        return [...$this->events];
+        return $this->events;
     }
 
     public function clear() : void
     {
-        $this->events->clear();
+        $this->events = [];
     }
 }

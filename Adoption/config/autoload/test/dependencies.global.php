@@ -7,7 +7,6 @@ use Sip\Psinder\SharedKernel\Infrastructure\InterceptingEventPublisher;
 
 return [
     'dependencies' => [
-        'invokables' => [],
         'factories'  => array_merge(
             [
                 InterceptingEventPublisher::class => static function () {

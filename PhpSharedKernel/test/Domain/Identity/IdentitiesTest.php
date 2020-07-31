@@ -25,22 +25,23 @@ class IdentitiesTest extends TestCase
 
     public function testAllowsSubtypes() : void
     {
-        $identityArray = [new class implements Identity {
-            public function toScalar() : int
-            {
-                return 1;
-            }
+        $identityArray = [
+            new class implements Identity {
+                public function toScalar() : int
+                {
+                    return 1;
+                }
 
-            public function equals(Identity $otherIdentity) : bool
-            {
-                return true;
-            }
+                public function equals(Identity $otherIdentity) : bool
+                {
+                    return true;
+                }
 
-            public function __toString() : string
-            {
-                return '1';
-            }
-        },
+                public function __toString() : string
+                {
+                    return '1';
+                }
+            },
         ];
 
         $result = new TestIdentities($identityArray);
