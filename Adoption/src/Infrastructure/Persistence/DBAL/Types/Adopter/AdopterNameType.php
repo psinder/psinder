@@ -45,7 +45,7 @@ final class AdopterNameType extends StringType
             return $value->fullName();
         }
 
-        ConversionException::conversionFailedInvalidType($value, 'string', [AdopterName::class]);
+        throw ConversionException::conversionFailedInvalidType($value, 'string', [AdopterName::class]);
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform) : bool

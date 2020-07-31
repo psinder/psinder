@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Bunny\AbstractClient;
 use Bunny\Client;
 use ContainerInteropDoctrine\ConnectionFactory;
 use ContainerInteropDoctrine\EntityManagerFactory;
@@ -11,17 +10,12 @@ use Lcobucci\Clock\SystemClock;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
-use Psr\Log\LoggerInterface;
-use Sip\Psinder\Security\Infrastructure\Guzzle\GuzzleAdoptionRegistrator;
-use Sip\Psinder\SharedKernel\Infrastructure\AMQP\BunnyDeclareCommand;
-use Sip\Psinder\SharedKernel\Infrastructure\AMQP\BunnyEventHandler;
 use Sip\Psinder\SharedKernel\Infrastructure\EventPublisher\SymfonyMessengerEventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\LoggingErrorListenerDelegatorFactory;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\MigrationsConfigurationFactory;
 use Sip\Psinder\SharedKernel\Infrastructure\Serializer\SymfonySerializer\PayloadableEventNormalizer;
 use Sip\Psinder\SharedKernel\Infrastructure\Serializer\SymfonySerializer\SymfonySerializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\DataUriNormalizer;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
@@ -82,35 +76,6 @@ return [
                     'password'  => getenv('RABBITMQ_PASS'), // The default password is guest
                 ]);
             },
-            BunnyEventHandler::class => static function (ContainerInterface $container) {
-                return new BunnyEventHandler(
-                    $container->get(AbstractClient::class),
-                    $container->get(\Sip\Psinder\SharedKernel\Infrastructure\Serializer\Serializer::class),
-                    'events',
-                    'security',
-                    new CamelCaseToSnakeCaseNameConverter()
-                );
-            },
-            BunnyDeclareCommand::class => static function (ContainerInterface $container) {
-                return new BunnyDeclareCommand(
-                    $container->get(AbstractClient::class),
-                    $container->get(LoggerInterface::class),
-                    [
-                        'exchanges' => [
-                            [
-                                'name' => 'events',
-                                'type' => 'topic',
-                            ]
-                        ]
-                    ]
-                );
-            },
         ],
     ],
-
-    'console' => [
-        'commands' => [
-            BunnyDeclareCommand::class
-        ]
-    ]
 ];

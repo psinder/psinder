@@ -1,4 +1,4 @@
-all: docker-compose-up composer-install qa
+all: composer-install qa
 
 PROJECT_DIR = ../
 

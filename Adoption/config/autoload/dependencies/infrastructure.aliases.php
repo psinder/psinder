@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Bunny\AbstractClient;
-use Bunny\Client;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Monolog\Logger;

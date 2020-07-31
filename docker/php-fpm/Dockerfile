@@ -7,7 +7,7 @@ RUN apk --no-cache add autoconf g++ make \
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+COPY php.ini $PHP_INI_DIR/php.ini
 
 USER 1000:1000
 
