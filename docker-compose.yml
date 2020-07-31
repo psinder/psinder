@@ -14,7 +14,7 @@ services:
     volumes:
       - ./docker/kong/kong.yml:/usr/local/kong.yml
     networks:
-      - proxy
+      - psinder
   adoption-web:
     image: sip/psinder-nginx
     build:
@@ -27,8 +27,7 @@ services:
       FPM_HOST: adoption-php
       ROOT_DIR: /var/www/app/Adoption/public
     networks:
-      - internal
-      - proxy
+      - psinder
   adoption-php:
     image: sip/psinder-adoption-php
     build:
@@ -40,7 +39,7 @@ services:
       - /tmp/composer-cache:/.composer/cache
     working_dir: /var/www/app/Adoption
     networks:
-      - internal
+      - psinder
     env_file:
       - Adoption/.env
   security-php:
@@ -54,7 +53,7 @@ services:
       - /tmp/composer-cache:/.composer/cache
     working_dir: /var/www/app/Security
     networks:
-      - internal
+      - psinder
     env_file:
       - Security/.env
   security-web:
@@ -69,8 +68,7 @@ services:
       FPM_HOST: security-php
       ROOT_DIR: /var/www/app/Security/public
     networks:
-      - internal
-      - proxy
+      - psinder
   rabbitmq:
     image: rabbitmq:3-management
     environment:
@@ -81,14 +79,13 @@ services:
     ports:
       - ${RABBITMQ_MANAGEMENT_HOST_PORT}:15672
     networks:
-      - internal
-      - proxy
+      - psinder
   db:
     image: postgres:11-alpine
     environment:
       POSTGRES_PASSWORD: ${DB_SUPERUSER_PASS}
     networks:
-      - internal
+      - psinder
     env_file:
       - ./Adoption/.env
       - ./Security/.env
@@ -104,8 +101,7 @@ services:
       - adoption-web
       - security-web
     networks:
-      - internal
-      - proxy
+      - psinder
     env_file:
       - ./e2e-tests/.env
     volumes:
@@ -114,7 +110,5 @@ services:
     working_dir: /var/www/app/e2e-tests
     entrypoint: "php -S 0.0.0.0:8080"
 networks:
-  proxy:
-    external: false
-  internal:
+  psinder:
     external: false
