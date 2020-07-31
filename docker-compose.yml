@@ -69,17 +69,17 @@ services:
       ROOT_DIR: /var/www/app/Security/public
     networks:
       - psinder
-  rabbitmq:
-    image: rabbitmq:3-management
-    environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
-    env_file:
-      - .env
-    ports:
-      - ${RABBITMQ_MANAGEMENT_HOST_PORT}:15672
-    networks:
-      - psinder
+#  rabbitmq:
+#    image: rabbitmq:3-management
+#    environment:
+#      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+#      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+#    env_file:
+#      - .env
+#    ports:
+#      - ${RABBITMQ_MANAGEMENT_HOST_PORT}:15672
+#    networks:
+#      - psinder
   db:
     image: postgres:11-alpine
     environment:
