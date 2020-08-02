@@ -35,7 +35,7 @@
         "mezzio/mezzio-authentication-session": "^1.0",
         "mezzio/mezzio-fastroute": "^3.0",
         "mezzio/mezzio-helpers": "^5.3",
-        "monolog/monolog": "^1.24",
+        "monolog/monolog": "^2.1",
         "psr7-sessions/storageless": "^5.0",
         "ramsey/uuid": "^3.8",
         "roave/psr-container-doctrine": "^2.1",

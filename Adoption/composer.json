@@ -35,7 +35,7 @@
         "mezzio/mezzio": "^3.2",
         "mezzio/mezzio-fastroute": "^3.0",
         "mezzio/mezzio-helpers": "^5.1",
-        "monolog/monolog": "^1.24",
+        "monolog/monolog": "^2.1",
         "nyholm/psr7": "^1.2",
         "ramsey/uuid": "^3.8",
         "roave/psr-container-doctrine": "^2.1",

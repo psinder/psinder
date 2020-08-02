@@ -5,12 +5,12 @@ declare(strict_types=1);
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\ConfigAggregator\PhpFileProvider;
 use Laminas\ZendFrameworkBridge\ConfigPostProcessor;
-use Mezzio\Router\FastRouteRouter\ConfigProvider;
 
 $env = getenv('APP_ENV');
 
 $aggregator = new ConfigAggregator([
-    ConfigProvider::class,
+    new \Sip\Psinder\SharedKernel\Mezzio\ConfigProvider('php-adoption'),
+    Mezzio\Router\FastRouteRouter\ConfigProvider::class,
     \Laminas\HttpHandlerRunner\ConfigProvider::class,
 
     \Mezzio\Helper\ConfigProvider::class,

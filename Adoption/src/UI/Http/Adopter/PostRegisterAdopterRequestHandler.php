@@ -19,10 +19,10 @@ final class PostRegisterAdopterRequestHandler implements RequestHandlerInterface
     private CommandBus $commandBus;
     private LoggerInterface $logger;
 
-    public function __construct(CommandBus $commandBus, LoggerInterface  $logger)
+    public function __construct(CommandBus $commandBus, LoggerInterface $logger)
     {
         $this->commandBus = $commandBus;
-        $this->logger = $logger;
+        $this->logger     = $logger;
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface

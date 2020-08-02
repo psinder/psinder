@@ -10,6 +10,7 @@ use Mezzio\Router\FastRouteRouter\ConfigProvider;
 $env = getenv('APP_ENV');
 
 $aggregator = new ConfigAggregator([
+    new \Sip\Psinder\SharedKernel\Mezzio\ConfigProvider('php-security'),
     ConfigProvider::class,
     \Laminas\HttpHandlerRunner\ConfigProvider::class,
 

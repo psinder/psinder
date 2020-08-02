@@ -19,7 +19,8 @@
         "psr/http-message": "^1.0",
         "psr/http-server-middleware": "^1.0",
         "ramsey/uuid": "^3.8",
-        "thecodingmachine/safe": "^1.0"
+        "thecodingmachine/safe": "^1.0",
+        "easycorp/easy-log-handler": "^1.0"
     },
     "require-dev": {
         "doctrine/dbal": "^2.10",

@@ -9,8 +9,6 @@ use Laminas\Stratigility\Middleware\ErrorHandler;
 use Lcobucci\Clock\SystemClock;
 use Mezzio\Authentication\Session\PhpSession;
 use Mezzio\Authentication\Session\PhpSessionFactory;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 use Psr\Container\ContainerInterface;
 use Sip\Psinder\SharedKernel\Infrastructure\EventPublisher\SymfonyMessengerEventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\LoggingErrorListenerDelegatorFactory;
@@ -54,12 +52,6 @@ return [
                         new ArrayDenormalizer(),
                     ],
                     [new JsonEncoder()]
-                );
-            },
-            Logger::class => static function (ContainerInterface $c) {
-                return new Logger(
-                    'main',
-                    [new StreamHandler( 'php://stdout', Logger::DEBUG )]
                 );
             },
             SymfonyMessengerEventPublisher::class => static function (ContainerInterface $c) {

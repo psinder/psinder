@@ -5,10 +5,6 @@ declare(strict_types=1);
 use Lcobucci\Clock\Clock;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\RequestFactoryInterface;
-use Psr\Http\Message\ServerRequestFactoryInterface;
-use Psr\Http\Message\StreamFactoryInterface;
-use Psr\Http\Message\UriFactoryInterface;
 use Sip\Psinder\Adoption\UI\Http\Shelter\PostOfferRequestHandler;
 use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
 use Sip\Psinder\SharedKernel\Infrastructure\Serializer\Serializer;
@@ -52,7 +48,7 @@ return [
                     new Psr17Factory(),
                     new Psr17Factory(),
                 );
-            }
+            },
         ],
     ],
 ];

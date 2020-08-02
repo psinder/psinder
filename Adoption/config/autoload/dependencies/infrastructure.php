@@ -3,14 +3,13 @@
 declare(strict_types=1);
 
 use Doctrine\ORM\EntityManagerInterface;
+use GuzzleHttp\Client;
 use Laminas\Diactoros\RequestFactory;
 use Laminas\Diactoros\ServerRequestFactory;
 use Laminas\Diactoros\StreamFactory;
 use Laminas\Diactoros\UriFactory;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Lcobucci\Clock\SystemClock;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Roave\PsrContainerDoctrine\ConnectionFactory;
@@ -67,16 +66,6 @@ return [
             InMemoryShelters::class => static function (ContainerInterface $container) {
                 return new InMemoryShelters($container->get(EventPublisher::class));
             },
-            Logger::class => static function (ContainerInterface $c) {
-                $handler = new StreamHandler('php://stdout', Logger::DEBUG);
-                $handler->setFormatter(new \Monolog\Formatter\LogstashFormatter(
-                    'php-adoption'
-                ));
-                return new Logger(
-                    'adoption',
-                    [$handler]
-                );
-            },
             SymfonyMessengerCommandBus::class => static function (ContainerInterface $c) {
                 return new SymfonyMessengerCommandBus($c->get('messenger.command.bus'));
             },
@@ -103,7 +92,7 @@ return [
             GuzzleUserRegisterer::class => static function(ContainerInterface $container): GuzzleUserRegisterer {
                 return new GuzzleUserRegisterer(
                     // TODO: Introduce internal client
-                    new \GuzzleHttp\Client([
+                    new Client([
                         'base_uri' => 'http://security-web'
                     ]),
                     $container->get(RequestBuilderFactory::class),
