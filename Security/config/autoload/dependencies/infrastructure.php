@@ -7,6 +7,8 @@ use ContainerInteropDoctrine\ConnectionFactory;
 use ContainerInteropDoctrine\EntityManagerFactory;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Lcobucci\Clock\SystemClock;
+use Mezzio\Authentication\Session\PhpSession;
+use Mezzio\Authentication\Session\PhpSessionFactory;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
@@ -22,8 +24,6 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
-use Mezzio\Authentication\Session\PhpSession;
-use Mezzio\Authentication\Session\PhpSessionFactory;
 
 return [
     'dependencies' => [
@@ -59,7 +59,7 @@ return [
             Logger::class => static function (ContainerInterface $c) {
                 return new Logger(
                     'main',
-                    [new StreamHandler(getcwd() . '/var/logs/main.log')]
+                    [new StreamHandler( 'php://stdout', Logger::DEBUG )]
                 );
             },
             SymfonyMessengerEventPublisher::class => static function (ContainerInterface $c) {

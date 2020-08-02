@@ -68,9 +68,13 @@ return [
                 return new InMemoryShelters($container->get(EventPublisher::class));
             },
             Logger::class => static function (ContainerInterface $c) {
+                $handler = new StreamHandler('php://stdout', Logger::DEBUG);
+                $handler->setFormatter(new \Monolog\Formatter\LogstashFormatter(
+                    'php-adoption'
+                ));
                 return new Logger(
-                    'main',
-                    [new StreamHandler(getcwd() . '/var/logs/main.log')]
+                    'adoption',
+                    [$handler]
                 );
             },
             SymfonyMessengerCommandBus::class => static function (ContainerInterface $c) {

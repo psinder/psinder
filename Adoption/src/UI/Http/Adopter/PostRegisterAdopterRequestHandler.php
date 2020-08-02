@@ -9,6 +9,7 @@ use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Adoption\Application\Command\Adopter\RegisterAdopter\RegisterAdopter;
 use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
@@ -16,14 +17,17 @@ use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
 final class PostRegisterAdopterRequestHandler implements RequestHandlerInterface
 {
     private CommandBus $commandBus;
+    private LoggerInterface $logger;
 
-    public function __construct(CommandBus $commandBus)
+    public function __construct(CommandBus $commandBus, LoggerInterface  $logger)
     {
         $this->commandBus = $commandBus;
+        $this->logger = $logger;
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
+        $this->logger->info('Registering adopter');
         /** @var PostRegisterAdopterRequest $dto */
         $dto = $request->getAttribute(PostRegisterAdopterRequest::class);
 

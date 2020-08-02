@@ -25,3 +25,6 @@ cs-fix:
 
 test:
 	$(PHP_RUN) composer run test-coverage
+
+test-report-merged:
+	docker run --init -it --rm -v "$(realpath $(PROJECT_DIR)):/project" -v "$(pwd)/tmp-phpqa:/tmp" -w /project jakzal/phpqa php -d pcov.enabled=1 /tools/phpcov merge reports --html=reports/html

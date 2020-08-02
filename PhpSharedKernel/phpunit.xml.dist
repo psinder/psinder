@@ -16,6 +16,7 @@
     </filter>
 
     <logging>
-        <log type="coverage-html" target="reports/test-coverage-html"/>
+        <log type="coverage-php" target="../reports/shared.cov" />
+        <log type="coverage-html" target="./reports/html-shared"/>
     </logging>
 </phpunit>

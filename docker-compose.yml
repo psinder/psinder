@@ -1,4 +1,9 @@
-version: '3.2'
+version: '3.7'
+x-logging:
+  &elk
+  options:
+    gelf-address: "udp://localhost:12201"
+  driver: gelf
 services:
   kong:
     image: kong:2
@@ -42,6 +47,7 @@ services:
       - psinder
     env_file:
       - Adoption/.env
+    logging: *elk
   security-php:
     image: sip/psinder-php
     build:
@@ -56,6 +62,7 @@ services:
       - psinder
     env_file:
       - Security/.env
+    logging: *elk
   security-web:
     image: sip/psinder-nginx
     build:
@@ -109,6 +116,18 @@ services:
       - /tmp/composer-cache:/.composer/cache
     working_dir: /var/www/app/e2e-tests
     entrypoint: "php -S 0.0.0.0:8080"
+  elk:
+    image: sebp/elk:780
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+      - "12201:12201/udp"
+    networks:
+      - psinder
+    volumes:
+      - './docker/elk/logstash/input-kong.conf:/etc/logstash/conf.d/03-kong-input.conf'
+      - './docker/elk/logstash/input-php.conf:/etc/logstash/conf.d/04-php-input.conf'
 networks:
   psinder:
     external: false
