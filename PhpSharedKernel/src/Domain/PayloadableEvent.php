@@ -7,5 +7,5 @@ namespace Sip\Psinder\SharedKernel\Domain;
 interface PayloadableEvent
 {
     /** @return mixed[] */
-    public function toPayload() : array;
+    public function toPayload(): array;
 }

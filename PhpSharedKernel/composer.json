@@ -9,7 +9,7 @@
         "ext-json": "*",
         "beberlei/assert": "^3.1",
         "danielstjules/stringy": "^3.1",
-        "doctrine/coding-standard": "^5.0",
+        "doctrine/coding-standard": "^8.1",
         "easycorp/easy-log-handler": "^1.0",
         "guzzlehttp/psr7": "^1.6",
         "lcobucci/clock": "^1.3",

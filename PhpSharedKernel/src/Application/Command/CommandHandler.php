@@ -6,5 +6,5 @@ namespace Sip\Psinder\SharedKernel\Application\Command;
 
 interface CommandHandler
 {
-    public function __invoke(Command $command) : void;
+    public function __invoke(Command $command): void;
 }

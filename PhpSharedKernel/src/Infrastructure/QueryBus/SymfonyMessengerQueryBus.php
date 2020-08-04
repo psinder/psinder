@@ -9,6 +9,8 @@ use Sip\Psinder\SharedKernel\Application\Query\Query;
 use Sip\Psinder\SharedKernel\Application\Query\QueryBus;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
+
+use function assert;
 use function Functional\first;
 use function get_class;
 use function sprintf;
@@ -28,8 +30,8 @@ final class SymfonyMessengerQueryBus implements QueryBus
     public function execute(Query $query)
     {
         $envelope = $this->bus->dispatch($query);
-        /** @var HandledStamp|null $stamp */
-        $stamp = first($envelope->all(HandledStamp::class));
+        $stamp    = first($envelope->all(HandledStamp::class));
+        assert($stamp instanceof HandledStamp || $stamp === null);
 
         if ($stamp === null) {
             throw new LogicException(sprintf(

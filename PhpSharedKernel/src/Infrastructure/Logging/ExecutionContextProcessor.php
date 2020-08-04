@@ -20,9 +20,10 @@ final class ExecutionContextProcessor implements ProcessorInterface
      * @param mixed[] $record
      * @return mixed[]
      */
-    public function __invoke(array $record) : array
+    public function __invoke(array $record): array
     {
         $record['extra']['correlation_id'] = $this->context->correlationId();
+
         return $record;
     }
 }

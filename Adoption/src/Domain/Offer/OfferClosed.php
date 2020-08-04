@@ -19,17 +19,17 @@ final class OfferClosed implements Event
         $this->occurredAt = $occurredAt;
     }
 
-    public static function occur(OfferId $id) : self
+    public static function occur(OfferId $id): self
     {
         return new self($id->toScalar(), new DateTimeImmutable());
     }
 
-    public function offerId() : string
+    public function offerId(): string
     {
         return $this->offerId;
     }
 
-    public function occurredAt() : DateTimeImmutable
+    public function occurredAt(): DateTimeImmutable
     {
         return $this->occurredAt;
     }

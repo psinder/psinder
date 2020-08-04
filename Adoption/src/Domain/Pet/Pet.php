@@ -30,31 +30,31 @@ class Pet
         PetSex $sex,
         Birthdate $birthdate,
         PetBreed $breed
-    ) : self {
+    ): self {
         return new self($id, $name, $sex, $birthdate, $breed);
     }
 
-    public function id() : PetId
+    public function id(): PetId
     {
         return $this->id;
     }
 
-    public function name() : PetName
+    public function name(): PetName
     {
         return $this->name;
     }
 
-    public function birthdate() : Birthdate
+    public function birthdate(): Birthdate
     {
         return $this->birthdate;
     }
 
-    public function breed() : PetBreed
+    public function breed(): PetBreed
     {
         return $this->breed;
     }
 
-    public function sex() : PetSex
+    public function sex(): PetSex
     {
         return $this->sex;
     }
@@ -62,7 +62,7 @@ class Pet
     /**
      * @return string[]
      */
-    public function toPayload() : array
+    public function toPayload(): array
     {
         return [
             'id' => $this->id()->toScalar(),

@@ -9,6 +9,7 @@ use Sip\Psinder\Adoption\Domain\Adopter\AdopterId;
 use Sip\Psinder\Adoption\Domain\Adopter\Adopters;
 use Sip\Psinder\SharedKernel\Application\Command\Command;
 use Sip\Psinder\SharedKernel\Application\Command\CommandHandler;
+
 use function assert;
 
 final class GivePetHandler implements CommandHandler
@@ -23,7 +24,7 @@ final class GivePetHandler implements CommandHandler
         $this->petFactory = $petFactory;
     }
 
-    public function __invoke(Command $command) : void
+    public function __invoke(Command $command): void
     {
         assert($command instanceof GivePet);
 

@@ -8,7 +8,7 @@ use Sip\Psinder\Adoption\Application\Command\Adopter\AdopterFactory;
 
 final class AdopterFactoryFactory
 {
-    public static function create() : AdopterFactory
+    public static function create(): AdopterFactory
     {
         return new AdopterFactory();
     }

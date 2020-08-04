@@ -19,12 +19,13 @@ final class SymfonySerializer implements Serializer
         $this->format     = $format;
     }
 
-    public function serialize($value) : string
+    /** @param mixed[]|object $value */
+    public function serialize($value): string
     {
         return $this->serializer->serialize($value, $this->format);
     }
 
-    public function deserialize(string $value, string $type) : object
+    public function deserialize(string $value, string $type): object
     {
         return (object) $this->serializer->deserialize($value, $type, $this->format);
     }

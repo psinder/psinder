@@ -17,7 +17,7 @@ final class OfferTest extends TestCase
 {
     use EventsInterceptingIsolatedTest;
 
-    public function testSendsApplication() : void
+    public function testSendsApplication(): void
     {
         $offer     = OfferMother::example();
         $adopterId = AdopterMother::randomId();
@@ -34,7 +34,7 @@ final class OfferTest extends TestCase
         );
     }
 
-    public function testSendsTwoApplicationsForDifferentAdopters() : void
+    public function testSendsTwoApplicationsForDifferentAdopters(): void
     {
         $offer = OfferMother::example();
 
@@ -50,7 +50,7 @@ final class OfferTest extends TestCase
         $this->assertPublishedEvent(ApplicationSent::occur($otherAdopterId, $offer->id()));
     }
 
-    public function testSendsTwoApplicationsForTheSameAdopterAndThrows() : void
+    public function testSendsTwoApplicationsForTheSameAdopterAndThrows(): void
     {
         $offer     = OfferMother::example();
         $adopterId = AdopterMother::randomId();
@@ -62,7 +62,7 @@ final class OfferTest extends TestCase
         $offer->apply($adopterId);
     }
 
-    public function testSendsApplicationAfterApplicationWasSelectedAndThrows() : void
+    public function testSendsApplicationAfterApplicationWasSelectedAndThrows(): void
     {
         $adopterId = AdopterMother::randomId();
         $offer     = (new OfferBuilder())
@@ -76,7 +76,7 @@ final class OfferTest extends TestCase
         $offer->apply($otherAdopterId);
     }
 
-    public function testSchedulesTransfer() : void
+    public function testSchedulesTransfer(): void
     {
         $transferId = TransferMother::randomId();
         $adopterId  = AdopterMother::randomId();
@@ -91,7 +91,7 @@ final class OfferTest extends TestCase
         $this->context()::assertTrue($result->id()->equals($transferId));
     }
 
-    public function testSchedulesTransferForOfferWithoutSelectedApplicationAndThrows() : void
+    public function testSchedulesTransferForOfferWithoutSelectedApplicationAndThrows(): void
     {
         $transferId = TransferMother::randomId();
 
@@ -102,7 +102,7 @@ final class OfferTest extends TestCase
         $offer->prepareTransfer($transferId);
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

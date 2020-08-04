@@ -11,7 +11,7 @@ use Zend\Expressive\Application;
 
 abstract class ExpressiveFunctionalTestCase extends ExpressiveIntegrationTestCase implements RequestHandlerInterface
 {
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         return $this->get(Application::class)
             ->handle($request);

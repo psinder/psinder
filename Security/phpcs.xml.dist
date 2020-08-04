@@ -5,8 +5,9 @@
     <arg name="colors"/>
 
     <!-- inherit rules from: -->
-    <rule ref="vendor/doctrine/coding-standard/lib/Doctrine/ruleset.xml"/>
-
+    <rule ref="vendor/doctrine/coding-standard/lib/Doctrine/ruleset.xml">
+        <exclude name="SlevomatCodingStandard.Classes.UnusedPrivateElements.WriteOnlyProperty"/>
+    </rule>
     <!-- Paths to check -->
     <file>src</file>
     <file>test</file>

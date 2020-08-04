@@ -9,6 +9,7 @@ use Sip\Psinder\Adoption\Domain\Adopter\AdopterId;
 use Sip\Psinder\Adoption\Domain\Adopter\AdopterNotFound;
 use Sip\Psinder\Adoption\Domain\Adopter\Adopters;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
+
 use function array_key_exists;
 
 final class InMemoryAdopters implements Adopters
@@ -23,14 +24,14 @@ final class InMemoryAdopters implements Adopters
         $this->eventPublisher = $eventPublisher;
     }
 
-    public function create(Adopter $adopter) : void
+    public function create(Adopter $adopter): void
     {
         $this->adopters[$adopter->id()->toScalar()] = $adopter;
 
         $adopter->publishEvents($this->eventPublisher);
     }
 
-    public function update(Adopter $adopter) : void
+    public function update(Adopter $adopter): void
     {
         $exists = array_key_exists($adopter->id()->toScalar(), $this->adopters);
 
@@ -43,7 +44,7 @@ final class InMemoryAdopters implements Adopters
         $adopter->publishEvents($this->eventPublisher);
     }
 
-    public function get(AdopterId $adopterId) : Adopter
+    public function get(AdopterId $adopterId): Adopter
     {
         $adopter = $this->adopters[$adopterId->toScalar()] ?? null;
 

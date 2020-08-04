@@ -10,7 +10,7 @@ use Sip\Psinder\SharedKernel\Infrastructure\NoOpEventPublisher;
 
 final class InMemoryAdoptersFactory
 {
-    public static function create(?EventPublisher $eventPublisher = null) : InMemoryAdopters
+    public static function create(?EventPublisher $eventPublisher = null): InMemoryAdopters
     {
         return new InMemoryAdopters($eventPublisher ?? new NoOpEventPublisher());
     }

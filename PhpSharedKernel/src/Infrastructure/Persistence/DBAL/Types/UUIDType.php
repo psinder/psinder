@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 use InvalidArgumentException;
 use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
+
 use function is_string;
 
 abstract class UUIDType extends Type
@@ -16,7 +17,7 @@ abstract class UUIDType extends Type
     /**
      * @param mixed[] $fieldDeclaration
      */
-    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform) : string
+    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
         return $platform->getGuidTypeDeclarationSQL($fieldDeclaration);
     }
@@ -67,16 +68,17 @@ abstract class UUIDType extends Type
         throw ConversionException::conversionFailedInvalidType($value, 'string', [Identity::class, 'string']);
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return static::name();
     }
 
-    abstract public function identityClass() : string;
-    abstract public static function name() : string;
+    abstract public function identityClass(): string;
+
+    abstract public static function name(): string;
 }

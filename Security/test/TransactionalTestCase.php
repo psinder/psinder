@@ -8,21 +8,21 @@ use Doctrine\ORM\EntityManagerInterface;
 
 abstract class TransactionalTestCase extends IntegrationTestCase
 {
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->em()->beginTransaction();
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         $this->em()->rollback();
 
         parent::tearDown();
     }
 
-    protected function em() : EntityManagerInterface
+    protected function em(): EntityManagerInterface
     {
         return $this->get(EntityManagerInterface::class);
     }

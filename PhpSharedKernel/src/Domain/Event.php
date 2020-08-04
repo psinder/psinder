@@ -8,5 +8,5 @@ use DateTimeImmutable;
 
 interface Event
 {
-    public function occurredAt() : DateTimeImmutable;
+    public function occurredAt(): DateTimeImmutable;
 }

@@ -15,7 +15,7 @@ use Sip\Psinder\SharedKernel\Domain\Birthdate;
 
 final class PetFactory
 {
-    public function create(PetDTO $dto) : Pet
+    public function create(PetDTO $dto): Pet
     {
         return Pet::register(
             new PetId($dto->id()),

@@ -23,7 +23,7 @@ final class RegisterUser
         $this->hasher = $hasher;
     }
 
-    public function handle(RegisterUserDTO $dto) : void
+    public function handle(RegisterUserDTO $dto): void
     {
         $user = User::register(
             new UserId($dto->id()),

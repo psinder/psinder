@@ -10,15 +10,17 @@ use Psr\Http\Server\MiddlewareInterface;
 use ReflectionObject;
 use Stringy\Stringy;
 use Zend\Expressive\Router\RouteResult;
+
+use function assert;
 use function class_exists;
 use function get_class;
 
 final class RouteResultRequestPayloadTargetDTOResolver implements RequestPayloadTargetDTOResolver
 {
-    public function resolve(ServerRequestInterface $request) : ?string
+    public function resolve(ServerRequestInterface $request): ?string
     {
-        /** @var RouteResult|null $routeResult */
         $routeResult = $request->getAttribute(RouteResult::class);
+        assert($routeResult instanceof RouteResult || $routeResult === null);
 
         if ($routeResult !== null) {
             $matchedRoute = $routeResult->getMatchedRoute();
@@ -50,12 +52,13 @@ final class RouteResultRequestPayloadTargetDTOResolver implements RequestPayload
         return null;
     }
 
-    private function determineRequestHandlerClass(MiddlewareInterface $middleware) : ?string
+    private function determineRequestHandlerClass(MiddlewareInterface $middleware): ?string
     {
         if ($middleware instanceof LazyLoadingMiddleware) {
             $class              = new ReflectionObject($middleware);
             $middlewareProperty = $class->getProperty('middlewareName');
             $middlewareProperty->setAccessible(true);
+
             return $middlewareProperty->getValue($middleware);
         }
 

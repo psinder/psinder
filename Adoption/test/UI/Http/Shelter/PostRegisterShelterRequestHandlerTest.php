@@ -11,7 +11,7 @@ use Sip\Psinder\SharedKernel\UI\Http\RequestBuilderFactory;
 
 final class PostRegisterShelterRequestHandlerTest extends FunctionalTestCase
 {
-    public function testPostsValidOffer() : void
+    public function testPostsValidOffer(): void
     {
         $faker   = Factory::create();
         $request = $this->get(RequestBuilderFactory::class)

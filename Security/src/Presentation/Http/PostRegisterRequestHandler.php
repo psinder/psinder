@@ -11,6 +11,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Sip\Psinder\Security\Application\UseCase\RegisterUser;
 use Sip\Psinder\Security\Application\UseCase\RegisterUserDTO;
+
 use function assert;
 
 final class PostRegisterRequestHandler implements RequestHandlerInterface
@@ -22,7 +23,7 @@ final class PostRegisterRequestHandler implements RequestHandlerInterface
         $this->registerUser = $registerUser;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $requestData = $request->getAttribute(PostRegisterRequest::class);
 

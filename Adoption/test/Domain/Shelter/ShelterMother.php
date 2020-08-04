@@ -15,17 +15,17 @@ final class ShelterMother
 {
     private const EXAMPLE_ID = 'baec7e53-bbc9-4537-9541-d6a8df844c6a';
 
-    public static function randomId() : ShelterId
+    public static function randomId(): ShelterId
     {
         return new ShelterId(Uuid::uuid4()->toString());
     }
 
-    public static function exampleId() : ShelterId
+    public static function exampleId(): ShelterId
     {
         return new ShelterId(self::EXAMPLE_ID);
     }
 
-    public static function registeredWithRandomId() : Shelter
+    public static function registeredWithRandomId(): Shelter
     {
         return Shelter::register(
             self::randomId(),

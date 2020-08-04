@@ -25,17 +25,17 @@ final class Role
         $this->identifier = $identifier;
     }
 
-    public static function fromString(string $identifier) : self
+    public static function fromString(string $identifier): self
     {
         return new self($identifier);
     }
 
-    public function identifier() : string
+    public function identifier(): string
     {
         return $this->identifier;
     }
 
-    public function equals(Role $role) : bool
+    public function equals(Role $role): bool
     {
         return $this->identifier === $role->identifier;
     }

@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Sip\Psinder\SharedKernel\Infrastructure\Serializer\Serializer;
+
 use function in_array;
 
 final class JsonDeserializeMiddleware implements MiddlewareInterface
@@ -34,7 +35,7 @@ final class JsonDeserializeMiddleware implements MiddlewareInterface
         $this->targetDTOResolver = $targetDTOResolver;
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (! $this->shouldDeserialize($request)) {
             return $handler->handle($request);
@@ -56,12 +57,8 @@ final class JsonDeserializeMiddleware implements MiddlewareInterface
         );
     }
 
-    private function shouldDeserialize(ServerRequestInterface $request) : bool
+    private function shouldDeserialize(ServerRequestInterface $request): bool
     {
-        if (! in_array($request->getMethod(), $this->allowedMethods, true)) {
-            return false;
-        }
-
-        return true;
+        return in_array($request->getMethod(), $this->allowedMethods, true);
     }
 }

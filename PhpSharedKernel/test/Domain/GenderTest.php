@@ -15,7 +15,7 @@ class GenderTest extends TestCase
     /**
      * @dataProvider comparsionExamplesProvider
      */
-    public function testComparesWithOtherGenders(Gender $gender, Gender $otherGender, bool $expectedResult) : void
+    public function testComparesWithOtherGenders(Gender $gender, Gender $otherGender, bool $expectedResult): void
     {
         self::assertSame($expectedResult, $gender->equals($otherGender));
     }
@@ -23,7 +23,7 @@ class GenderTest extends TestCase
     /**
      * @return mixed[]
      */
-    public function comparsionExamplesProvider() : iterable
+    public function comparsionExamplesProvider(): iterable
     {
         $sameGender = Gender::male();
 

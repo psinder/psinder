@@ -7,11 +7,12 @@ namespace Sip\Psinder\Security\Infrastructure\Persistence\DBAL\Types\User;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 use Sip\Psinder\Security\Domain\User\HashedPassword;
+
 use function is_string;
 
 final class EncodedPasswordType extends StringType
 {
-    public static function name() : string
+    public static function name(): string
     {
         return 'EncodedPassword';
     }
@@ -44,7 +45,7 @@ final class EncodedPasswordType extends StringType
         return $value;
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

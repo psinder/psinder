@@ -9,7 +9,7 @@ use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 
 final class NoOpEventPublisher implements EventPublisher
 {
-    public function publish(Event ...$events) : void
+    public function publish(Event ...$events): void
     {
     }
 }

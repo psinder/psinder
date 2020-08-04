@@ -15,7 +15,7 @@ final class GetOfferApplications implements Query
         $this->id = $id;
     }
 
-    public function id() : string
+    public function id(): string
     {
         return $this->id;
     }

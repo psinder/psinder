@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Sip\Psinder\Security\Application\UseCase\LoginUser;
 use Sip\Psinder\Security\Application\UseCase\LoginUserDTO;
+
 use function assert;
 
 final class PostLoginRequestHandler implements RequestHandlerInterface
@@ -24,7 +25,7 @@ final class PostLoginRequestHandler implements RequestHandlerInterface
         $this->loginUser    = $loginUser;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $requestData = $request->getAttribute(PostLoginRequest::class);
 

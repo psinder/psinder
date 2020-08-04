@@ -23,22 +23,22 @@ final class Address
         $this->city       = $city;
     }
 
-    public function street() : string
+    public function street(): string
     {
         return $this->street;
     }
 
-    public function number() : string
+    public function number(): string
     {
         return $this->number;
     }
 
-    public function postalCode() : string
+    public function postalCode(): string
     {
         return $this->postalCode;
     }
 
-    public function city() : string
+    public function city(): string
     {
         return $this->city;
     }

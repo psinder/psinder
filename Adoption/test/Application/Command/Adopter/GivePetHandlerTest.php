@@ -19,20 +19,18 @@ final class GivePetHandlerTest extends TransactionalTestCase
 {
     use EventsPublishingTest;
 
-    /** @var CommandBus */
-    private $bus;
+    private CommandBus $bus;
 
-    /** @var Adopters */
-    private $adopters;
+    private Adopters $adopters;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->bus      = $this->get(CommandBus::class);
         $this->adopters = $this->get(Adopters::class);
     }
 
-    public function testGivesPet() : void
+    public function testGivesPet(): void
     {
         $adopter = AdopterMother::registeredExample();
         $pet     = PetMother::example();
@@ -55,7 +53,7 @@ final class GivePetHandlerTest extends TransactionalTestCase
         ));
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

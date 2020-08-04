@@ -10,6 +10,7 @@ use Sip\Psinder\Adoption\Domain\Shelter\Shelters;
 use Sip\Psinder\SharedKernel\Application\Command\Command;
 use Sip\Psinder\SharedKernel\Application\Command\CommandHandler;
 use Sip\Psinder\SharedKernel\Application\Command\TransactionManager;
+
 use function assert;
 
 final class RegisterShelterHandler implements CommandHandler
@@ -31,7 +32,7 @@ final class RegisterShelterHandler implements CommandHandler
         $this->transactionManager = $transactionManager;
     }
 
-    public function __invoke(Command $command) : void
+    public function __invoke(Command $command): void
     {
         assert($command instanceof RegisterShelter);
 
@@ -42,7 +43,7 @@ final class RegisterShelterHandler implements CommandHandler
             $command->email()
         );
 
-        $this->transactionManager->transactional(function () use ($shelter, $command) : void {
+        $this->transactionManager->transactional(function () use ($shelter, $command): void {
             $this->shelters->create($shelter);
 
             $this->registerer->register(

@@ -22,17 +22,17 @@ final class PostOffer implements Command
         $this->pet       = $pet;
     }
 
-    public function offerId() : string
+    public function offerId(): string
     {
         return $this->offerId;
     }
 
-    public function shelterId() : string
+    public function shelterId(): string
     {
         return $this->shelterId;
     }
 
-    public function pet() : Pet
+    public function pet(): Pet
     {
         return $this->pet;
     }

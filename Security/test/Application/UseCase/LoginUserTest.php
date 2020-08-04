@@ -24,7 +24,7 @@ final class LoginUserTest extends TransactionalTestCase
     private LoginUser $useCase;
     private PasswordHasher $passwordHasher;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -33,7 +33,7 @@ final class LoginUserTest extends TransactionalTestCase
         $this->useCase        = $this->get(LoginUser::class);
     }
 
-    public function testLogsInExistingUserUsingValidCredentials() : void
+    public function testLogsInExistingUserUsingValidCredentials(): void
     {
         $id       = Uuid::uuid4()->toString();
         $email    = 'foo@example.com';
@@ -59,7 +59,7 @@ final class LoginUserTest extends TransactionalTestCase
         self::assertEquals($user, $result);
     }
 
-    public function testLogsInNotExistentUserAndThrows() : void
+    public function testLogsInNotExistentUserAndThrows(): void
     {
         $email    = 'foo@example.com';
         $password = 'foobar';

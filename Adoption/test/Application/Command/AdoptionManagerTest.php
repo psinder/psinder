@@ -18,19 +18,17 @@ use Sip\Psinder\SharedKernel\Application\Command\InterceptingCommandBus;
 
 final class AdoptionManagerTest extends TestCase
 {
-    /** @var InterceptingCommandBus */
-    private $commandBus;
+    private InterceptingCommandBus $commandBus;
 
-    /** @var AdoptionManager */
-    private $manager;
+    private AdoptionManager $manager;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->commandBus = new InterceptingCommandBus();
         $this->manager    = new AdoptionManager($this->commandBus);
     }
 
-    public function testScheduleTransferOnApplicationSelected() : void
+    public function testScheduleTransferOnApplicationSelected(): void
     {
         $adopterId = AdopterMother::randomId();
         $offerId   = OfferMother::randomId();
@@ -45,12 +43,11 @@ final class AdoptionManagerTest extends TestCase
         self::assertCount(1, $this->commandBus);
         $last = $this->commandBus->last();
         self::assertInstanceOf(ScheduleTransfer::class, $last);
-        /** @var ScheduleTransfer $last */
         self::assertSame($offerId->toScalar(), $last->offerId());
         self::assertTrue(Uuid::isValid($last->transferId()));
     }
 
-    public function testGivePetToAdopterOnTransferCompleted() : void
+    public function testGivePetToAdopterOnTransferCompleted(): void
     {
         $transfer   = TransferMother::example();
         $transferId = $transfer->id();
@@ -67,7 +64,6 @@ final class AdoptionManagerTest extends TestCase
         self::assertCount(1, $this->commandBus);
         $last = $this->commandBus->last();
         self::assertInstanceOf(GivePet::class, $last);
-        /** @var GivePet $last */
         self::assertSame($adopterId->toScalar(), $last->adopterId());
         self::assertSame($transfer->pet()->toPayload(), $last->pet()->toArray());
     }

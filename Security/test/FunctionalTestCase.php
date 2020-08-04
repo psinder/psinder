@@ -11,7 +11,7 @@ abstract class FunctionalTestCase extends ExpressiveFunctionalTestCase
 {
     use Psr7Assertions;
 
-    protected function containerPath() : string
+    protected function containerPath(): string
     {
         return __DIR__ . '/../config/container.php';
     }

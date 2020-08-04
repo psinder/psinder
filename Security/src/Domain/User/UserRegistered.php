@@ -28,7 +28,7 @@ final class UserRegistered implements Event, PayloadableEvent
         $this->email      = $email;
     }
 
-    public static function occur(UserId $id, Email $email, Roles $roles) : self
+    public static function occur(UserId $id, Email $email, Roles $roles): self
     {
         return new self(
             $id->toScalar(),
@@ -38,23 +38,23 @@ final class UserRegistered implements Event, PayloadableEvent
         );
     }
 
-    public function id() : string
+    public function id(): string
     {
         return $this->id;
     }
 
-    public function email() : string
+    public function email(): string
     {
         return $this->email;
     }
 
     /** @return string[] */
-    public function roles() : array
+    public function roles(): array
     {
         return $this->roles;
     }
 
-    public function occurredAt() : DateTimeImmutable
+    public function occurredAt(): DateTimeImmutable
     {
         return $this->occurredAt;
     }
@@ -62,7 +62,7 @@ final class UserRegistered implements Event, PayloadableEvent
     /**
      * @return mixed[]
      */
-    public function toPayload() : array
+    public function toPayload(): array
     {
         return [
             'id' => $this->id,

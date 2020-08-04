@@ -24,7 +24,7 @@ final class RegisterUserTest extends TransactionalTestCase
     private Users $users;
     private RegisterUser $useCase;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ final class RegisterUserTest extends TransactionalTestCase
         $this->useCase = $this->get(RegisterUser::class);
     }
 
-    public function testRegistersShelterUser() : void
+    public function testRegistersShelterUser(): void
     {
         $id  = Uuid::uuid4()->toString();
         $dto = new RegisterUserDTO(
@@ -57,7 +57,7 @@ final class RegisterUserTest extends TransactionalTestCase
         );
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

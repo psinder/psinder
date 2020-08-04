@@ -15,7 +15,7 @@ final class JsonDeserializeToSpecifiedDTOMiddlewareFactory
         $this->serializer = $serializer;
     }
 
-    public function __invoke(string $dto) : JsonDeserializeMiddleware
+    public function __invoke(string $dto): JsonDeserializeMiddleware
     {
         return new JsonDeserializeMiddleware(
             $this->serializer,

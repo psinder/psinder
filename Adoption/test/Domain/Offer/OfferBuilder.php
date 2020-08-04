@@ -28,35 +28,35 @@ final class OfferBuilder
         $this->pet       = PetMother::example();
     }
 
-    public function id(OfferId $id) : self
+    public function id(OfferId $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function selectedAdopter(AdopterId $adopterId) : self
+    public function selectedAdopter(AdopterId $adopterId): self
     {
         $this->selectedAdopterId = $adopterId;
 
         return $this;
     }
 
-    public function shelter(ShelterId $shelterId) : self
+    public function shelter(ShelterId $shelterId): self
     {
         $this->shelterId = $shelterId;
 
         return $this;
     }
 
-    public function pet(Pet $pet) : self
+    public function pet(Pet $pet): self
     {
         $this->pet = $pet;
 
         return $this;
     }
 
-    public function get() : Offer
+    public function get(): Offer
     {
         $offer = Offer::post(
             $this->id,

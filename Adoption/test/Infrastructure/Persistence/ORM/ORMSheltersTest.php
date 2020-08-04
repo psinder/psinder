@@ -14,22 +14,21 @@ final class ORMSheltersTest extends TransactionalTestCase
 {
     use SheltersTest;
 
-    /** @var ORMShelters */
-    private $shelters;
+    private ORMShelters $shelters;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->shelters = $this->get(ORMShelters::class);
     }
 
-    protected function shelters() : Shelters
+    protected function shelters(): Shelters
     {
         return $this->shelters;
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

@@ -44,7 +44,7 @@ final class Shelter implements AggregateRoot
         ShelterName $name,
         Address $address,
         Email $email
-    ) : self {
+    ): self {
         return new self(
             $id,
             $name,
@@ -54,27 +54,27 @@ final class Shelter implements AggregateRoot
         );
     }
 
-    public function id() : ShelterId
+    public function id(): ShelterId
     {
         return $this->id;
     }
 
-    public function name() : ShelterName
+    public function name(): ShelterName
     {
         return $this->name;
     }
 
-    public function address() : Address
+    public function address(): Address
     {
         return $this->address;
     }
 
-    public function contactForms() : ContactForms
+    public function contactForms(): ContactForms
     {
         return $this->contactForms;
     }
 
-    public function addContactForm(ContactForm $contactForm) : void
+    public function addContactForm(ContactForm $contactForm): void
     {
         $this->contactForms->add($contactForm);
 

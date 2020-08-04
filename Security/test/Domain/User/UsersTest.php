@@ -10,14 +10,14 @@ use Sip\Psinder\Security\Domain\User\UserRegistered;
 use Sip\Psinder\Security\Domain\User\Users;
 use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAwareTrait;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAware;
 
 trait UsersTest
 {
     use EventsPublishingTest;
-    use TestCaseAwareTrait;
+    use TestCaseAware;
 
-    public function testPublishesEventsOfAddedUser() : void
+    public function testPublishesEventsOfAddedUser(): void
     {
         $accounts = $this->users();
         $account  = UserMother::example();
@@ -32,7 +32,7 @@ trait UsersTest
         );
     }
 
-    public function testGetsAddedUser() : void
+    public function testGetsAddedUser(): void
     {
         $accounts = $this->users();
 
@@ -45,7 +45,7 @@ trait UsersTest
         $this->context()::assertEquals($account, $result);
     }
 
-    public function testGetsNotExistentUserAndThrows() : void
+    public function testGetsNotExistentUserAndThrows(): void
     {
         $accounts = $this->users();
 
@@ -56,5 +56,5 @@ trait UsersTest
         $accounts->get($accountId);
     }
 
-    abstract protected function users() : Users;
+    abstract protected function users(): Users;
 }

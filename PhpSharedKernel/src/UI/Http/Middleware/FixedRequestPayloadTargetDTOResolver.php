@@ -15,7 +15,7 @@ final class FixedRequestPayloadTargetDTOResolver implements RequestPayloadTarget
         $this->class = $class;
     }
 
-    public function resolve(ServerRequestInterface $request) : ?string
+    public function resolve(ServerRequestInterface $request): ?string
     {
         return $this->class;
     }

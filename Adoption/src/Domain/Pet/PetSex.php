@@ -25,22 +25,22 @@ final class PetSex
         $this->sex = $sex;
     }
 
-    public static function fromString(string $sex) : self
+    public static function fromString(string $sex): self
     {
         return new self($sex);
     }
 
-    public static function male() : self
+    public static function male(): self
     {
         return new self(self::MALE);
     }
 
-    public static function female() : self
+    public static function female(): self
     {
         return new self(self::FEMALE);
     }
 
-    public function toString() : string
+    public function toString(): string
     {
         return $this->sex;
     }

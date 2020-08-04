@@ -10,7 +10,7 @@ use Sip\Psinder\SharedKernel\Infrastructure\NoOpEventPublisher;
 
 final class InMemorySheltersFactory
 {
-    public static function create(?EventPublisher $eventPublisher = null) : InMemoryShelters
+    public static function create(?EventPublisher $eventPublisher = null): InMemoryShelters
     {
         return new InMemoryShelters($eventPublisher ?? new NoOpEventPublisher());
     }

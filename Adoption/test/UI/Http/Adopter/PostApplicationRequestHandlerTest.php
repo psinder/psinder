@@ -14,20 +14,22 @@ use Sip\Psinder\Adoption\Test\Domain\Shelter\ShelterMother;
 use Sip\Psinder\Adoption\Test\FunctionalTestCase;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authentication\LoggedInUser;
 use Sip\Psinder\SharedKernel\UI\Http\RequestBuilderFactory;
+
+use function assert;
 use function Safe\sprintf;
 
 final class PostApplicationRequestHandlerTest extends FunctionalTestCase
 {
-    public function testAppliesForOffer() : void
+    public function testAppliesForOffer(): void
     {
         $offerId   = OfferMother::randomId();
         $shelterId = ShelterMother::exampleId();
         $adopter   = AdopterMother::registeredExample();
         $adopterId = $adopter->id();
-        /** @var Offers $offers */
-        $offers = $this->get(Offers::class);
-        /** @var Adopters $adopters */
+        $offers    = $this->get(Offers::class);
+        assert($offers instanceof Offers);
         $adopters = $this->get(Adopters::class);
+        assert($adopters instanceof Adopters);
         $adopters->create($adopter);
 
         $offers->create(Offer::post(

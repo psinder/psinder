@@ -22,7 +22,7 @@ final class SelectApplicationHandlerTest extends TransactionalTestCase
     private Offers $offers;
     private CommandBus $bus;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -30,7 +30,7 @@ final class SelectApplicationHandlerTest extends TransactionalTestCase
         $this->bus    = $this->get(CommandBus::class);
     }
 
-    public function testSelectsApplication() : void
+    public function testSelectsApplication(): void
     {
         $adopterId = AdopterMother::exampleId();
         $offer     = OfferMother::example();
@@ -54,7 +54,7 @@ final class SelectApplicationHandlerTest extends TransactionalTestCase
         );
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

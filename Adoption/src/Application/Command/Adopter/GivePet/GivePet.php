@@ -19,12 +19,12 @@ final class GivePet implements Command
         $this->pet       = $pet;
     }
 
-    public function adopterId() : string
+    public function adopterId(): string
     {
         return $this->adopterId;
     }
 
-    public function pet() : Pet
+    public function pet(): Pet
     {
         return $this->pet;
     }

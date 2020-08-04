@@ -18,12 +18,12 @@ final class ApplyForAdoption implements Command
         $this->offerId   = $offerId;
     }
 
-    public function adopterId() : string
+    public function adopterId(): string
     {
         return $this->adopterId;
     }
 
-    public function offerId() : string
+    public function offerId(): string
     {
         return $this->offerId;
     }

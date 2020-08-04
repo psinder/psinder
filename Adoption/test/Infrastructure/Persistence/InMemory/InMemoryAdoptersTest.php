@@ -15,20 +15,19 @@ final class InMemoryAdoptersTest extends TestCase
     use AdoptersTest;
     use EventsInterceptingIsolatedTest;
 
-    /** @var InMemoryAdopters */
-    private $adopters;
+    private InMemoryAdopters $adopters;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         $this->adopters = new InMemoryAdopters($this->eventPublisher());
     }
 
-    protected function adopters() : Adopters
+    protected function adopters(): Adopters
     {
         return $this->adopters;
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

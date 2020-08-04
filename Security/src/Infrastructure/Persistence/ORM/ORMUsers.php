@@ -12,6 +12,7 @@ use Sip\Psinder\Security\Domain\User\Users;
 use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\ORM\ORMCollection;
+
 use function assert;
 
 final class ORMUsers implements Users
@@ -24,12 +25,12 @@ final class ORMUsers implements Users
             $entityManager,
             $eventPublisher,
             User::class,
-            static fn(UserId $id): UserNotFound => UserNotFound::forId($id)
+            static fn (UserId $id): UserNotFound => UserNotFound::forId($id)
         );
     }
 
     /** @throws UserNotFound */
-    public function get(UserId $id) : User
+    public function get(UserId $id): User
     {
         $offer = $this->collection->get($id);
 
@@ -38,7 +39,7 @@ final class ORMUsers implements Users
         return $offer;
     }
 
-    public function add(User $account) : void
+    public function add(User $account): void
     {
         $this->collection->create($account);
     }
@@ -46,7 +47,7 @@ final class ORMUsers implements Users
     /**
      * @throws UserNotFound
      */
-    public function forEmail(Email $email) : User
+    public function forEmail(Email $email): User
     {
         $qb = $this->collection->entityManager()->createQueryBuilder();
 

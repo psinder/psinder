@@ -18,6 +18,7 @@ use Sip\Psinder\Adoption\Domain\Transfer\TransferId;
 use Sip\Psinder\SharedKernel\Domain\AggregateRoot;
 use Sip\Psinder\SharedKernel\Domain\Event;
 use Sip\Psinder\SharedKernel\Domain\EventsPublishingAggregateRoot;
+
 use function Functional\some;
 
 final class Offer implements AggregateRoot
@@ -56,22 +57,22 @@ final class Offer implements AggregateRoot
         $this->applications = new ArrayCollection();
     }
 
-    public static function post(OfferId $id, ShelterId $shelterId, Pet $pet) : self
+    public static function post(OfferId $id, ShelterId $shelterId, Pet $pet): self
     {
         return new self($id, $shelterId, $pet, self::OPEN, [OfferPosted::occur($id, $shelterId, $pet)]);
     }
 
-    public function id() : OfferId
+    public function id(): OfferId
     {
         return $this->id;
     }
 
-    public function shelterId() : ShelterId
+    public function shelterId(): ShelterId
     {
         return $this->shelterId;
     }
 
-    public function apply(AdopterId $adopterId) : void
+    public function apply(AdopterId $adopterId): void
     {
         if (! $this->isOpen) {
             throw OfferNotOpen::forId($this->id);
@@ -88,7 +89,7 @@ final class Offer implements AggregateRoot
         $this->events[]       = ApplicationSent::occur($adopterId, $this->id);
     }
 
-    public function selectApplication(AdopterId $adopterId) : void
+    public function selectApplication(AdopterId $adopterId): void
     {
         $this->selectedAdopter = $adopterId;
         $this->events[]        = ApplicationSelected::occur($adopterId, $this->id);
@@ -96,21 +97,21 @@ final class Offer implements AggregateRoot
         $this->close();
     }
 
-    private function close() : void
+    private function close(): void
     {
         $this->isOpen   = self::CLOSED;
         $this->events[] = OfferClosed::occur($this->id);
     }
 
-    private function alreadyApplied(AdopterId $adopterId) : bool
+    private function alreadyApplied(AdopterId $adopterId): bool
     {
         return some(
             $this->applications,
-            static fn(Application $application): bool => $application->adopterId()->equals($adopterId)
+            static fn (Application $application): bool => $application->adopterId()->equals($adopterId)
         );
     }
 
-    public function prepareTransfer(TransferId $transferId) : Transfer
+    public function prepareTransfer(TransferId $transferId): Transfer
     {
         if ($this->selectedAdopter === null) {
             throw CannotScheduleTransfer::applicationNotSelected($this->id);

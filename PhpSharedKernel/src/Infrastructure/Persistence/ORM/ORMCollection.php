@@ -9,6 +9,8 @@ use Sip\Psinder\SharedKernel\Domain\AggregateRoot;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
 
+use function assert;
+
 final class ORMCollection
 {
     private EntityManagerInterface $entityManager;
@@ -32,16 +34,16 @@ final class ORMCollection
         $this->exceptionFactory = $exceptionFactory;
     }
 
-    public function create(AggregateRoot $aggregate) : void
+    public function create(AggregateRoot $aggregate): void
     {
-        $this->entityManager->transactional(function () use ($aggregate) : void {
+        $this->entityManager->transactional(function () use ($aggregate): void {
             $this->entityManager->persist($aggregate);
             $this->entityManager->flush();
             $aggregate->publishEvents($this->eventPublisher);
         });
     }
 
-    public function update(AggregateRoot $aggregate) : void
+    public function update(AggregateRoot $aggregate): void
     {
         $id = $aggregate->id();
 
@@ -49,16 +51,16 @@ final class ORMCollection
             throw ($this->exceptionFactory)($id);
         }
 
-        $this->entityManager->transactional(function () use ($aggregate) : void {
+        $this->entityManager->transactional(function () use ($aggregate): void {
             $this->entityManager->flush();
             $aggregate->publishEvents($this->eventPublisher);
         });
     }
 
-    public function get(Identity $id) : ?AggregateRoot
+    public function get(Identity $id): ?AggregateRoot
     {
-        /** @var AggregateRoot|null $aggregate */
         $aggregate = $this->entityManager->find($this->class, $id->toScalar());
+        assert($aggregate instanceof AggregateRoot || $aggregate === null);
 
         if ($aggregate === null) {
             throw ($this->exceptionFactory)($id);
@@ -67,12 +69,12 @@ final class ORMCollection
         return $aggregate;
     }
 
-    public function exists(Identity $id) : bool
+    public function exists(Identity $id): bool
     {
         return $this->entityManager->find($this->class, $id->toScalar()) !== null;
     }
 
-    public function entityManager() : EntityManagerInterface
+    public function entityManager(): EntityManagerInterface
     {
         return $this->entityManager;
     }

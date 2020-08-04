@@ -8,5 +8,5 @@ use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authentication\AuthenticatedUser
 
 interface AuthorizationRule
 {
-    public function isAuthorized(AuthenticatedUser $user) : bool;
+    public function isAuthorized(AuthenticatedUser $user): bool;
 }

@@ -35,17 +35,17 @@ final class TransferCompleted implements Event
         $this->occurredAt = $occurredAt;
     }
 
-    public static function occur(TransferId $id, AdopterId $adopterId, Pet $pet) : self
+    public static function occur(TransferId $id, AdopterId $adopterId, Pet $pet): self
     {
         return new self($id->toScalar(), $adopterId->toScalar(), $pet->toPayload(), new DateTimeImmutable());
     }
 
-    public function transferId() : string
+    public function transferId(): string
     {
         return $this->transferId;
     }
 
-    public function adopterId() : string
+    public function adopterId(): string
     {
         return $this->adopterId;
     }
@@ -53,12 +53,12 @@ final class TransferCompleted implements Event
     /**
      * @return string[]
      */
-    public function pet() : array
+    public function pet(): array
     {
         return $this->pet;
     }
 
-    public function occurredAt() : DateTimeImmutable
+    public function occurredAt(): DateTimeImmutable
     {
         return $this->occurredAt;
     }

@@ -18,7 +18,7 @@ final class TestLoggerFactory implements LoggerFactory
         $this->path = $path;
     }
 
-    public function __invoke(string $channel) : LoggerInterface
+    public function __invoke(string $channel): LoggerInterface
     {
         return new Logger($channel, [new BufferHandler(new EasyLogHandler($this->path))]);
     }

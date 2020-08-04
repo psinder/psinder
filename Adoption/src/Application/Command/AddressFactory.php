@@ -9,7 +9,7 @@ use Sip\Psinder\SharedKernel\Domain\Address;
 
 final class AddressFactory
 {
-    public function create(AddressDTO $address) : Address
+    public function create(AddressDTO $address): Address
     {
         return new Address(
             $address->street(),

@@ -18,7 +18,7 @@ final class SymfonyMessengerCommandBus implements CommandBus
         $this->bus = $bus;
     }
 
-    public function dispatch(Command $command) : void
+    public function dispatch(Command $command): void
     {
         try {
             $this->bus->dispatch($command);

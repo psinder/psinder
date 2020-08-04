@@ -26,17 +26,17 @@ class Application
         $this->id        = $applicationId;
     }
 
-    public static function prepare(Offer $offer, AdopterId $adopterId) : self
+    public static function prepare(Offer $offer, AdopterId $adopterId): self
     {
         return new self(new ApplicationId(Uuid::uuid4()->toString()), $offer, $adopterId);
     }
 
-    public function adopterId() : AdopterId
+    public function adopterId(): AdopterId
     {
         return $this->adopterId;
     }
 
-    public function offerId() : OfferId
+    public function offerId(): OfferId
     {
         return $this->offer->id();
     }

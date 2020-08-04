@@ -20,17 +20,16 @@ final class RegisterShelterHandlerTest extends TransactionalTestCase
 {
     use EventsPublishingTest;
 
-    /** @var RegisterShelterHandler */
-    private $handler;
+    private RegisterShelterHandler $handler;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         $this->overrideServiceAliasWithInstance(UserRegisterer::class, new UserRegistererStub());
         parent::setUp();
         $this->handler = $this->get(RegisterShelterHandler::class);
     }
 
-    public function testRegistersValidShelter() : void
+    public function testRegistersValidShelter(): void
     {
         $id       = Uuid::uuid4()->toString();
         $name     = 'Foo';
@@ -67,7 +66,7 @@ final class RegisterShelterHandlerTest extends TransactionalTestCase
         ));
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

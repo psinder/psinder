@@ -17,17 +17,17 @@ final class AdopterMother
 {
     private const EXAMPLE_ID = '5c5e43e7-a254-4653-bc51-19f03f2eb3ee';
 
-    public static function randomId() : AdopterId
+    public static function randomId(): AdopterId
     {
         return new AdopterId(Uuid::uuid4()->toString());
     }
 
-    public static function exampleId() : AdopterId
+    public static function exampleId(): AdopterId
     {
         return new AdopterId(self::EXAMPLE_ID);
     }
 
-    public static function registeredExample() : Adopter
+    public static function registeredExample(): Adopter
     {
         return Adopter::register(
             self::exampleId(),
@@ -38,7 +38,7 @@ final class AdopterMother
         );
     }
 
-    public static function registeredRandom() : Adopter
+    public static function registeredRandom(): Adopter
     {
         $faker = Factory::create();
 

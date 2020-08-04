@@ -15,13 +15,11 @@ use Sip\Psinder\SharedKernel\Application\Query\QueryBus;
 
 class GetOfferDetailsTest extends TransactionalTestCase
 {
-    /** @var QueryBus */
-    private $bus;
+    private QueryBus $bus;
 
-    /** @var Offers */
-    private $offers;
+    private Offers $offers;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -29,14 +27,14 @@ class GetOfferDetailsTest extends TransactionalTestCase
         $this->offers = $this->get(Offers::class);
     }
 
-    public function testFetchesDetailsForNonExistingOffer() : void
+    public function testFetchesDetailsForNonExistingOffer(): void
     {
         $result = $this->bus->execute(new GetOfferDetails(OfferMother::randomId()->toScalar()));
 
         self::assertNull($result);
     }
 
-    public function testFetchesDetailsForExistingOffer() : void
+    public function testFetchesDetailsForExistingOffer(): void
     {
         $pet       = PetMother::example();
         $id        = OfferMother::randomId();

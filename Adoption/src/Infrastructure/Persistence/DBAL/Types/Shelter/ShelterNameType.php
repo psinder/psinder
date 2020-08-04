@@ -6,22 +6,23 @@ namespace Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Shelter;
 
 use Sip\Psinder\Adoption\Domain\Shelter\ShelterName;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\DBAL\Types\FromStringableVOType;
+
 use function assert;
 
 final class ShelterNameType extends FromStringableVOType
 {
-    protected function voClass() : string
+    protected function voClass(): string
     {
         return ShelterName::class;
     }
 
-    public static function name() : string
+    public static function name(): string
     {
         return 'ShelterName';
     }
 
     /** @param mixed $value */
-    protected function convertToString($value) : string
+    protected function convertToString($value): string
     {
         assert($value instanceof ShelterName);
 

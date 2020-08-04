@@ -16,7 +16,7 @@ abstract class ExpressiveIntegrationTestCase extends TestCase implements Contain
     /** @var string[] */
     private array $testAliasOverrides = [];
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $GLOBALS['TEST_FACTORY_OVERRIDES'] = $this->testFactoryOverrides;
         $GLOBALS['TEST_ALIAS_OVERRIDES']   = $this->testAliasOverrides;
@@ -27,17 +27,17 @@ abstract class ExpressiveIntegrationTestCase extends TestCase implements Contain
         $GLOBALS['TEST_ALIAS_OVERRIDES']   = [];
     }
 
-    protected function overrideServiceAliasWithInstance(string $id, object $instance) : void
+    protected function overrideServiceAliasWithInstance(string $id, object $instance): void
     {
         $implAlias = 'override_' . $id;
 
-        $this->testFactoryOverrides[$implAlias] = fn() => $instance;
+        $this->testFactoryOverrides[$implAlias] = static fn () => $instance;
         $this->testAliasOverrides[$id]          = $implAlias;
     }
 
-    protected function overrideServiceInstance(string $id, object $instance) : void
+    protected function overrideServiceInstance(string $id, object $instance): void
     {
-        $this->testFactoryOverrides[$id] = fn() => $instance;
+        $this->testFactoryOverrides[$id] = static fn () => $instance;
     }
 
     /**
@@ -53,15 +53,15 @@ abstract class ExpressiveIntegrationTestCase extends TestCase implements Contain
     /**
      * @param mixed $id
      */
-    public function has($id) : bool
+    public function has($id): bool
     {
         return $this->container->has($id);
     }
 
-    protected function eventPublisher() : InterceptingEventPublisher
+    protected function eventPublisher(): InterceptingEventPublisher
     {
         return $this->get(InterceptingEventPublisher::class);
     }
 
-    abstract protected function containerPath() : string;
+    abstract protected function containerPath(): string;
 }

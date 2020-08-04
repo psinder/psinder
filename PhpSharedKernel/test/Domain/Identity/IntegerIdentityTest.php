@@ -19,14 +19,14 @@ class IntegerIdentityTest extends TestCase
         IntegerIdentity $identity,
         IntegerIdentity $otherIdentity,
         bool $expectedResult
-    ) : void {
+    ): void {
         self::assertSame($expectedResult, $identity->equals($otherIdentity));
     }
 
     /**
      * @return mixed[]
      */
-    public function comparsionExamplesProvider() : iterable
+    public function comparsionExamplesProvider(): iterable
     {
         $same = new TestIntegerIdentity(1);
 

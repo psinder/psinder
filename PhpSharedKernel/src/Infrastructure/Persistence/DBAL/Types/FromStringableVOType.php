@@ -7,12 +7,15 @@ namespace Sip\Psinder\SharedKernel\Infrastructure\Persistence\DBAL\Types;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\StringType;
+
+use function assert;
 use function call_user_func;
+use function is_callable;
 use function method_exists;
 
 abstract class FromStringableVOType extends StringType
 {
-    public function getName() : string
+    public function getName(): string
     {
         return static::name();
     }
@@ -31,8 +34,8 @@ abstract class FromStringableVOType extends StringType
         $class = $this->voClass();
 
         if (method_exists($class, 'fromString')) {
-            /** @var callable $callable */
             $callable = [$class, 'fromString'];
+            assert(is_callable($callable));
 
             return call_user_func($callable, $value);
         }
@@ -54,12 +57,14 @@ abstract class FromStringableVOType extends StringType
         return $this->convertToString($value);
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }
 
-    abstract protected function voClass() : string;
-    abstract protected function convertToString(object $value) : string;
-    abstract public static function name() : string;
+    abstract protected function voClass(): string;
+
+    abstract protected function convertToString(object $value): string;
+
+    abstract public static function name(): string;
 }

@@ -20,7 +20,7 @@ final class AdoptionManager
         $this->commandBus = $commandBus;
     }
 
-    public function scheduleTransferOnApplicationSelected(ApplicationSelected $event) : void
+    public function scheduleTransferOnApplicationSelected(ApplicationSelected $event): void
     {
         $transferId = Uuid::uuid4()->toString();
 
@@ -30,7 +30,7 @@ final class AdoptionManager
         ));
     }
 
-    public function givePetToAdopterOnTransferCompleted(TransferCompleted $event) : void
+    public function givePetToAdopterOnTransferCompleted(TransferCompleted $event): void
     {
         $this->commandBus->dispatch(new GivePet(
             $event->adopterId(),

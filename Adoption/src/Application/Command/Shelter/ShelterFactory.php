@@ -25,7 +25,7 @@ final class ShelterFactory
         string $name,
         AddressDTO $address,
         string $email
-    ) : Shelter {
+    ): Shelter {
         return Shelter::register(
             new ShelterId($id),
             ShelterName::fromString($name),

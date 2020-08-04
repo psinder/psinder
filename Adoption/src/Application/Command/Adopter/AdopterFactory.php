@@ -20,7 +20,7 @@ final class AdopterFactory
         string $birthdate,
         string $gender,
         string $email
-    ) : Adopter {
+    ): Adopter {
         return Adopter::register(
             new AdopterId($id),
             AdopterName::fromFirstAndLastName($firstName, $lastName),

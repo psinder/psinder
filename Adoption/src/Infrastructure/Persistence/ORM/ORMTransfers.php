@@ -12,6 +12,7 @@ use Sip\Psinder\Adoption\Domain\Transfer\Transfers;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\ORM\ORMCollection;
 use Throwable;
+
 use function assert;
 
 final class ORMTransfers implements Transfers
@@ -24,23 +25,23 @@ final class ORMTransfers implements Transfers
             $entityManager,
             $eventPublisher,
             Transfer::class,
-            static fn(TransferId $id): Throwable => TransferNotFound::forId($id)
+            static fn (TransferId $id): Throwable => TransferNotFound::forId($id)
         );
     }
 
-    public function create(Transfer $transfer) : void
+    public function create(Transfer $transfer): void
     {
         $this->collection->create($transfer);
     }
 
     /** @throws TransferNotFound */
-    public function update(Transfer $transfer) : void
+    public function update(Transfer $transfer): void
     {
         $this->collection->update($transfer);
     }
 
     /** @throws TransferNotFound */
-    public function get(TransferId $id) : Transfer
+    public function get(TransferId $id): Transfer
     {
         $transfer = $this->collection->get($id);
 
@@ -49,7 +50,7 @@ final class ORMTransfers implements Transfers
         return $transfer;
     }
 
-    public function exists(TransferId $id) : bool
+    public function exists(TransferId $id): bool
     {
         return $this->collection->exists($id);
     }

@@ -10,6 +10,7 @@ use Sip\Psinder\Adoption\Domain\Contact\ContactForms;
 use Sip\Psinder\Adoption\Domain\Contact\ContactPhone;
 use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Domain\Phone;
+
 use function sprintf;
 
 final class ContactFormAbstractFactory
@@ -17,7 +18,7 @@ final class ContactFormAbstractFactory
     /**
      * @param mixed[] $value
      */
-    public static function create(array $value) : ContactForms
+    public static function create(array $value): ContactForms
     {
         $forms = [];
 

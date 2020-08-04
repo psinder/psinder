@@ -30,7 +30,7 @@ final class ScheduleTransferHandlerTest extends TransactionalTestCase
     private CommandBus $bus;
     private InterceptingEventPublisher $eventPublisher;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         $this->eventPublisher = new InterceptingEventPublisher();
         $this->transfers      = InMemoryTransfersFactory::create($this->eventPublisher());
@@ -43,7 +43,7 @@ final class ScheduleTransferHandlerTest extends TransactionalTestCase
         $this->bus    = $this->get(CommandBus::class);
     }
 
-    public function testSchedulesTransfer() : void
+    public function testSchedulesTransfer(): void
     {
         // Given
         $id        = TransferMother::randomId()->toScalar();
@@ -73,12 +73,12 @@ final class ScheduleTransferHandlerTest extends TransactionalTestCase
         );
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }
 
-    protected function eventPublisher() : InterceptingEventPublisher
+    protected function eventPublisher(): InterceptingEventPublisher
     {
         return $this->eventPublisher;
     }

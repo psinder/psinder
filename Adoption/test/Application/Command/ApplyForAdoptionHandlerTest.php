@@ -24,7 +24,7 @@ final class ApplyForAdoptionHandlerTest extends TransactionalTestCase
     private Adopters $adopters;
     private Offers $offers;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -33,7 +33,7 @@ final class ApplyForAdoptionHandlerTest extends TransactionalTestCase
         $this->bus      = $this->get(CommandBus::class);
     }
 
-    public function testCanApply() : void
+    public function testCanApply(): void
     {
         $adopter = AdopterMother::registeredExample();
         $offer   = OfferMother::example();
@@ -56,7 +56,7 @@ final class ApplyForAdoptionHandlerTest extends TransactionalTestCase
         $this->assertPublishedEvents(ApplicationSent::occur($adopterId, $offerId));
     }
 
-    public function testCannotApplyTwice() : void
+    public function testCannotApplyTwice(): void
     {
         $adopter = AdopterMother::registeredExample();
         $offer   = OfferMother::example();
@@ -79,7 +79,7 @@ final class ApplyForAdoptionHandlerTest extends TransactionalTestCase
         $this->bus->dispatch($command);
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

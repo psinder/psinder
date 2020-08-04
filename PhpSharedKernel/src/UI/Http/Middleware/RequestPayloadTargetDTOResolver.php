@@ -8,5 +8,5 @@ use Psr\Http\Message\ServerRequestInterface;
 
 interface RequestPayloadTargetDTOResolver
 {
-    public function resolve(ServerRequestInterface $request) : ?string;
+    public function resolve(ServerRequestInterface $request): ?string;
 }

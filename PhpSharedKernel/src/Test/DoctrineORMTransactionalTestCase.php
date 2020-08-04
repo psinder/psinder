@@ -8,21 +8,21 @@ use Doctrine\ORM\EntityManagerInterface;
 
 abstract class DoctrineORMTransactionalTestCase extends ExpressiveIntegrationTestCase
 {
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->em()->beginTransaction();
     }
 
-    public function tearDown() : void
+    public function tearDown(): void
     {
         $this->em()->rollback();
 
         parent::tearDown();
     }
 
-    protected function em() : EntityManagerInterface
+    protected function em(): EntityManagerInterface
     {
         return $this->get(EntityManagerInterface::class);
     }

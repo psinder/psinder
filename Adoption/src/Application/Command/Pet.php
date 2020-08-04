@@ -31,7 +31,7 @@ final class Pet
     /**
      * @param string[] $payload
      */
-    public static function fromArray(array $payload) : self
+    public static function fromArray(array $payload): self
     {
         return new self(
             $payload['id'],
@@ -43,32 +43,32 @@ final class Pet
         );
     }
 
-    public function id() : string
+    public function id(): string
     {
         return $this->id;
     }
 
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }
 
-    public function birthdate() : string
+    public function birthdate(): string
     {
         return $this->birthdate;
     }
 
-    public function breed() : string
+    public function breed(): string
     {
         return $this->breed;
     }
 
-    public function sex() : string
+    public function sex(): string
     {
         return $this->sex;
     }
 
-    public function type() : string
+    public function type(): string
     {
         return $this->type;
     }
@@ -76,7 +76,7 @@ final class Pet
     /**
      * @return string[]
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'id' => $this->id,

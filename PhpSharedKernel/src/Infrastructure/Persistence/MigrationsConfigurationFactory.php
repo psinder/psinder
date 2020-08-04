@@ -8,11 +8,12 @@ use Doctrine\Migrations\Configuration\Configuration;
 use Psr\Container\ContainerInterface;
 use Roave\PsrContainerDoctrine\AbstractFactory;
 use Roave\PsrContainerDoctrine\ConnectionFactory;
+
 use function class_exists;
 
 final class MigrationsConfigurationFactory extends AbstractFactory
 {
-    protected function createWithConfig(ContainerInterface $container, string $configKey) : ?Configuration
+    protected function createWithConfig(ContainerInterface $container, string $configKey): ?Configuration
     {
         $config = $this->retrieveConfig($container, $configKey, 'migrations');
 
@@ -58,7 +59,7 @@ final class MigrationsConfigurationFactory extends AbstractFactory
      *
      * @phpstan-return array<string, mixed>
      */
-    protected function getDefaultConfig(string $configKey) : array
+    protected function getDefaultConfig(string $configKey): array
     {
         return [
             'directory' => 'data/migrations',

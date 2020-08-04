@@ -14,6 +14,8 @@ use Sip\Psinder\Adoption\Application\Command\Pet;
 use Sip\Psinder\Adoption\Application\Command\Shelter\PostOffer\PostOffer;
 use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
 
+use function assert;
+
 final class PostOfferRequestHandler implements RequestHandlerInterface
 {
     private CommandBus $commandBus;
@@ -23,10 +25,10 @@ final class PostOfferRequestHandler implements RequestHandlerInterface
         $this->commandBus = $commandBus;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var PostOfferRequest|null $offerRequest */
         $offerRequest = $request->getAttribute(PostOfferRequest::class);
+        assert($offerRequest instanceof PostOfferRequest || $offerRequest === null);
 
         if ($offerRequest === null) {
             return new JsonResponse(

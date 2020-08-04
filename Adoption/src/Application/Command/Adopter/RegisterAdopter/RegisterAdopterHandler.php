@@ -10,6 +10,7 @@ use Sip\Psinder\Adoption\Domain\Adopter\Adopters;
 use Sip\Psinder\SharedKernel\Application\Command\Command;
 use Sip\Psinder\SharedKernel\Application\Command\CommandHandler;
 use Sip\Psinder\SharedKernel\Application\Command\TransactionManager;
+
 use function assert;
 
 final class RegisterAdopterHandler implements CommandHandler
@@ -31,7 +32,7 @@ final class RegisterAdopterHandler implements CommandHandler
         $this->transactionManager = $transactionManager;
     }
 
-    public function __invoke(Command $command) : void
+    public function __invoke(Command $command): void
     {
         assert($command instanceof RegisterAdopter);
 
@@ -44,7 +45,7 @@ final class RegisterAdopterHandler implements CommandHandler
             $command->email()
         );
 
-        $this->transactionManager->transactional(function () use ($adopter, $command) : void {
+        $this->transactionManager->transactional(function () use ($adopter, $command): void {
             $this->adopters->create($adopter);
             $this->userRegisterer->register(
                 $command->id(),

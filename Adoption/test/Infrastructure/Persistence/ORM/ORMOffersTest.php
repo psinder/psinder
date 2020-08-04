@@ -14,22 +14,21 @@ final class ORMOffersTest extends TransactionalTestCase
 {
     use OffersTest;
 
-    /** @var ORMOffers */
-    private $offers;
+    private ORMOffers $offers;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->offers = $this->get(ORMOffers::class);
     }
 
-    protected function offers() : Offers
+    protected function offers(): Offers
     {
         return $this->offers;
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

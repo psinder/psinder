@@ -28,7 +28,7 @@ final class RequestBuilderFactory
         $this->serverRequestFactory = $serverRequestFactory;
     }
 
-    public function create() : RequestBuilder
+    public function create(): RequestBuilder
     {
         return new RequestBuilder(
             $this->requestFactory,
@@ -37,7 +37,7 @@ final class RequestBuilderFactory
         );
     }
 
-    public function createServerRequestBuilder() : ServerRequestBuilder
+    public function createServerRequestBuilder(): ServerRequestBuilder
     {
         return new ServerRequestBuilder(
             $this->serverRequestFactory,

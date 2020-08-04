@@ -9,6 +9,7 @@ use Assert\Assertion;
 use Countable;
 use IteratorAggregate;
 use Traversable;
+
 use function array_diff;
 use function count;
 use function Functional\map;
@@ -21,7 +22,7 @@ use function implode;
 abstract class Identities implements IteratorAggregate, Countable
 {
     /** @var Identity[] */
-    private $ids;
+    private array $ids;
 
     /**
      * @param Identity[] $ids
@@ -43,17 +44,17 @@ abstract class Identities implements IteratorAggregate, Countable
      *
      * @phpstan-return Traversable<Identity>
      */
-    public function getIterator() : Traversable
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->ids);
     }
 
-    public function count() : int
+    public function count(): int
     {
         return count($this->ids);
     }
 
-    private function add(Identity $id) : void
+    private function add(Identity $id): void
     {
         if ($this->exists($id)) {
             return;
@@ -62,7 +63,7 @@ abstract class Identities implements IteratorAggregate, Countable
         $this->ids[] = $id;
     }
 
-    public function toString() : string
+    public function toString(): string
     {
         return implode(',', $this->toScalarArray());
     }
@@ -70,21 +71,21 @@ abstract class Identities implements IteratorAggregate, Countable
     /**
      * @return mixed[]
      */
-    public function toScalarArray() : array
+    public function toScalarArray(): array
     {
-        return map($this->ids, static fn(Identity $identity) => $identity->toScalar());
+        return map($this->ids, static fn (Identity $identity) => $identity->toScalar());
     }
 
-    public function equals(Identities $otherServices) : bool
+    public function equals(Identities $otherServices): bool
     {
         return $this->storedIdentityClass() === $otherServices->storedIdentityClass()
             && count(array_diff($this->toScalarArray(), $otherServices->toScalarArray())) === 0;
     }
 
-    abstract public function storedIdentityClass() : string;
+    abstract public function storedIdentityClass(): string;
 
-    public function exists(Identity $id) : bool
+    public function exists(Identity $id): bool
     {
-        return some($this->ids, static fn(Identity $identity) => $identity->equals($id));
+        return some($this->ids, static fn (Identity $identity) => $identity->equals($id));
     }
 }

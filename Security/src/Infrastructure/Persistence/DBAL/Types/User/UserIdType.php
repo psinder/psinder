@@ -9,12 +9,12 @@ use Sip\Psinder\SharedKernel\Infrastructure\Persistence\DBAL\Types\UUIDType;
 
 final class UserIdType extends UUIDType
 {
-    public function identityClass() : string
+    public function identityClass(): string
     {
         return UserId::class;
     }
 
-    public static function name() : string
+    public static function name(): string
     {
         return 'UserId';
     }

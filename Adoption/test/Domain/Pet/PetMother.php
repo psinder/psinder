@@ -18,12 +18,12 @@ final class PetMother
 {
     private const EXAMPLE_ID = '6144a4bc-6032-4c96-9407-b2d958c86849';
 
-    public static function exampleId() : PetId
+    public static function exampleId(): PetId
     {
         return new PetId(self::EXAMPLE_ID);
     }
 
-    public static function example() : Pet
+    public static function example(): Pet
     {
         return Pet::register(
             self::exampleId(),
@@ -37,7 +37,7 @@ final class PetMother
         );
     }
 
-    public static function random() : Pet
+    public static function random(): Pet
     {
         $faker = Factory::create();
 

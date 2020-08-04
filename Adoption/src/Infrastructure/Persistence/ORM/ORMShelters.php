@@ -12,6 +12,7 @@ use Sip\Psinder\Adoption\Domain\Shelter\Shelters;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\ORM\ORMCollection;
 use Throwable;
+
 use function assert;
 
 final class ORMShelters implements Shelters
@@ -24,23 +25,23 @@ final class ORMShelters implements Shelters
             $entityManager,
             $eventPublisher,
             Shelter::class,
-            static fn(ShelterId $id): Throwable => ShelterNotFound::forId($id)
+            static fn (ShelterId $id): Throwable => ShelterNotFound::forId($id)
         );
     }
 
-    public function create(Shelter $shelter) : void
+    public function create(Shelter $shelter): void
     {
         $this->collection->create($shelter);
     }
 
     /** @throws ShelterNotFound */
-    public function update(Shelter $shelter) : void
+    public function update(Shelter $shelter): void
     {
         $this->collection->update($shelter);
     }
 
     /** @throws ShelterNotFound */
-    public function get(ShelterId $id) : Shelter
+    public function get(ShelterId $id): Shelter
     {
         $shelter = $this->collection->get($id);
 
@@ -49,7 +50,7 @@ final class ORMShelters implements Shelters
         return $shelter;
     }
 
-    public function exists(ShelterId $id) : bool
+    public function exists(ShelterId $id): bool
     {
         return $this->collection->exists($id);
     }

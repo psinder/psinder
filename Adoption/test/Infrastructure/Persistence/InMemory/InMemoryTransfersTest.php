@@ -15,20 +15,19 @@ final class InMemoryTransfersTest extends TestCase
     use TransfersTest;
     use EventsInterceptingIsolatedTest;
 
-    /** @var Transfers */
-    private $transfers;
+    private Transfers $transfers;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         $this->transfers = new InMemoryTransfers($this->eventPublisher());
     }
 
-    protected function transfers() : Transfers
+    protected function transfers(): Transfers
     {
         return $this->transfers;
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

@@ -24,27 +24,27 @@ final class RegisterShelter implements Command
         $this->password = $password;
     }
 
-    public function id() : string
+    public function id(): string
     {
         return $this->id;
     }
 
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }
 
-    public function address() : Address
+    public function address(): Address
     {
         return $this->address;
     }
 
-    public function email() : string
+    public function email(): string
     {
         return $this->email;
     }
 
-    public function password() : string
+    public function password(): string
     {
         return $this->password;
     }

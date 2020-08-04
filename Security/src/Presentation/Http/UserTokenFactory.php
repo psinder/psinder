@@ -34,7 +34,7 @@ final class UserTokenFactory
     /**
      * @param string[] $roles
      */
-    public function create(string $userId, array $roles) : string
+    public function create(string $userId, array $roles): string
     {
         $now = $this->clock->now()->getTimestamp();
 

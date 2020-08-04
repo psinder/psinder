@@ -31,7 +31,7 @@ final class PetDetails
     /**
      * @return string[]
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'id' => $this->id,

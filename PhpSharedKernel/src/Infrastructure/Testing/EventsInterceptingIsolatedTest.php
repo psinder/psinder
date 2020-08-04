@@ -9,13 +9,12 @@ use Sip\Psinder\SharedKernel\Infrastructure\InterceptingEventPublisher;
 
 trait EventsInterceptingIsolatedTest
 {
-    use TestCaseAwareTrait;
+    use TestCaseAware;
     use EventsPublishingTest;
 
-    /** @var EventPublisher|null */
-    private $eventPublisher;
+    private ?EventPublisher $eventPublisher = null;
 
-    protected function eventPublisher() : InterceptingEventPublisher
+    protected function eventPublisher(): InterceptingEventPublisher
     {
         if ($this->eventPublisher === null) {
             $this->eventPublisher = new InterceptingEventPublisher();

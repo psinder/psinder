@@ -22,7 +22,7 @@ final class GetOfferRequestHandler implements RequestHandlerInterface
         $this->queryBus = $queryBus;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $id     = $request->getAttribute('id');
         $result = $this->queryBus->execute(new GetOfferDetails($id));

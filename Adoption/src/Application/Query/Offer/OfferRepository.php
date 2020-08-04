@@ -6,7 +6,8 @@ namespace Sip\Psinder\Adoption\Application\Query\Offer;
 
 interface OfferRepository
 {
-    public function findDetails(string $id) : ?OfferDetails;
+    public function findDetails(string $id): ?OfferDetails;
+
     /** @return OfferApplication[] */
-    public function getApplications(string $id) : array;
+    public function getApplications(string $id): array;
 }

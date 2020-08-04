@@ -8,7 +8,7 @@ use Sip\Psinder\Adoption\Application\Command\PetFactory;
 
 final class PetFactoryFactory
 {
-    public static function create() : PetFactory
+    public static function create(): PetFactory
     {
         return new PetFactory();
     }

@@ -15,17 +15,17 @@ final class ExecutionContext
         $this->appName       = $appName;
     }
 
-    public function init(?string $correlationId) : void
+    public function init(?string $correlationId): void
     {
         $this->correlationId = $correlationId;
     }
 
-    public function correlationId() : ?string
+    public function correlationId(): ?string
     {
         return $this->correlationId;
     }
 
-    public function appName() : string
+    public function appName(): string
     {
         return $this->appName;
     }

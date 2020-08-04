@@ -14,6 +14,8 @@ use Sip\Psinder\Adoption\Application\Command\Address;
 use Sip\Psinder\Adoption\Application\Command\Shelter\RegisterShelter\RegisterShelter;
 use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
 
+use function assert;
+
 final class PostRegisterShelterRequestHandler implements RequestHandlerInterface
 {
     private CommandBus $commandBus;
@@ -23,10 +25,10 @@ final class PostRegisterShelterRequestHandler implements RequestHandlerInterface
         $this->commandBus = $commandBus;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var PostRegisterShelterRequest $dto */
         $dto = $request->getAttribute(PostRegisterShelterRequest::class);
+        assert($dto instanceof PostRegisterShelterRequest);
 
         $id = Uuid::uuid4()->toString();
 

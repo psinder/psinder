@@ -15,20 +15,19 @@ final class InMemorySheltersTest extends TestCase
     use SheltersTest;
     use EventsInterceptingIsolatedTest;
 
-    /** @var Shelters */
-    private $shelters;
+    private Shelters $shelters;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         $this->shelters = new InMemoryShelters($this->eventPublisher());
     }
 
-    protected function shelters() : Shelters
+    protected function shelters(): Shelters
     {
         return $this->shelters;
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

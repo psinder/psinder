@@ -19,7 +19,7 @@ final class GetOfferApplicationsRequestTest extends FunctionalTestCase
     private Adopters $adopters;
     private Shelters $shelters;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -28,7 +28,7 @@ final class GetOfferApplicationsRequestTest extends FunctionalTestCase
         $this->offers   = $this->get(Offers::class);
     }
 
-    public function testGetsExistingOfferApplications() : void
+    public function testGetsExistingOfferApplications(): void
     {
         $adopter = AdopterMother::registeredRandom();
         $this->adopters->create($adopter);

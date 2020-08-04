@@ -13,6 +13,7 @@ use Sip\Psinder\Adoption\Application\Command\Adopter\ApplyForAdoption\ApplyForAd
 use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authentication\AuthenticatedUser;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authentication\LoggedInUser;
+use function assert;
 
 final class PostApplyForOfferRequestHandler implements RequestHandlerInterface
 {
@@ -23,13 +24,12 @@ final class PostApplyForOfferRequestHandler implements RequestHandlerInterface
         $this->commandBus = $commandBus;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @var LoggedInUser $user */
         $user = $request->getAttribute(AuthenticatedUser::class);
-        /** @var string $adopterId */
+        assert($user instanceof LoggedInUser);
         $adopterId = $user->userId();
-        $offerId   = $request->getAttribute('offerId');
+        $offerId = $request->getAttribute('offerId');
         $this->commandBus->dispatch(new ApplyForAdoption(
             $adopterId,
             $offerId

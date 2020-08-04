@@ -6,6 +6,7 @@ namespace Sip\Psinder\SharedKernel\Domain;
 
 use Exception;
 use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
+
 use function sprintf;
 
 abstract class AggregateRootNotFound extends Exception
@@ -15,7 +16,7 @@ abstract class AggregateRootNotFound extends Exception
         parent::__construct($message, 0, null);
     }
 
-    public static function forId(Identity $id) : self
+    public static function forId(Identity $id): self
     {
         return new static(sprintf(
             '%s with id %s not found',
@@ -24,5 +25,5 @@ abstract class AggregateRootNotFound extends Exception
         ));
     }
 
-    abstract public static function name() : string;
+    abstract public static function name(): string;
 }

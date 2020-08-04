@@ -20,7 +20,7 @@ final class OfferDetails
     }
 
     /** @return mixed[] */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'id' => $this->id,

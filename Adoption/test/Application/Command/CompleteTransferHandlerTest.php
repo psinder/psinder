@@ -18,20 +18,18 @@ final class CompleteTransferHandlerTest extends TransactionalTestCase
 {
     use EventsPublishingTest;
 
-    /** @var CommandBus */
-    private $bus;
+    private CommandBus $bus;
 
-    /** @var Transfers */
-    private $transfers;
+    private Transfers $transfers;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->transfers = $this->get(Transfers::class);
         $this->bus       = $this->get(CommandBus::class);
     }
 
-    public function testCompletesTransfer() : void
+    public function testCompletesTransfer(): void
     {
         // Given
         $transfer = TransferMother::example();
@@ -55,7 +53,7 @@ final class CompleteTransferHandlerTest extends TransactionalTestCase
         );
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

@@ -40,7 +40,7 @@ final class TransferScheduled implements Event
         $this->occurredAt = $occurredAt;
     }
 
-    public static function occur(TransferId $id, OfferId $offerId, Pet $pet, AdopterId $adopterId) : self
+    public static function occur(TransferId $id, OfferId $offerId, Pet $pet, AdopterId $adopterId): self
     {
         return new self(
             $id->toScalar(),
@@ -51,12 +51,12 @@ final class TransferScheduled implements Event
         );
     }
 
-    public function id() : string
+    public function id(): string
     {
         return $this->id;
     }
 
-    public function offerId() : string
+    public function offerId(): string
     {
         return $this->offerId;
     }
@@ -64,17 +64,17 @@ final class TransferScheduled implements Event
     /**
      * @return string[]
      */
-    public function pet() : array
+    public function pet(): array
     {
         return $this->pet;
     }
 
-    public function adopterId() : string
+    public function adopterId(): string
     {
         return $this->adopterId;
     }
 
-    public function occurredAt() : DateTimeImmutable
+    public function occurredAt(): DateTimeImmutable
     {
         return $this->occurredAt;
     }

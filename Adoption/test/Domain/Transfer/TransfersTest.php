@@ -13,14 +13,14 @@ use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
 use Sip\Psinder\Adoption\Test\Domain\Offer\OfferMother;
 use Sip\Psinder\Adoption\Test\Domain\Pet\PetMother;
 use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAwareTrait;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAware;
 
 trait TransfersTest
 {
     use EventsInterceptingIsolatedTest;
-    use TestCaseAwareTrait;
+    use TestCaseAware;
 
-    public function testPublishesEventsWhenCreatingTransfer() : void
+    public function testPublishesEventsWhenCreatingTransfer(): void
     {
         $id        = TransferMother::randomId();
         $offerId   = OfferMother::randomId();
@@ -44,7 +44,7 @@ trait TransfersTest
         ));
     }
 
-    public function testPublishesEventsWhenUpdatingTransfer() : void
+    public function testPublishesEventsWhenUpdatingTransfer(): void
     {
         $transfer = TransferMother::example();
 
@@ -63,7 +63,7 @@ trait TransfersTest
         ));
     }
 
-    public function testFetchesExistingTransfer() : void
+    public function testFetchesExistingTransfer(): void
     {
         $transfer = TransferMother::example();
         $this->transfers()->create($transfer);
@@ -73,7 +73,7 @@ trait TransfersTest
         $this->context()::assertEquals($transfer, $result);
     }
 
-    public function testFetchesNotExistentTransferAndThrows() : void
+    public function testFetchesNotExistentTransferAndThrows(): void
     {
         $transfer = TransferMother::example();
         $otherId  = TransferMother::randomId();
@@ -85,7 +85,7 @@ trait TransfersTest
         $this->transfers()->get($otherId);
     }
 
-    public function testUpdatesNotExistentTransferAndThrows() : void
+    public function testUpdatesNotExistentTransferAndThrows(): void
     {
         $shelter = TransferMother::example();
 
@@ -94,5 +94,5 @@ trait TransfersTest
         $this->transfers()->update($shelter);
     }
 
-    abstract protected function transfers() : Transfers;
+    abstract protected function transfers(): Transfers;
 }

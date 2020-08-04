@@ -18,12 +18,12 @@ final class ScheduleTransfer implements Command
         $this->transferId = $transferId;
     }
 
-    public function transferId() : string
+    public function transferId(): string
     {
         return $this->transferId;
     }
 
-    public function offerId() : string
+    public function offerId(): string
     {
         return $this->offerId;
     }

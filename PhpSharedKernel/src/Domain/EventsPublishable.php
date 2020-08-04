@@ -6,5 +6,5 @@ namespace Sip\Psinder\SharedKernel\Domain;
 
 interface EventsPublishable
 {
-    public function publishEvents(EventPublisher $publisher) : void;
+    public function publishEvents(EventPublisher $publisher): void;
 }

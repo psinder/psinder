@@ -17,7 +17,7 @@ final class SymfonyMessengerEventPublisher implements EventPublisher
         $this->bus = $bus;
     }
 
-    public function publish(Event ...$events) : void
+    public function publish(Event ...$events): void
     {
         foreach ($events as $event) {
             $this->bus->dispatch($event);

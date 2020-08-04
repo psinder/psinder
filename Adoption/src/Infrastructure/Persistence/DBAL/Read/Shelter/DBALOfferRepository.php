@@ -10,6 +10,7 @@ use Sip\Psinder\Adoption\Application\Query\Offer\OfferApplication;
 use Sip\Psinder\Adoption\Application\Query\Offer\OfferDetails;
 use Sip\Psinder\Adoption\Application\Query\Offer\OfferRepository;
 use Sip\Psinder\Adoption\Application\Query\PetDetails;
+
 use function assert;
 use function Functional\map;
 
@@ -22,7 +23,7 @@ final class DBALOfferRepository implements OfferRepository
         $this->connection = $connection;
     }
 
-    public function findDetails(string $id) : ?OfferDetails
+    public function findDetails(string $id): ?OfferDetails
     {
         $qb = $this->connection->createQueryBuilder();
 
@@ -66,7 +67,7 @@ final class DBALOfferRepository implements OfferRepository
     }
 
     /** @return OfferApplication[] */
-    public function getApplications(string $id) : array
+    public function getApplications(string $id): array
     {
         $qb = $this->connection->createQueryBuilder();
 
@@ -91,7 +92,7 @@ final class DBALOfferRepository implements OfferRepository
 
         $offers = $statement->fetchAll();
 
-        return map($offers, fn(array $item) => new OfferApplication(
+        return map($offers, static fn (array $item) => new OfferApplication(
             $item['offer_id'],
             $item['shelter_id'],
             $item['shelter_name'],

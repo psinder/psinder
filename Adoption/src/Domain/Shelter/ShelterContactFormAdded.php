@@ -26,27 +26,27 @@ final class ShelterContactFormAdded implements Event
         $this->occurredAt = $occurredAt;
     }
 
-    public static function occur(ShelterId $shelterId, ContactForm $form) : self
+    public static function occur(ShelterId $shelterId, ContactForm $form): self
     {
         return new self($shelterId->toScalar(), $form::type(), $form->value(), new DateTimeImmutable());
     }
 
-    public function shelterId() : string
+    public function shelterId(): string
     {
         return $this->shelterId;
     }
 
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }
 
-    public function value() : string
+    public function value(): string
     {
         return $this->value;
     }
 
-    public function occurredAt() : DateTimeImmutable
+    public function occurredAt(): DateTimeImmutable
     {
         return $this->occurredAt;
     }

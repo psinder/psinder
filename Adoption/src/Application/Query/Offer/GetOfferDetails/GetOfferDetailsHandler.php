@@ -8,6 +8,7 @@ use Sip\Psinder\Adoption\Application\Query\Offer\OfferDetails;
 use Sip\Psinder\Adoption\Application\Query\Offer\OfferRepository;
 use Sip\Psinder\SharedKernel\Application\Query\Query;
 use Sip\Psinder\SharedKernel\Application\Query\QueryHandler;
+
 use function assert;
 
 final class GetOfferDetailsHandler implements QueryHandler
@@ -19,7 +20,7 @@ final class GetOfferDetailsHandler implements QueryHandler
         $this->repository = $repository;
     }
 
-    public function __invoke(Query $query) : ?OfferDetails
+    public function __invoke(Query $query): ?OfferDetails
     {
         assert($query instanceof GetOfferDetails);
 

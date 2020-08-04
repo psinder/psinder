@@ -17,27 +17,27 @@ final class Phone
         $this->number = $number;
     }
 
-    public static function fromPrefixAndNumber(string $prefix, string $number) : self
+    public static function fromPrefixAndNumber(string $prefix, string $number): self
     {
         return new self($prefix, $number);
     }
 
-    public function toString() : string
+    public function toString(): string
     {
         return sprintf('+%s %s', $this->prefix, $this->number);
     }
 
-    public function prefix() : string
+    public function prefix(): string
     {
         return $this->prefix;
     }
 
-    public function number() : string
+    public function number(): string
     {
         return $this->number;
     }
 
-    public function equals(Phone $otherPhone) : bool
+    public function equals(Phone $otherPhone): bool
     {
         return $this->prefix === $otherPhone->prefix
             && $this->number === $otherPhone->number;

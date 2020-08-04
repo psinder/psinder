@@ -15,17 +15,17 @@ final class PetBreed
         $this->name = $name;
     }
 
-    public static function fromTypeAndName(PetType $type, string $name) : self
+    public static function fromTypeAndName(PetType $type, string $name): self
     {
         return new self($type, $name);
     }
 
-    public function type() : PetType
+    public function type(): PetType
     {
         return $this->type;
     }
 
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }

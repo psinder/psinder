@@ -17,14 +17,14 @@ use Sip\Psinder\SharedKernel\Domain\Birthdate;
 use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Domain\Gender;
 use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsInterceptingIsolatedTest;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAwareTrait;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAware;
 
 trait AdoptersTest
 {
     use EventsInterceptingIsolatedTest;
-    use TestCaseAwareTrait;
+    use TestCaseAware;
 
-    public function testPublishesEventsWhenCreatingAdopter() : void
+    public function testPublishesEventsWhenCreatingAdopter(): void
     {
         $id        = new AdopterId(Uuid::uuid4()->toString());
         $name      = AdopterName::fromFirstAndLastName('Foo', 'Bar');
@@ -51,7 +51,7 @@ trait AdoptersTest
         ));
     }
 
-    public function testPublishesEventsWhenUpdatingAdopter() : void
+    public function testPublishesEventsWhenUpdatingAdopter(): void
     {
         $adopter = AdopterMother::registeredExample();
 
@@ -71,7 +71,7 @@ trait AdoptersTest
         ));
     }
 
-    public function testFetchesExistingAdopter() : void
+    public function testFetchesExistingAdopter(): void
     {
         $adopter = AdopterMother::registeredExample();
 
@@ -82,7 +82,7 @@ trait AdoptersTest
         $this->context()::assertEquals($adopter, $result);
     }
 
-    public function testFetchesNotExistentAdopterAndThrows() : void
+    public function testFetchesNotExistentAdopterAndThrows(): void
     {
         $adopter = AdopterMother::registeredExample();
         $otherId = AdopterMother::randomId();
@@ -94,7 +94,7 @@ trait AdoptersTest
         $this->adopters()->get($otherId);
     }
 
-    public function testUpdatesNotExistentAdopterAndThrows() : void
+    public function testUpdatesNotExistentAdopterAndThrows(): void
     {
         $adopter = AdopterMother::registeredExample();
 
@@ -103,5 +103,5 @@ trait AdoptersTest
         $this->adopters()->update($adopter);
     }
 
-    abstract protected function adopters() : Adopters;
+    abstract protected function adopters(): Adopters;
 }

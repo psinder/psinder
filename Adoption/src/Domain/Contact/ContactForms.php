@@ -17,12 +17,12 @@ final class ContactForms
         $this->forms = $forms;
     }
 
-    public static function fromForms(ContactForm $contactForm, ContactForm ...$contactForms) : self
+    public static function fromForms(ContactForm $contactForm, ContactForm ...$contactForms): self
     {
         return new self([...[$contactForm], ...$contactForms]);
     }
 
-    public static function empty() : self
+    public static function empty(): self
     {
         return new self([]);
     }
@@ -30,12 +30,12 @@ final class ContactForms
     /**
      * @return ContactForm[]
      */
-    public function forms() : array
+    public function forms(): array
     {
         return $this->forms;
     }
 
-    public function add(ContactForm $form) : void
+    public function add(ContactForm $form): void
     {
         $this->forms[] = $form;
     }

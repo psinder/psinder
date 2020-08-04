@@ -17,18 +17,18 @@ final class LoggedInUser implements AuthenticatedUser
         $this->roles  = $roles;
     }
 
-    public function userId() : string
+    public function userId(): string
     {
         return $this->userId;
     }
 
     /** @return string[] */
-    public function roles() : array
+    public function roles(): array
     {
         return $this->roles;
     }
 
-    public function isLoggedIn() : bool
+    public function isLoggedIn(): bool
     {
         return true;
     }

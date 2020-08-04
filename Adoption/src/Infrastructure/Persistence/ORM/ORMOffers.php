@@ -13,6 +13,7 @@ use Sip\Psinder\Adoption\Domain\Shelter\ShelterId;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\ORM\ORMCollection;
 use Throwable;
+
 use function assert;
 
 final class ORMOffers implements Offers
@@ -27,23 +28,23 @@ final class ORMOffers implements Offers
             $entityManager,
             $eventPublisher,
             Offer::class,
-            static fn(OfferId $id): Throwable => OfferNotFound::forId($id)
+            static fn (OfferId $id): Throwable => OfferNotFound::forId($id)
         );
     }
 
-    public function create(Offer $offer) : void
+    public function create(Offer $offer): void
     {
         $this->collection->create($offer);
     }
 
     /** @throws OfferNotFound */
-    public function update(Offer $offer) : void
+    public function update(Offer $offer): void
     {
         $this->collection->update($offer);
     }
 
     /** @throws OfferNotFound */
-    public function get(OfferId $id) : Offer
+    public function get(OfferId $id): Offer
     {
         $offer = $this->collection->get($id);
 
@@ -53,7 +54,7 @@ final class ORMOffers implements Offers
     }
 
     /** @return Offer[] */
-    public function forShelter(ShelterId $shelterId) : array
+    public function forShelter(ShelterId $shelterId): array
     {
         $qb = $this->collection->entityManager()
             ->createQueryBuilder();

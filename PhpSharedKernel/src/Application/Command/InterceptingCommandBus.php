@@ -8,6 +8,7 @@ use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use Traversable;
+
 use function count;
 use function end;
 
@@ -24,7 +25,7 @@ final class InterceptingCommandBus implements CommandBus, Countable, IteratorAgg
         $this->commands = [];
     }
 
-    public function dispatch(Command $command) : void
+    public function dispatch(Command $command): void
     {
         $this->commands[] = $command;
     }
@@ -32,17 +33,17 @@ final class InterceptingCommandBus implements CommandBus, Countable, IteratorAgg
     /**
      * @return Command[]
      */
-    public function commands() : array
+    public function commands(): array
     {
         return $this->commands;
     }
 
-    public function reset() : void
+    public function reset(): void
     {
         $this->commands = [];
     }
 
-    public function count() : int
+    public function count(): int
     {
         return count($this->commands);
     }
@@ -52,12 +53,12 @@ final class InterceptingCommandBus implements CommandBus, Countable, IteratorAgg
      *
      * @phpstan-return Traversable<Command>
      */
-    public function getIterator() : Traversable
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->commands);
     }
 
-    public function last() : ?Command
+    public function last(): ?Command
     {
         $last = end($this->commands);
 

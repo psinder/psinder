@@ -44,7 +44,7 @@ final class Transfer implements AggregateRoot
         $this->completed = $completed;
     }
 
-    public static function schedule(TransferId $id, OfferId $offerId, Pet $pet, AdopterId $adopterId) : self
+    public static function schedule(TransferId $id, OfferId $offerId, Pet $pet, AdopterId $adopterId): self
     {
         return new self(
             $id,
@@ -56,27 +56,27 @@ final class Transfer implements AggregateRoot
         );
     }
 
-    public function id() : TransferId
+    public function id(): TransferId
     {
         return $this->id;
     }
 
-    public function offerId() : OfferId
+    public function offerId(): OfferId
     {
         return $this->offerId;
     }
 
-    public function pet() : Pet
+    public function pet(): Pet
     {
         return $this->pet;
     }
 
-    public function adopterId() : AdopterId
+    public function adopterId(): AdopterId
     {
         return $this->adopterId;
     }
 
-    public function complete() : void
+    public function complete(): void
     {
         if ($this->completed) {
             throw new RuntimeException('Already completed');
@@ -87,7 +87,7 @@ final class Transfer implements AggregateRoot
         $this->events[] = TransferCompleted::occur($this->id, $this->adopterId, $this->pet);
     }
 
-    public function isCompleted() : bool
+    public function isCompleted(): bool
     {
         return $this->completed === self::COMPLETED;
     }

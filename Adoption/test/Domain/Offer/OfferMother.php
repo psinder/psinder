@@ -12,30 +12,30 @@ use Sip\Psinder\Adoption\Domain\Shelter\ShelterId;
 
 final class OfferMother
 {
-    public static function exampleId() : OfferId
+    public static function exampleId(): OfferId
     {
         return new OfferId(OfferBuilder::EXAMPLE_ID);
     }
 
-    public static function randomId() : OfferId
+    public static function randomId(): OfferId
     {
         return new OfferId(Uuid::uuid4()->toString());
     }
 
-    public static function example() : Offer
+    public static function example(): Offer
     {
         return (new OfferBuilder())
             ->get();
     }
 
-    public static function withShelter(ShelterId $shelterId) : Offer
+    public static function withShelter(ShelterId $shelterId): Offer
     {
         return (new OfferBuilder())
             ->shelter($shelterId)
             ->get();
     }
 
-    public static function withSelectedAdopter(AdopterId $adopterId) : Offer
+    public static function withSelectedAdopter(AdopterId $adopterId): Offer
     {
         return (new OfferBuilder())
             ->selectedAdopter($adopterId)

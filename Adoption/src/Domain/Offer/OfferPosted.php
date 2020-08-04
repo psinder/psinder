@@ -35,7 +35,7 @@ final class OfferPosted implements Event
         $this->occurredAt = $occurredAt;
     }
 
-    public static function occur(OfferId $id, ShelterId $shelterId, Pet $pet) : self
+    public static function occur(OfferId $id, ShelterId $shelterId, Pet $pet): self
     {
         return new self(
             $id->toScalar(),
@@ -45,12 +45,12 @@ final class OfferPosted implements Event
         );
     }
 
-    public function offerId() : string
+    public function offerId(): string
     {
         return $this->offerId;
     }
 
-    public function shelterId() : string
+    public function shelterId(): string
     {
         return $this->shelterId;
     }
@@ -58,12 +58,12 @@ final class OfferPosted implements Event
     /**
      * @return string[]
      */
-    public function pet() : array
+    public function pet(): array
     {
         return $this->pet;
     }
 
-    public function occurredAt() : DateTimeImmutable
+    public function occurredAt(): DateTimeImmutable
     {
         return $this->occurredAt;
     }

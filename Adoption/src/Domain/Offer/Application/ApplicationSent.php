@@ -24,22 +24,22 @@ final class ApplicationSent implements Event
         $this->occurredAt = $occurredAt;
     }
 
-    public static function occur(AdopterId $adopterId, OfferId $offerId) : self
+    public static function occur(AdopterId $adopterId, OfferId $offerId): self
     {
         return new self($adopterId->toScalar(), $offerId->toScalar(), new DateTimeImmutable());
     }
 
-    public function adopterId() : string
+    public function adopterId(): string
     {
         return $this->adopterId;
     }
 
-    public function offerId() : string
+    public function offerId(): string
     {
         return $this->offerId;
     }
 
-    public function occurredAt() : DateTimeImmutable
+    public function occurredAt(): DateTimeImmutable
     {
         return $this->occurredAt;
     }

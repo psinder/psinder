@@ -9,6 +9,7 @@ use Sip\Psinder\Adoption\Domain\Shelter\ShelterId;
 use Sip\Psinder\Adoption\Domain\Shelter\ShelterNotFound;
 use Sip\Psinder\Adoption\Domain\Shelter\Shelters;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
+
 use function array_key_exists;
 
 final class InMemoryShelters implements Shelters
@@ -23,14 +24,14 @@ final class InMemoryShelters implements Shelters
         $this->eventPublisher = $eventPublisher;
     }
 
-    public function create(Shelter $shelter) : void
+    public function create(Shelter $shelter): void
     {
         $this->shelters[$shelter->id()->toScalar()] = $shelter;
 
         $shelter->publishEvents($this->eventPublisher);
     }
 
-    public function update(Shelter $shelter) : void
+    public function update(Shelter $shelter): void
     {
         if (! $this->exists($shelter->id())) {
             throw ShelterNotFound::forId($shelter->id());
@@ -41,7 +42,7 @@ final class InMemoryShelters implements Shelters
         $shelter->publishEvents($this->eventPublisher);
     }
 
-    public function get(ShelterId $id) : Shelter
+    public function get(ShelterId $id): Shelter
     {
         $shelter = $this->shelters[$id->toScalar()] ?? null;
 
@@ -52,7 +53,7 @@ final class InMemoryShelters implements Shelters
         return $shelter;
     }
 
-    public function exists(ShelterId $id) : bool
+    public function exists(ShelterId $id): bool
     {
         return array_key_exists($id->toScalar(), $this->shelters);
     }

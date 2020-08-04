@@ -27,12 +27,12 @@ final class ReceivedPet implements Event
         $this->occurredAt = $occurredAt;
     }
 
-    public static function occur(AdopterId $adopterId, Pet $pet) : self
+    public static function occur(AdopterId $adopterId, Pet $pet): self
     {
         return new self($adopterId->toScalar(), $pet->toPayload(), new DateTimeImmutable());
     }
 
-    public function adopterId() : string
+    public function adopterId(): string
     {
         return $this->adopterId;
     }
@@ -40,12 +40,12 @@ final class ReceivedPet implements Event
     /**
      * @return string[]
      */
-    public function pet() : array
+    public function pet(): array
     {
         return $this->pet;
     }
 
-    public function occurredAt() : DateTimeImmutable
+    public function occurredAt(): DateTimeImmutable
     {
         return $this->occurredAt;
     }

@@ -18,22 +18,22 @@ final class Credentials
         $this->email    = $email;
     }
 
-    public static function fromEmailAndPassword(Email $email, HashedPassword $password) : self
+    public static function fromEmailAndPassword(Email $email, HashedPassword $password): self
     {
         return new self($email, $password);
     }
 
-    public function email() : Email
+    public function email(): Email
     {
         return $this->email;
     }
 
-    public function password() : HashedPassword
+    public function password(): HashedPassword
     {
         return $this->password;
     }
 
-    public function equals(self $otherCredentials) : bool
+    public function equals(self $otherCredentials): bool
     {
         return $this->email->equals($otherCredentials->email)
             && $this->password->equals($otherCredentials->password);

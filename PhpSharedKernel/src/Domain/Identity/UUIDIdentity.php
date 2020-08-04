@@ -6,6 +6,7 @@ namespace Sip\Psinder\SharedKernel\Domain\Identity;
 
 use Assert\Assertion;
 use Ramsey\Uuid\Uuid;
+
 use function sprintf;
 
 abstract class UUIDIdentity implements Identity
@@ -19,18 +20,18 @@ abstract class UUIDIdentity implements Identity
         $this->id = $id;
     }
 
-    public function toScalar() : string
+    public function toScalar(): string
     {
         return $this->id;
     }
 
-    public function equals(Identity $otherIdentity) : bool
+    public function equals(Identity $otherIdentity): bool
     {
         return $otherIdentity instanceof static
             && $this->id === $otherIdentity->id;
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->id;
     }

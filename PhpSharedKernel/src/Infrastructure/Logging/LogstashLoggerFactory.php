@@ -21,7 +21,7 @@ final class LogstashLoggerFactory implements LoggerFactory
         $this->executionContext = $executionContext;
     }
 
-    public function __invoke(string $channel) : LoggerInterface
+    public function __invoke(string $channel): LoggerInterface
     {
         $handler = new StreamHandler('php://stdout', $this->level);
         $handler->setFormatter(new LogstashFormatter(
@@ -30,6 +30,7 @@ final class LogstashLoggerFactory implements LoggerFactory
         $handler->pushProcessor(new ExecutionContextProcessor(
             $this->executionContext
         ));
+
         return new Logger($channel, [$handler]);
     }
 }

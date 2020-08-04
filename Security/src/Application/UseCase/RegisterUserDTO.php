@@ -23,23 +23,23 @@ final class RegisterUserDTO
         $this->roles    = $roles;
     }
 
-    public function id() : string
+    public function id(): string
     {
         return $this->id;
     }
 
     /** @return string[] */
-    public function roles() : array
+    public function roles(): array
     {
         return $this->roles;
     }
 
-    public function email() : string
+    public function email(): string
     {
         return $this->email;
     }
 
-    public function password() : string
+    public function password(): string
     {
         return $this->password;
     }

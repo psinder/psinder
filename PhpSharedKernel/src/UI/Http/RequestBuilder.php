@@ -10,6 +10,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
+
 use function Safe\json_encode as safe_json_encode;
 
 class RequestBuilder
@@ -37,26 +38,26 @@ class RequestBuilder
         $this->url    = $this->uriFactory->createUri('/');
     }
 
-    public function method(string $method) : self
+    public function method(string $method): self
     {
         $this->method = $method;
 
         return $this;
     }
 
-    public function post() : self
+    public function post(): self
     {
         return $this->method(RequestMethodInterface::METHOD_POST);
     }
 
-    public function as(string $token) : self
+    public function as(string $token): self
     {
         $this->token = $token;
 
         return $this;
     }
 
-    public function url(string $url) : self
+    public function url(string $url): self
     {
         $this->url = $this->uriFactory->createUri($url);
 
@@ -66,14 +67,14 @@ class RequestBuilder
     /**
      * @param mixed[] $body
      */
-    public function jsonBodyArray(array $body) : self
+    public function jsonBodyArray(array $body): self
     {
         $this->body = safe_json_encode($body);
 
         return $this;
     }
 
-    public function create() : RequestInterface
+    public function create(): RequestInterface
     {
         $request = $this->factory->createRequest(
             $this->method,

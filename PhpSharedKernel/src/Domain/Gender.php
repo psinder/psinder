@@ -27,32 +27,32 @@ final class Gender
         $this->value = $name;
     }
 
-    public static function male() : self
+    public static function male(): self
     {
         return new self(self::MALE);
     }
 
-    public static function female() : self
+    public static function female(): self
     {
         return new self(self::FEMALE);
     }
 
-    public static function other() : self
+    public static function other(): self
     {
         return new self(self::OTHER);
     }
 
-    public static function fromString(string $value) : self
+    public static function fromString(string $value): self
     {
         return new self($value);
     }
 
-    public function toString() : string
+    public function toString(): string
     {
         return $this->value;
     }
 
-    public function equals(Gender $otherGender) : bool
+    public function equals(Gender $otherGender): bool
     {
         return $this->value === $otherGender->value;
     }

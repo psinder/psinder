@@ -8,6 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;
+
 use function sprintf;
 
 final class LoggingErrorListener
@@ -26,7 +27,7 @@ final class LoggingErrorListener
         $this->logger = $logger;
     }
 
-    public function __invoke(Throwable $error, ServerRequestInterface $request, ResponseInterface $response) : void
+    public function __invoke(Throwable $error, ServerRequestInterface $request, ResponseInterface $response): void
     {
         $this->logger->error(
             sprintf(

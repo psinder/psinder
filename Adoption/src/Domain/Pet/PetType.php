@@ -13,12 +13,12 @@ final class PetType
         $this->name = $name;
     }
 
-    public static function fromString(string $name) : self
+    public static function fromString(string $name): self
     {
         return new self($name);
     }
 
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }

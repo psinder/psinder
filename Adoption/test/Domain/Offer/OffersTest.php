@@ -15,14 +15,14 @@ use Sip\Psinder\Adoption\Test\Domain\Adopter\AdopterMother;
 use Sip\Psinder\Adoption\Test\Domain\Pet\PetMother;
 use Sip\Psinder\Adoption\Test\Domain\Shelter\ShelterMother;
 use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAwareTrait;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAware;
 
 trait OffersTest
 {
     use EventsPublishingTest;
-    use TestCaseAwareTrait;
+    use TestCaseAware;
 
-    public function testPublishesEventsWhenCreatingOffer() : void
+    public function testPublishesEventsWhenCreatingOffer(): void
     {
         $id        = new OfferId(Uuid::uuid4()->toString());
         $shelterId = ShelterMother::randomId();
@@ -35,7 +35,7 @@ trait OffersTest
         $this->assertPublishedEvents(OfferPosted::occur($id, $shelterId, $pet));
     }
 
-    public function testPublishesEventsWhenUpdatingOffer() : void
+    public function testPublishesEventsWhenUpdatingOffer(): void
     {
         $offer     = OfferMother::example();
         $adopterId = AdopterMother::randomId();
@@ -51,7 +51,7 @@ trait OffersTest
         $this->assertPublishedEvents(ApplicationSent::occur($adopterId, $offer->id()));
     }
 
-    public function testFetchesExistingOffer() : void
+    public function testFetchesExistingOffer(): void
     {
         $offer = OfferMother::example();
         $this->offers()->create($offer);
@@ -61,7 +61,7 @@ trait OffersTest
         $this->context()::assertEquals($offer, $result);
     }
 
-    public function testFetchesNotExistentOfferAndThrows() : void
+    public function testFetchesNotExistentOfferAndThrows(): void
     {
         $offer   = OfferMother::example();
         $otherId = OfferMother::randomId();
@@ -73,7 +73,7 @@ trait OffersTest
         $this->offers()->get($otherId);
     }
 
-    public function testFetchesShelterOffers() : void
+    public function testFetchesShelterOffers(): void
     {
         $shelterId = ShelterMother::randomId();
 
@@ -85,7 +85,7 @@ trait OffersTest
         $this->context()::assertEquals([$offer], $result);
     }
 
-    public function testFetchesNoShelterOffersForNotExistentId() : void
+    public function testFetchesNoShelterOffersForNotExistentId(): void
     {
         $shelterId = ShelterMother::randomId();
 
@@ -97,5 +97,5 @@ trait OffersTest
         $this->context()::assertEmpty($result);
     }
 
-    abstract protected function offers() : Offers;
+    abstract protected function offers(): Offers;
 }

@@ -16,17 +16,17 @@ final class TransferMother
 {
     public const EXAMPLE_ID = '71794ecb-0f57-4b4b-bc16-880ad85876c7';
 
-    public static function randomId() : TransferId
+    public static function randomId(): TransferId
     {
         return new TransferId(Uuid::uuid4()->toString());
     }
 
-    public static function exampleId() : TransferId
+    public static function exampleId(): TransferId
     {
         return new TransferId(self::EXAMPLE_ID);
     }
 
-    public static function example() : Transfer
+    public static function example(): Transfer
     {
         return Transfer::schedule(
             self::exampleId(),
@@ -36,7 +36,7 @@ final class TransferMother
         );
     }
 
-    public static function withAdopterId(AdopterId $adopterId) : Transfer
+    public static function withAdopterId(AdopterId $adopterId): Transfer
     {
         return Transfer::schedule(
             self::exampleId(),

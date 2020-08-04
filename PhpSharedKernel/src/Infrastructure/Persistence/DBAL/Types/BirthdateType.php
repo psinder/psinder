@@ -8,21 +8,22 @@ use DateTimeImmutable;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\DateImmutableType;
 use Sip\Psinder\SharedKernel\Domain\Birthdate;
+
 use function is_string;
 
 final class BirthdateType extends DateImmutableType implements DBALType
 {
-    public static function name() : string
+    public static function name(): string
     {
         return 'Birthdate';
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return static::name();
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

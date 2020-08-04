@@ -9,7 +9,7 @@ use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
 
 final class TestIdentities extends Identities
 {
-    public function storedIdentityClass() : string
+    public function storedIdentityClass(): string
     {
         return Identity::class;
     }

@@ -18,7 +18,7 @@
         "ext-json": "*",
         "beberlei/assert": "^3.1",
         "danielstjules/stringy": "^3.1",
-        "doctrine/coding-standard": "^5.0",
+        "doctrine/coding-standard": "^8.1",
         "doctrine/migrations": "^2.2",
         "filp/whoops": "^2.3",
         "guzzlehttp/guzzle": "^6.5",

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sip\Psinder\SharedKernel\Domain\Identity;
 
 use Assert\Assertion;
+
 use function sprintf;
 
 abstract class IntegerIdentity implements Identity
@@ -22,18 +23,18 @@ abstract class IntegerIdentity implements Identity
         $this->id = $id;
     }
 
-    public function toScalar() : int
+    public function toScalar(): int
     {
         return $this->id;
     }
 
-    public function equals(Identity $otherIdentity) : bool
+    public function equals(Identity $otherIdentity): bool
     {
         return $otherIdentity instanceof self
             && $this->id === $otherIdentity->id;
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return (string) $this->id;
     }

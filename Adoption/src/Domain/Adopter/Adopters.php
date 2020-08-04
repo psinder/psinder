@@ -6,9 +6,11 @@ namespace Sip\Psinder\Adoption\Domain\Adopter;
 
 interface Adopters
 {
-    public function create(Adopter $adopter) : void;
+    public function create(Adopter $adopter): void;
+
     /** @throws AdopterNotFound */
-    public function get(AdopterId $adopterId) : Adopter;
+    public function get(AdopterId $adopterId): Adopter;
+
     /** @throws AdopterNotFound */
-    public function update(Adopter $adopter) : void;
+    public function update(Adopter $adopter): void;
 }

@@ -13,7 +13,7 @@ use Sip\Psinder\SharedKernel\UI\Http\RequestBuilderFactory;
 
 final class PostOfferRequestHandlerTest extends FunctionalTestCase
 {
-    public function testPostsValidOffer() : void
+    public function testPostsValidOffer(): void
     {
         $shelterId = ShelterMother::exampleId()->toScalar();
         $request   = $this->get(RequestBuilderFactory::class)

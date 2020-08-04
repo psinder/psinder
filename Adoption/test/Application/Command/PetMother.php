@@ -11,7 +11,7 @@ final class PetMother
 {
     private const EXAMPLE_ID = '035be0ba-b295-4b99-ab5a-e9472420e2d1';
 
-    public static function example() : Pet
+    public static function example(): Pet
     {
         return new Pet(
             self::EXAMPLE_ID,

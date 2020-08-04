@@ -6,11 +6,14 @@ namespace Sip\Psinder\Adoption\Domain\Contact;
 
 interface ContactForm
 {
-    public function equals(ContactForm $otherForm) : bool;
-    public function value() : string;
-    public static function type() : string;
+    public function equals(ContactForm $otherForm): bool;
+
+    public function value(): string;
+
+    public static function type(): string;
+
     /**
      * @return mixed[]
      */
-    public function toArray() : array;
+    public function toArray(): array;
 }

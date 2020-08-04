@@ -14,12 +14,12 @@ use Sip\Psinder\SharedKernel\Domain\Email;
 
 final class UserMother
 {
-    public static function randomId() : UserId
+    public static function randomId(): UserId
     {
         return new UserId(Uuid::uuid4()->toString());
     }
 
-    public static function example() : User
+    public static function example(): User
     {
         return User::register(
             self::randomId(),

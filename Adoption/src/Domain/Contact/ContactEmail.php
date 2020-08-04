@@ -15,28 +15,28 @@ final class ContactEmail implements ContactForm
         $this->email = $email;
     }
 
-    public static function fromEmail(Email $email) : self
+    public static function fromEmail(Email $email): self
     {
         return new self($email);
     }
 
-    public function email() : Email
+    public function email(): Email
     {
         return $this->email;
     }
 
-    public function equals(ContactForm $otherForm) : bool
+    public function equals(ContactForm $otherForm): bool
     {
         return $otherForm instanceof self
             && $this->email->equals($otherForm->email);
     }
 
-    public function value() : string
+    public function value(): string
     {
         return $this->email->toString();
     }
 
-    public static function type() : string
+    public static function type(): string
     {
         return 'email';
     }
@@ -44,7 +44,7 @@ final class ContactEmail implements ContactForm
     /**
      * @return mixed[]
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'type' => self::type(),

@@ -44,7 +44,7 @@ final class ShelterRegistered implements Event
         ShelterName $name,
         Email $email,
         Address $address
-    ) : self {
+    ): self {
         return new self(
             $shelterId->toScalar(),
             $name->toString(),
@@ -54,28 +54,28 @@ final class ShelterRegistered implements Event
         );
     }
 
-    public function shelterId() : string
+    public function shelterId(): string
     {
         return $this->shelterId;
     }
 
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }
 
     /** @return string[] */
-    public function address() : array
+    public function address(): array
     {
         return $this->address;
     }
 
-    public function email() : string
+    public function email(): string
     {
         return $this->email;
     }
 
-    public function occurredAt() : DateTimeImmutable
+    public function occurredAt(): DateTimeImmutable
     {
         return $this->occurredAt;
     }

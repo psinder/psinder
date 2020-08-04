@@ -9,7 +9,7 @@ use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
 
 class IdentitiesTest extends TestCase
 {
-    public function testIgnoresDuplicates() : void
+    public function testIgnoresDuplicates(): void
     {
         $identityArray = [
             new TestIntegerIdentity(1),
@@ -23,21 +23,21 @@ class IdentitiesTest extends TestCase
         self::assertSame([1, 2], $result->toScalarArray());
     }
 
-    public function testAllowsSubtypes() : void
+    public function testAllowsSubtypes(): void
     {
         $identityArray = [
             new class implements Identity {
-                public function toScalar() : int
+                public function toScalar(): int
                 {
                     return 1;
                 }
 
-                public function equals(Identity $otherIdentity) : bool
+                public function equals(Identity $otherIdentity): bool
                 {
                     return true;
                 }
 
-                public function __toString() : string
+                public function __toString(): string
                 {
                     return '1';
                 }

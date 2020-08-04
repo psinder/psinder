@@ -13,7 +13,6 @@ use Sip\Psinder\SharedKernel\Application\Query\QueryBus;
 
 final class GetOfferApplicationsRequestHandler implements RequestHandlerInterface
 {
-    /** @var QueryBus */
     private QueryBus $queryBus;
 
     public function __construct(QueryBus $queryBus)
@@ -21,7 +20,7 @@ final class GetOfferApplicationsRequestHandler implements RequestHandlerInterfac
         $this->queryBus = $queryBus;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         return new JsonResponse(
             $this->queryBus->execute(new GetOfferApplications(

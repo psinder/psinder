@@ -11,7 +11,7 @@ interface Identity
      */
     public function toScalar();
 
-    public function equals(Identity $otherIdentity) : bool;
+    public function equals(Identity $otherIdentity): bool;
 
-    public function __toString() : string;
+    public function __toString(): string;
 }

@@ -18,12 +18,12 @@ final class SelectApplication implements Command
         $this->adopterId = $adopterId;
     }
 
-    public function offerId() : string
+    public function offerId(): string
     {
         return $this->offerId;
     }
 
-    public function adopterId() : string
+    public function adopterId(): string
     {
         return $this->adopterId;
     }

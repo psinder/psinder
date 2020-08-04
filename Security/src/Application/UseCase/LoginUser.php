@@ -23,7 +23,7 @@ final class LoginUser
         $this->passwordHasher = $passwordEncoder;
     }
 
-    public function handle(LoginUserDTO $dto) : User
+    public function handle(LoginUserDTO $dto): User
     {
         $email = Email::fromString($dto->email());
         $user  = $this->users->forEmail($email);

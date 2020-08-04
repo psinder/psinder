@@ -15,23 +15,23 @@ final class ContactPhone implements ContactForm
         $this->phone = $phone;
     }
 
-    public static function fromPhone(Phone $phone) : self
+    public static function fromPhone(Phone $phone): self
     {
         return new self($phone);
     }
 
-    public function equals(ContactForm $otherForm) : bool
+    public function equals(ContactForm $otherForm): bool
     {
         return $otherForm instanceof self
             && $this->phone->equals($otherForm->phone);
     }
 
-    public function value() : string
+    public function value(): string
     {
         return $this->phone->toString();
     }
 
-    public static function type() : string
+    public static function type(): string
     {
         return 'phone';
     }
@@ -39,7 +39,7 @@ final class ContactPhone implements ContactForm
     /**
      * @return mixed[]
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'type' => self::type(),

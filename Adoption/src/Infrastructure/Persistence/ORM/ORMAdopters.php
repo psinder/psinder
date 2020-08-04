@@ -12,6 +12,7 @@ use Sip\Psinder\Adoption\Domain\Adopter\Adopters;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\ORM\ORMCollection;
 use Throwable;
+
 use function assert;
 
 final class ORMAdopters implements Adopters
@@ -26,23 +27,23 @@ final class ORMAdopters implements Adopters
             $entityManager,
             $eventPublisher,
             Adopter::class,
-            static fn(AdopterId $id): Throwable => AdopterNotFound::forId($id)
+            static fn (AdopterId $id): Throwable => AdopterNotFound::forId($id)
         );
     }
 
-    public function create(Adopter $offer) : void
+    public function create(Adopter $offer): void
     {
         $this->collection->create($offer);
     }
 
     /** @throws AdopterNotFound */
-    public function update(Adopter $offer) : void
+    public function update(Adopter $offer): void
     {
         $this->collection->update($offer);
     }
 
     /** @throws AdopterNotFound */
-    public function get(AdopterId $id) : Adopter
+    public function get(AdopterId $id): Adopter
     {
         $offer = $this->collection->get($id);
 

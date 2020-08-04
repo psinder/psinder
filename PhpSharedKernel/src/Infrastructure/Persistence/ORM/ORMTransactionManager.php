@@ -16,17 +16,17 @@ final class ORMTransactionManager implements TransactionManager
         $this->em = $em;
     }
 
-    public function begin() : void
+    public function begin(): void
     {
         $this->em->beginTransaction();
     }
 
-    public function commit() : void
+    public function commit(): void
     {
         $this->em->commit();
     }
 
-    public function transactional(callable $fn) : void
+    public function transactional(callable $fn): void
     {
         $this->em->transactional($fn);
     }

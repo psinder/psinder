@@ -14,6 +14,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authentication\AnonymousUser;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authentication\AuthenticatedUser;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authentication\LoggedInUser;
+
 use function explode;
 
 final class AuthenticationMiddleware implements MiddlewareInterface
@@ -27,7 +28,7 @@ final class AuthenticationMiddleware implements MiddlewareInterface
         $this->issuer = $issuer;
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $request = $request->withAttribute('user', new AnonymousUser());
 

@@ -13,6 +13,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authentication\AuthenticatedUser;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\Authorization\AuthorizationRule;
 
+use function assert;
+
 final class AuthorizationMiddleware implements MiddlewareInterface
 {
     private AuthorizationRule $rule;
@@ -22,10 +24,10 @@ final class AuthorizationMiddleware implements MiddlewareInterface
         $this->rule = $rule;
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var AuthenticatedUser $user */
         $user = $request->getAttribute(AuthenticatedUser::class);
+        assert($user instanceof AuthenticatedUser);
 
         if (! $this->rule->isAuthorized($user)) {
             return new Response(StatusCodeInterface::STATUS_UNAUTHORIZED);

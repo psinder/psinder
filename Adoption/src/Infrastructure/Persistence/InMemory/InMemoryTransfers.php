@@ -9,6 +9,7 @@ use Sip\Psinder\Adoption\Domain\Transfer\TransferId;
 use Sip\Psinder\Adoption\Domain\Transfer\TransferNotFound;
 use Sip\Psinder\Adoption\Domain\Transfer\Transfers;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
+
 use function array_key_exists;
 
 final class InMemoryTransfers implements Transfers
@@ -24,7 +25,7 @@ final class InMemoryTransfers implements Transfers
     }
 
     /** @throws TransferNotFound */
-    public function get(TransferId $id) : Transfer
+    public function get(TransferId $id): Transfer
     {
         $transfer = $this->transfers[$id->toScalar()] ?? null;
 
@@ -35,14 +36,14 @@ final class InMemoryTransfers implements Transfers
         return $transfer;
     }
 
-    public function create(Transfer $transfer) : void
+    public function create(Transfer $transfer): void
     {
         $this->transfers[$transfer->id()->toScalar()] = $transfer;
 
         $transfer->publishEvents($this->eventPublisher);
     }
 
-    public function update(Transfer $transfer) : void
+    public function update(Transfer $transfer): void
     {
         $exists = array_key_exists($transfer->id()->toScalar(), $this->transfers);
 

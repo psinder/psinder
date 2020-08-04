@@ -8,7 +8,7 @@ use Sip\Psinder\SharedKernel\Domain\Address;
 
 final class AddressMother
 {
-    public static function example() : Address
+    public static function example(): Address
     {
         return new Address(
             'Foo',

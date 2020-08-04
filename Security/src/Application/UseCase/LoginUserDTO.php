@@ -16,12 +16,12 @@ final class LoginUserDTO
         $this->password = $password;
     }
 
-    public function email() : string
+    public function email(): string
     {
         return $this->email;
     }
 
-    public function password() : string
+    public function password(): string
     {
         return $this->password;
     }

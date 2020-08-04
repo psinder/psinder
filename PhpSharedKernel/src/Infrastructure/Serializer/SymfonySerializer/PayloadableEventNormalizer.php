@@ -10,9 +10,10 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 final class PayloadableEventNormalizer implements NormalizerInterface
 {
     /**
-     * @param mixed   $object
-     * @param string  $format
-     * @param mixed[] $context
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
+     * @param mixed       $object
+     * @param mixed[]     $context
+     * @param string|null $format
      *
      * @return mixed[]|string|int|float|bool|null
      */
@@ -26,10 +27,9 @@ final class PayloadableEventNormalizer implements NormalizerInterface
     }
 
     /**
-     * @param mixed  $data
-     * @param string $format
+     * @param mixed $data
      */
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization($data, ?string $format = null): bool
     {
         return $data instanceof PayloadableEvent;
     }

@@ -59,7 +59,7 @@ final class Adopter implements AggregateRoot
         Birthdate $birthdate,
         Gender $gender,
         Email $email
-    ) : self {
+    ): self {
         return new self(
             $id,
             $name,
@@ -71,22 +71,22 @@ final class Adopter implements AggregateRoot
         );
     }
 
-    public function id() : AdopterId
+    public function id(): AdopterId
     {
         return $this->id;
     }
 
-    public function name() : AdopterName
+    public function name(): AdopterName
     {
         return $this->name;
     }
 
-    public function birthdate() : Birthdate
+    public function birthdate(): Birthdate
     {
         return $this->birthdate;
     }
 
-    public function gender() : Gender
+    public function gender(): Gender
     {
         return $this->gender;
     }
@@ -94,17 +94,17 @@ final class Adopter implements AggregateRoot
     /**
      * @return Pet[]
      */
-    public function pets() : array
+    public function pets(): array
     {
         return $this->pets->toArray();
     }
 
-    public function contactForms() : ContactForms
+    public function contactForms(): ContactForms
     {
         return $this->contactForms;
     }
 
-    public function receivePet(Pet $pet) : void
+    public function receivePet(Pet $pet): void
     {
         $this->pets->add($pet);
         $this->events[] = ReceivedPet::occur($this->id, $pet);

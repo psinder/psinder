@@ -22,11 +22,11 @@ final class PostOfferHandlerTest extends TransactionalTestCase
 {
     use EventsPublishingTest;
 
-    private CommandBus$bus;
+    private CommandBus $bus;
     private Shelters $shelters;
     private Offers $offers;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -35,7 +35,7 @@ final class PostOfferHandlerTest extends TransactionalTestCase
         $this->bus      = $this->get(CommandBus::class);
     }
 
-    public function testCreatesNewOffer() : void
+    public function testCreatesNewOffer(): void
     {
         $id      = Uuid::uuid4()->toString();
         $shelter = ShelterMother::registeredWithRandomId();
@@ -63,7 +63,7 @@ final class PostOfferHandlerTest extends TransactionalTestCase
         );
     }
 
-    public function testCreatesOfferForNotExistentShelter() : void
+    public function testCreatesOfferForNotExistentShelter(): void
     {
         $id        = Uuid::uuid4()->toString();
         $shelterId = Uuid::uuid4()->toString();
@@ -80,7 +80,7 @@ final class PostOfferHandlerTest extends TransactionalTestCase
         $this->bus->dispatch($command);
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }

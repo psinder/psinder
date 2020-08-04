@@ -26,28 +26,28 @@ final class Address
         $this->city       = $city;
     }
 
-    public function getStreet() : string
+    public function getStreet(): string
     {
         return $this->street;
     }
 
-    public function getNumber() : string
+    public function getNumber(): string
     {
         return $this->number;
     }
 
-    public function getPostalCode() : string
+    public function getPostalCode(): string
     {
         return $this->postalCode;
     }
 
-    public function getCity() : string
+    public function getCity(): string
     {
         return $this->city;
     }
 
     /** @return string[] */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'street' => $this->street,

@@ -7,6 +7,7 @@ namespace Sip\Psinder\SharedKernel\Infrastructure\Testing;
 use SebastianBergmann\Exporter\Exporter;
 use Sip\Psinder\SharedKernel\Domain\Event;
 use Sip\Psinder\SharedKernel\Infrastructure\InterceptingEventPublisher;
+
 use function array_map;
 use function Functional\first;
 use function get_class;
@@ -14,11 +15,11 @@ use function sprintf;
 
 trait EventsPublishingTest
 {
-    use TestCaseAwareTrait;
+    use TestCaseAware;
 
-    abstract protected function eventPublisher() : InterceptingEventPublisher;
+    abstract protected function eventPublisher(): InterceptingEventPublisher;
 
-    protected function assertPublishedEvents(Event ...$expectedEvents) : void
+    protected function assertPublishedEvents(Event ...$expectedEvents): void
     {
         $expectedEvents = array_map([$this, 'extractEvent'], $expectedEvents);
         $actualEvents   = $this->eventPublisher()->events();
@@ -30,11 +31,11 @@ trait EventsPublishingTest
         );
     }
 
-    protected function assertPublishedEvent(Event $event) : void
+    protected function assertPublishedEvent(Event $event): void
     {
         $result = first(
             $this->eventPublisher()->events(),
-            fn(Event $publishedEvent) => $this->extractEvent($event) === $this->extractEvent($publishedEvent)
+            fn (Event $publishedEvent) => $this->extractEvent($event) === $this->extractEvent($publishedEvent)
         );
 
         $this->context()->assertNotNull(
@@ -46,7 +47,7 @@ trait EventsPublishingTest
     /**
      * @return mixed[]
      */
-    protected function extractEvent(Event $event) : array
+    protected function extractEvent(Event $event): array
     {
         $event = (new Exporter())->toArray($event);
 

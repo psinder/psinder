@@ -15,7 +15,7 @@ final class CompleteTransfer implements Command
         $this->transferId = $transferId;
     }
 
-    public function transferId() : string
+    public function transferId(): string
     {
         return $this->transferId;
     }

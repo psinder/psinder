@@ -13,6 +13,7 @@ use Sip\Psinder\Adoption\Domain\Shelter\ShelterId;
 use Sip\Psinder\Adoption\Domain\Shelter\Shelters;
 use Sip\Psinder\SharedKernel\Application\Command\Command;
 use Sip\Psinder\SharedKernel\Application\Command\CommandHandler;
+
 use function assert;
 use function sprintf;
 
@@ -31,7 +32,7 @@ final class PostOfferHandler implements CommandHandler
         $this->offers     = $offers;
     }
 
-    public function __invoke(Command $command) : void
+    public function __invoke(Command $command): void
     {
         assert($command instanceof PostOffer);
 

@@ -24,7 +24,7 @@ final class User implements AggregateRoot
         $this->roles       = $roles;
     }
 
-    public static function register(UserId $id, Roles $roles, Credentials $credentials) : self
+    public static function register(UserId $id, Roles $roles, Credentials $credentials): self
     {
         $instance = new self($id, $roles, $credentials);
 
@@ -36,22 +36,22 @@ final class User implements AggregateRoot
     /**
      * @return UserId
      */
-    public function id() : Identity
+    public function id(): Identity
     {
         return $this->id;
     }
 
-    public function roles() : Roles
+    public function roles(): Roles
     {
         return $this->roles;
     }
 
-    public function email() : Email
+    public function email(): Email
     {
         return $this->credentials->email();
     }
 
-    public function matchesCredentials(Credentials $credentials) : bool
+    public function matchesCredentials(Credentials $credentials): bool
     {
         return $this->credentials->equals($credentials);
     }

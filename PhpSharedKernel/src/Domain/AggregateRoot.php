@@ -8,5 +8,5 @@ use Sip\Psinder\SharedKernel\Domain\Identity\Identity;
 
 interface AggregateRoot extends EventsPublishable
 {
-    public function id() : Identity;
+    public function id(): Identity;
 }

@@ -12,7 +12,7 @@ use Sip\Psinder\SharedKernel\UI\Http\RequestBuilderFactory;
 
 final class PostRegisterAdopterRequestTest extends FunctionalTestCase
 {
-    public function testRegistersAdopter() : void
+    public function testRegistersAdopter(): void
     {
         $this->impersonate(new AnonymousUser());
 

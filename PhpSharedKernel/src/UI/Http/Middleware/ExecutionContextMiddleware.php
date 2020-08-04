@@ -18,7 +18,7 @@ final class ExecutionContextMiddleware implements MiddlewareInterface
         $this->context = $context;
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $correlationId = $request->getHeader('Correlation-Id')[0] ?? null;
         $this->context->init($correlationId);

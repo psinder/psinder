@@ -10,6 +10,7 @@ use Sip\Psinder\Adoption\Domain\Offer\OfferId;
 use Sip\Psinder\Adoption\Domain\Offer\Offers;
 use Sip\Psinder\SharedKernel\Application\Command\Command;
 use Sip\Psinder\SharedKernel\Application\Command\CommandHandler;
+
 use function assert;
 
 final class ApplyForAdoptionHandler implements CommandHandler
@@ -24,7 +25,7 @@ final class ApplyForAdoptionHandler implements CommandHandler
         $this->adopters = $adopters;
     }
 
-    public function __invoke(Command $command) : void
+    public function __invoke(Command $command): void
     {
         assert($command instanceof ApplyForAdoption);
 

@@ -18,29 +18,29 @@ final class AdopterName
         $this->lastName  = $lastName;
     }
 
-    public static function fromFirstAndLastName(string $firstName, string $lastName) : self
+    public static function fromFirstAndLastName(string $firstName, string $lastName): self
     {
         return new self($firstName, $lastName);
     }
 
-    public static function fromFullName(string $fullName) : self
+    public static function fromFullName(string $fullName): self
     {
         $parts = explode(' ', $fullName);
 
         return new self($parts[0], $parts[1]);
     }
 
-    public function firstName() : string
+    public function firstName(): string
     {
         return $this->firstName;
     }
 
-    public function lastName() : string
+    public function lastName(): string
     {
         return $this->lastName;
     }
 
-    public function fullName() : string
+    public function fullName(): string
     {
         return sprintf('%s %s', $this->firstName, $this->lastName);
     }

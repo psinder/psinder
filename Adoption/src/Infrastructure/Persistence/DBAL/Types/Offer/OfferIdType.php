@@ -9,12 +9,12 @@ use Sip\Psinder\SharedKernel\Infrastructure\Persistence\DBAL\Types\UUIDType;
 
 final class OfferIdType extends UUIDType
 {
-    public function identityClass() : string
+    public function identityClass(): string
     {
         return OfferId::class;
     }
 
-    public static function name() : string
+    public static function name(): string
     {
         return 'OfferId';
     }

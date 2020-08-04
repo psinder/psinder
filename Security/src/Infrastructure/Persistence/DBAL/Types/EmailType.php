@@ -7,11 +7,12 @@ namespace Sip\Psinder\Security\Infrastructure\Persistence\DBAL\Types;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 use Sip\Psinder\SharedKernel\Domain\Email;
+
 use function is_string;
 
 final class EmailType extends StringType
 {
-    public static function name() : string
+    public static function name(): string
     {
         return 'Email';
     }
@@ -44,7 +45,7 @@ final class EmailType extends StringType
         return $value;
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

@@ -11,7 +11,7 @@ use Sip\Psinder\Adoption\Domain\Adopter\AdopterName;
 
 final class AdopterNameType extends StringType
 {
-    public static function name() : string
+    public static function name(): string
     {
         return 'AdopterName';
     }
@@ -48,7 +48,7 @@ final class AdopterNameType extends StringType
         throw ConversionException::conversionFailedInvalidType($value, 'string', [AdopterName::class]);
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

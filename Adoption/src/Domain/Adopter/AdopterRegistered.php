@@ -50,7 +50,7 @@ final class AdopterRegistered implements Event
         Email $email,
         Birthdate $birthdate,
         Gender $gender
-    ) : self {
+    ): self {
         return new self(
             $id->toScalar(),
             $name->firstName(),
@@ -62,37 +62,37 @@ final class AdopterRegistered implements Event
         );
     }
 
-    public function id() : string
+    public function id(): string
     {
         return $this->id;
     }
 
-    public function firstName() : string
+    public function firstName(): string
     {
         return $this->firstName;
     }
 
-    public function lastName() : string
+    public function lastName(): string
     {
         return $this->lastName;
     }
 
-    public function birthdate() : string
+    public function birthdate(): string
     {
         return $this->birthdate;
     }
 
-    public function gender() : string
+    public function gender(): string
     {
         return $this->gender;
     }
 
-    public function email() : string
+    public function email(): string
     {
         return $this->email;
     }
 
-    public function occurredAt() : DateTimeImmutable
+    public function occurredAt(): DateTimeImmutable
     {
         return $this->occurredAt;
     }

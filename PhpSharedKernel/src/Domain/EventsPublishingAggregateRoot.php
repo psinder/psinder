@@ -9,7 +9,7 @@ trait EventsPublishingAggregateRoot
     /** @var Event[] */
     protected array $events = [];
 
-    public function publishEvents(EventPublisher $publisher) : void
+    public function publishEvents(EventPublisher $publisher): void
     {
         $events       = $this->events;
         $this->events = [];

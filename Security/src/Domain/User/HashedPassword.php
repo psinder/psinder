@@ -13,12 +13,12 @@ final class HashedPassword
         $this->password = $password;
     }
 
-    public function equals(self $otherPassword) : bool
+    public function equals(self $otherPassword): bool
     {
         return $this->password === $otherPassword->password;
     }
 
-    public function toString() : string
+    public function toString(): string
     {
         return $this->password;
     }

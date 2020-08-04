@@ -6,5 +6,5 @@ namespace Sip\Psinder\SharedKernel\Infrastructure\Persistence\DBAL\Types;
 
 interface DBALType
 {
-    public static function name() : string;
+    public static function name(): string;
 }

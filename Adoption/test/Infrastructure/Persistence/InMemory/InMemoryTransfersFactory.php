@@ -10,7 +10,7 @@ use Sip\Psinder\SharedKernel\Infrastructure\NoOpEventPublisher;
 
 final class InMemoryTransfersFactory
 {
-    public static function create(?EventPublisher $eventPublisher = null) : InMemoryTransfers
+    public static function create(?EventPublisher $eventPublisher = null): InMemoryTransfers
     {
         return new InMemoryTransfers($eventPublisher ?? new NoOpEventPublisher());
     }

@@ -16,7 +16,7 @@ class BirthdateTest extends TestCase
     /**
      * @dataProvider ageExamples
      */
-    public function testCalculatesAge(string $date, int $expectedAge) : void
+    public function testCalculatesAge(string $date, int $expectedAge): void
     {
         $birthDate = Birthdate::fromString($date);
 
@@ -26,7 +26,7 @@ class BirthdateTest extends TestCase
     /**
      * @return mixed[]
      */
-    public function ageExamples() : iterable
+    public function ageExamples(): iterable
     {
         yield 'on birthdate' => [
             (new DateTimeImmutable())

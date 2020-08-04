@@ -34,37 +34,37 @@ final class RegisterAdopter implements Command
         $this->password  = $password;
     }
 
-    public function id() : string
+    public function id(): string
     {
         return $this->id;
     }
 
-    public function firstName() : string
+    public function firstName(): string
     {
         return $this->firstName;
     }
 
-    public function lastName() : string
+    public function lastName(): string
     {
         return $this->lastName;
     }
 
-    public function birthdate() : string
+    public function birthdate(): string
     {
         return $this->birthdate;
     }
 
-    public function gender() : string
+    public function gender(): string
     {
         return $this->gender;
     }
 
-    public function password() : string
+    public function password(): string
     {
         return $this->password;
     }
 
-    public function email() : string
+    public function email(): string
     {
         return $this->email;
     }

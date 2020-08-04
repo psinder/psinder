@@ -17,12 +17,12 @@ abstract class FunctionalTestCase extends TransactionalTestCase
     private AuthenticatedUser $user;
     use Psr7Assertions;
 
-    protected function containerPath() : string
+    protected function containerPath(): string
     {
         return __DIR__ . '/../config/container.php';
     }
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -36,12 +36,12 @@ abstract class FunctionalTestCase extends TransactionalTestCase
         $this->user = new AnonymousUser();
     }
 
-    public function impersonate(AuthenticatedUser $authenticatedUser) : void
+    public function impersonate(AuthenticatedUser $authenticatedUser): void
     {
         $this->user = $authenticatedUser;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         return $this->get(Application::class)
             ->handle($request->withAttribute(AuthenticatedUser::class, $this->user));

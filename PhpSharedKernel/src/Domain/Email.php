@@ -17,17 +17,17 @@ final class Email
         $this->address = $address;
     }
 
-    public static function fromString(string $address) : self
+    public static function fromString(string $address): self
     {
         return new self($address);
     }
 
-    public function toString() : string
+    public function toString(): string
     {
         return $this->address;
     }
 
-    public function equals(Email $otherEmail) : bool
+    public function equals(Email $otherEmail): bool
     {
         return $this->address === $otherEmail->address;
     }

@@ -22,7 +22,7 @@ final class ConfigProvider
     }
 
     /** @return mixed[] */
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'dependencies' => [
@@ -30,7 +30,7 @@ final class ConfigProvider
                     LoggerFactory::class => LogstashLoggerFactory::class,
                 ],
                 'factories'  => [
-                    ExecutionContext::class =>  fn() => new ExecutionContext($this->appName),
+                    ExecutionContext::class =>  fn () => new ExecutionContext($this->appName),
                     Logger::class => static function (ContainerInterface $c) {
                         return $c->get(LoggerFactory::class)('main');
                     },

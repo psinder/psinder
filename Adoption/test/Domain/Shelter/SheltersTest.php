@@ -15,15 +15,15 @@ use Sip\Psinder\Adoption\Domain\Shelter\ShelterRegistered;
 use Sip\Psinder\Adoption\Domain\Shelter\Shelters;
 use Sip\Psinder\SharedKernel\Domain\Email;
 use Sip\Psinder\SharedKernel\Infrastructure\Testing\EventsPublishingTest;
-use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAwareTrait;
+use Sip\Psinder\SharedKernel\Infrastructure\Testing\TestCaseAware;
 use Sip\Psinder\SharedKernel\Test\Domain\AddressMother;
 
 trait SheltersTest
 {
-    use TestCaseAwareTrait;
+    use TestCaseAware;
     use EventsPublishingTest;
 
-    public function testPublishesEventsWhenCreatingShelter() : void
+    public function testPublishesEventsWhenCreatingShelter(): void
     {
         $id      = new ShelterId(Uuid::uuid4()->toString());
         $name    = ShelterName::fromString('Foo');
@@ -47,7 +47,7 @@ trait SheltersTest
         ));
     }
 
-    public function testPublishesEventsWhenUpdatingShelter() : void
+    public function testPublishesEventsWhenUpdatingShelter(): void
     {
         $id      = new ShelterId(Uuid::uuid4()->toString());
         $name    = ShelterName::fromString('Foo');
@@ -75,7 +75,7 @@ trait SheltersTest
         ));
     }
 
-    public function testChecksExistenceOfShelter() : void
+    public function testChecksExistenceOfShelter(): void
     {
         $shelter = ShelterMother::registeredWithRandomId();
 
@@ -86,7 +86,7 @@ trait SheltersTest
         $this->context()::assertTrue($result, 'Expected shelter does not exist');
     }
 
-    public function testChecksExistenceOfNotExistentShelter() : void
+    public function testChecksExistenceOfNotExistentShelter(): void
     {
         $notExistentId = ShelterMother::randomId();
         $result        = $this->shelters()->exists($notExistentId);
@@ -94,7 +94,7 @@ trait SheltersTest
         $this->context()::assertFalse($result, 'Expected not existent shelter exist');
     }
 
-    public function testUpdatedExistingShelter() : void
+    public function testUpdatedExistingShelter(): void
     {
         $id      = new ShelterId(Uuid::uuid4()->toString());
         $name    = ShelterName::fromString('Foo');
@@ -119,7 +119,7 @@ trait SheltersTest
         $this->context()::assertEquals($shelter, $result);
     }
 
-    public function testGetsNotExistentShelterAndThrows() : void
+    public function testGetsNotExistentShelterAndThrows(): void
     {
         $id = new ShelterId(Uuid::uuid4()->toString());
 
@@ -128,7 +128,7 @@ trait SheltersTest
         $this->shelters()->get($id);
     }
 
-    public function testUpdatesNotExistentShelterAndThrows() : void
+    public function testUpdatesNotExistentShelterAndThrows(): void
     {
         $shelter = ShelterMother::registeredWithRandomId();
 
@@ -137,5 +137,5 @@ trait SheltersTest
         $this->shelters()->update($shelter);
     }
 
-    abstract protected function shelters() : Shelters;
+    abstract protected function shelters(): Shelters;
 }

@@ -14,6 +14,8 @@ use Ramsey\Uuid\Uuid;
 use Sip\Psinder\Adoption\Application\Command\Adopter\RegisterAdopter\RegisterAdopter;
 use Sip\Psinder\SharedKernel\Application\Command\CommandBus;
 
+use function assert;
+
 final class PostRegisterAdopterRequestHandler implements RequestHandlerInterface
 {
     private CommandBus $commandBus;
@@ -25,11 +27,11 @@ final class PostRegisterAdopterRequestHandler implements RequestHandlerInterface
         $this->logger     = $logger;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $this->logger->info('Registering adopter');
-        /** @var PostRegisterAdopterRequest $dto */
         $dto = $request->getAttribute(PostRegisterAdopterRequest::class);
+        assert($dto instanceof PostRegisterAdopterRequest);
 
         $id = Uuid::uuid4()->toString();
 

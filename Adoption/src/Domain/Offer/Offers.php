@@ -8,11 +8,14 @@ use Sip\Psinder\Adoption\Domain\Shelter\ShelterId;
 
 interface Offers
 {
-    public function create(Offer $offer) : void;
+    public function create(Offer $offer): void;
+
     /** @throws OfferNotFound */
-    public function update(Offer $offer) : void;
+    public function update(Offer $offer): void;
+
     /** @throws OfferNotFound */
-    public function get(OfferId $id) : Offer;
+    public function get(OfferId $id): Offer;
+
     /** @return Offer[] */
-    public function forShelter(ShelterId $shelterId) : array;
+    public function forShelter(ShelterId $shelterId): array;
 }

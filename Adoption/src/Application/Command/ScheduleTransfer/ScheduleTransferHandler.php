@@ -10,6 +10,7 @@ use Sip\Psinder\Adoption\Domain\Transfer\TransferId;
 use Sip\Psinder\Adoption\Domain\Transfer\Transfers;
 use Sip\Psinder\SharedKernel\Application\Command\Command;
 use Sip\Psinder\SharedKernel\Application\Command\CommandHandler;
+
 use function assert;
 
 final class ScheduleTransferHandler implements CommandHandler
@@ -24,7 +25,7 @@ final class ScheduleTransferHandler implements CommandHandler
         $this->transfers = $transfers;
     }
 
-    public function __invoke(Command $command) : void
+    public function __invoke(Command $command): void
     {
         assert($command instanceof ScheduleTransfer);
 

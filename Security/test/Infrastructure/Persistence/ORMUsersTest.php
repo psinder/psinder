@@ -14,22 +14,21 @@ final class ORMUsersTest extends TransactionalTestCase
 {
     use UsersTest;
 
-    /** @var ORMUsers */
-    private $users;
+    private ORMUsers $users;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->users = $this->get(ORMUsers::class);
     }
 
-    protected function users() : Users
+    protected function users(): Users
     {
         return $this->users;
     }
 
-    protected function context() : TestCase
+    protected function context(): TestCase
     {
         return $this;
     }
