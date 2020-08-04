@@ -19,7 +19,7 @@ final class SymfonySerializer implements Serializer
         $this->format     = $format;
     }
 
-    public function serialize(object $value) : string
+    public function serialize($value) : string
     {
         return $this->serializer->serialize($value, $this->format);
     }

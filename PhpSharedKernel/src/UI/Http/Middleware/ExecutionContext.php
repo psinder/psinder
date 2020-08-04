@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Sip\Psinder\SharedKernel\UI\Http\Middleware;
 
@@ -11,19 +12,20 @@ final class ExecutionContext
     public function __construct(string $appName)
     {
         $this->correlationId = null;
-        $this->appName = $appName;
+        $this->appName       = $appName;
     }
 
-    public function init(?string $correlationId): void {
+    public function init(?string $correlationId) : void
+    {
         $this->correlationId = $correlationId;
     }
 
-    public function correlationId(): ?string
+    public function correlationId() : ?string
     {
         return $this->correlationId;
     }
 
-    public function appName(): string
+    public function appName() : string
     {
         return $this->appName;
     }

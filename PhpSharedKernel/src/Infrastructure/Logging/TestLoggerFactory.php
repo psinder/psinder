@@ -9,12 +9,17 @@ use Monolog\Handler\BufferHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 
-final class TestLoggerFactory
+final class TestLoggerFactory implements LoggerFactory
 {
-    public function __invoke(string $path): LoggerInterface
+    private string $path;
+
+    public function __construct(string $path)
     {
-        return new Logger('test', [
-            new BufferHandler(new EasyLogHandler($path))
-        ]);
+        $this->path = $path;
+    }
+
+    public function __invoke(string $channel) : LoggerInterface
+    {
+        return new Logger($channel, [new BufferHandler(new EasyLogHandler($this->path))]);
     }
 }

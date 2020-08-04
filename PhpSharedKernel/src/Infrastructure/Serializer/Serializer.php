@@ -6,7 +6,8 @@ namespace Sip\Psinder\SharedKernel\Infrastructure\Serializer;
 
 interface Serializer
 {
-    public function serialize(object $value) : string;
+    /** @param mixed[]|object $value */
+    public function serialize($value) : string;
 
     public function deserialize(string $value, string $type) : object;
 }

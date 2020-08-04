@@ -11,11 +11,15 @@ final class ExecutionContextProcessor implements ProcessorInterface
 {
     private ExecutionContext $context;
 
-    public function __construct(ExecutionContext  $context) {
-
+    public function __construct(ExecutionContext $context)
+    {
         $this->context = $context;
     }
 
+    /**
+     * @param mixed[] $record
+     * @return mixed[]
+     */
     public function __invoke(array $record) : array
     {
         $record['extra']['correlation_id'] = $this->context->correlationId();

@@ -13,7 +13,7 @@ docker-compose-exec:
 	$(DOCKER_COMPOSE) exec $(service) $(cmd)
 
 docker-compose-up:
-	$(DOCKER_COMPOSE) up --force-recreate -d $(service)
+	$(DOCKER_COMPOSE) up -d $(service)
 
 docker-compose-build:
 	$(DOCKER_COMPOSE) build

@@ -9,20 +9,23 @@ use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Adopter\AdopterNa
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\ContactFormsType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Offer\ApplicationIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Offer\OfferIdType;
-use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Transfer\TransferIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Pet\PetIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Pet\PetNameType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Pet\PetSexType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Pet\PetTypeType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Shelter\ShelterIdType;
 use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Shelter\ShelterNameType;
+use Sip\Psinder\Adoption\Infrastructure\Persistence\DBAL\Types\Transfer\TransferIdType;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\DBAL\Types\BirthdateType;
 use Sip\Psinder\SharedKernel\Infrastructure\Persistence\DBAL\Types\GenderType;
+use Sip\Psinder\SharedKernel\Infrastructure\Persistence\ORM\PSR3LoggingSQLLogger;
 
 return [
     'doctrine' => [
         'configuration' => [
-            'orm_default' => [],
+            'orm_default' => [
+                'sql_logger' => PSR3LoggingSQLLogger::class
+            ],
         ],
         'connection' => [
             'orm_default' => [

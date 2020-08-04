@@ -8,11 +8,14 @@ use Sip\Psinder\Security\Infrastructure\Persistence\DBAL\Types\EmailType;
 use Sip\Psinder\Security\Infrastructure\Persistence\DBAL\Types\User\EncodedPasswordType;
 use Sip\Psinder\Security\Infrastructure\Persistence\DBAL\Types\User\RolesType;
 use Sip\Psinder\Security\Infrastructure\Persistence\DBAL\Types\User\UserIdType;
+use Sip\Psinder\SharedKernel\Infrastructure\Persistence\ORM\PSR3LoggingSQLLogger;
 
 return [
     'doctrine' => [
         'configuration' => [
-            'orm_default' => [],
+            'orm_default' => [
+                'sql_logger' => PSR3LoggingSQLLogger::class
+            ],
         ],
         'connection' => [
             'orm_default' => [

@@ -10,18 +10,18 @@ use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use Sip\Psinder\SharedKernel\UI\Http\Middleware\ExecutionContext;
 
-final class LoggerFactory
+final class LogstashLoggerFactory implements LoggerFactory
 {
     private int $level;
     private ExecutionContext $executionContext;
 
     public function __construct(ExecutionContext $executionContext, int $level = Logger::DEBUG)
     {
-        $this->level   = $level;
+        $this->level            = $level;
         $this->executionContext = $executionContext;
     }
 
-    public function __invoke(string $channel): LoggerInterface
+    public function __invoke(string $channel) : LoggerInterface
     {
         $handler = new StreamHandler('php://stdout', $this->level);
         $handler->setFormatter(new LogstashFormatter(

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Monolog\Logger;
 use Sip\Psinder\SharedKernel\Domain\EventPublisher;
 use Sip\Psinder\SharedKernel\Infrastructure\InterceptingEventPublisher;
+use Sip\Psinder\SharedKernel\Infrastructure\Logging\LoggerFactory;
 use Sip\Psinder\SharedKernel\Infrastructure\Logging\TestLoggerFactory;
 
 return [
@@ -14,9 +14,8 @@ return [
                 InterceptingEventPublisher::class => static function () {
                     return new InterceptingEventPublisher();
                 },
-                Logger::class => static function () {
-                    $path = __DIR__ . '/../../../var/logs/test.log';
-                    return (new TestLoggerFactory())($path);
+                TestLoggerFactory::class => static function () : TestLoggerFactory {
+                    return new TestLoggerFactory(__DIR__ . '/../../../var/logs/test.log');
                 }
             ],
             $GLOBALS['TEST_FACTORY_OVERRIDES']
@@ -27,6 +26,7 @@ return [
         'aliases' => array_merge(
             [
                 EventPublisher::class => InterceptingEventPublisher::class,
+                LoggerFactory::class => TestLoggerFactory::class,
             ],
             $GLOBALS['TEST_ALIAS_OVERRIDES']
         )
