@@ -7,7 +7,7 @@
     "@material-ui/core": "^4.9",
     "@material-ui/pickers": "^3.2",
     "@types/react": "^16.8.20",
-    "axios": "^0.19",
+    "axios": "^0.21",
     "date-fns": "^2.10",
     "prop-types": "^15.7.2",
     "react": "^16.13",
