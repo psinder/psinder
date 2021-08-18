@@ -1,6 +1,6 @@
 # Psinder
 
-## How to run Psinder/
+## How to run Psinder
 Run `make initial-setup`. It will run docker-compose, install deps and prepare databases.
 
 To start it without recreating everything, use `make docker-compose-up`.
@@ -26,6 +26,11 @@ include ../Makefile-php
 
 ## E2E tests
 To run e2e tests use `make e2e`.
+ 
+## Architecture
+General idea is very similar to what Herberto Graca described [in his blogpost](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/).
+
+It's foundation is [the onion architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
  
 ## Components
 ### PhpSharedKernel
