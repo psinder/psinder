@@ -45,4 +45,5 @@ Experiment about introducing clean e2e test using behat.
 Broken frontend skeleton that uses React.
 
 ### Kong
-I decided to use Kong as an API gateway. Right now it requires to specifiy explicityle addresses available outside. It will be significantly changed in the future.
+I decided to play wth Kong as an API gateway. Right now it requires to specifiy routes available outside. It will be significantly changed in the future.
+Configuration can be found [here](https://github.com/psinder/psinder/blob/master/docker/kong/kong.yml).
